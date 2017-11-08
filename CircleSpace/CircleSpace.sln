@@ -7,6 +7,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CircleSpace", "CircleSpace\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CircleSpace.Tests", "CircleSpace.Tests\CircleSpace.Tests.csproj", "{39305C46-472F-4684-84E9-8C7FA09C8D99}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CircleSpaceServiceLib", "CircleSpaceServiceLib\CircleSpaceServiceLib.csproj", "{66EBA8E8-7C9C-450E-BEF3-1688CEEFD360}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CricleSpaceGeneralModels", "CricleSpaceGeneralModels\CricleSpaceGeneralModels.csproj", "{C5803521-C402-4FED-A40D-C5198E23507C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +25,14 @@ Global
 		{39305C46-472F-4684-84E9-8C7FA09C8D99}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{39305C46-472F-4684-84E9-8C7FA09C8D99}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{39305C46-472F-4684-84E9-8C7FA09C8D99}.Release|Any CPU.Build.0 = Release|Any CPU
+		{66EBA8E8-7C9C-450E-BEF3-1688CEEFD360}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{66EBA8E8-7C9C-450E-BEF3-1688CEEFD360}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{66EBA8E8-7C9C-450E-BEF3-1688CEEFD360}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{66EBA8E8-7C9C-450E-BEF3-1688CEEFD360}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C5803521-C402-4FED-A40D-C5198E23507C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C5803521-C402-4FED-A40D-C5198E23507C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C5803521-C402-4FED-A40D-C5198E23507C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C5803521-C402-4FED-A40D-C5198E23507C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
