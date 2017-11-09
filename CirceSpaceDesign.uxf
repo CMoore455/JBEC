@@ -1,0 +1,309 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.2">
+  <zoom_level>13</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>663</x>
+      <y>468</y>
+      <w>273</w>
+      <h>234</h>
+    </coordinates>
+    <panel_attributes>Page
+--
+-Footer: String
+-Body: String
+-Route:String
+Css: String
+-Header: String
+-Owner:User
+-ID:Int
+-ImageURL: List&lt;String&gt;
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>988</x>
+      <y>455</y>
+      <w>260</w>
+      <h>247</h>
+    </coordinates>
+    <panel_attributes>User
+--
+-ID: Int
+-FirstName:String
+-LastName:String
+-UserName: String
+-Email: String
+-Password: String
+-OwnedPages: List&lt;Pages&gt;
+-OwnedLayouts: List&lt;Layouts&gt;
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1300</x>
+      <y>507</y>
+      <w>221</w>
+      <h>195</h>
+    </coordinates>
+    <panel_attributes>Layout
+--
+-Type: LayoutType
+-ID: Int
+-Content: String
+-Owner: User
+-Css:String
+-Tags:List&lt;String&gt;
+-Title:String</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1560</x>
+      <y>598</y>
+      <w>169</w>
+      <h>130</h>
+    </coordinates>
+    <panel_attributes>LayoutType
+--
+-Header
+-Footer
+-Body
+-Custom</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1508</x>
+      <y>624</y>
+      <w>78</w>
+      <h>39</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>40.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1235</x>
+      <y>611</y>
+      <w>91</w>
+      <h>39</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;50.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>923</x>
+      <y>546</y>
+      <w>91</w>
+      <h>39</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;50.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>923</x>
+      <y>611</y>
+      <w>91</w>
+      <h>39</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>50.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>351</x>
+      <y>767</y>
+      <w>494</w>
+      <h>429</h>
+    </coordinates>
+    <panel_attributes>ICircleSpaceService
+--
++Add Page(Page): Void
++DeletePage(Page: Void
++GetPageWithID(int id): Page
++GetPageAtRoute(Route:String):Page
++GetContributorPage(User:User): List&lt;Page&gt;
++UpdatePage(Page:Page): Void
++AddContributorToPage(Page:Page, User:User): Void
++DeleteContributorFromPage(Page:Page, User:User): Void
++UpdateUser(user:User): Void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>2366</x>
+      <y>91</y>
+      <w>130</w>
+      <h>26</h>
+    </coordinates>
+    <panel_attributes>SimpleClass</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>195</x>
+      <y>260</y>
+      <w>130</w>
+      <h>195</h>
+    </coordinates>
+    <panel_attributes>Login
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>195</x>
+      <y>182</y>
+      <w>130</w>
+      <h>78</h>
+    </coordinates>
+    <panel_attributes>Profile
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>429</x>
+      <y>39</y>
+      <w>221</w>
+      <h>169</h>
+    </coordinates>
+    <panel_attributes>Create Website
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>429</x>
+      <y>208</y>
+      <w>234</w>
+      <h>91</h>
+    </coordinates>
+    <panel_attributes>Route Chooser Page
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>195</x>
+      <y>39</y>
+      <w>130</w>
+      <h>143</h>
+    </coordinates>
+    <panel_attributes>Home Page
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>429</x>
+      <y>325</y>
+      <w>234</w>
+      <h>91</h>
+    </coordinates>
+    <panel_attributes>Create Layout Page
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>871</x>
+      <y>117</y>
+      <w>221</w>
+      <h>143</h>
+    </coordinates>
+    <panel_attributes>Browse Layouts</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>195</x>
+      <y>507</y>
+      <w>130</w>
+      <h>26</h>
+    </coordinates>
+    <panel_attributes>Sign Up
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>195</x>
+      <y>533</y>
+      <w>130</w>
+      <h>26</h>
+    </coordinates>
+    <panel_attributes>Help Page
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>195</x>
+      <y>455</y>
+      <w>130</w>
+      <h>26</h>
+    </coordinates>
+    <panel_attributes>About Us</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>195</x>
+      <y>481</y>
+      <w>130</w>
+      <h>26</h>
+    </coordinates>
+    <panel_attributes>Contact Us</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>429</x>
+      <y>299</y>
+      <w>234</w>
+      <h>26</h>
+    </coordinates>
+    <panel_attributes>Create Page Page
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>871</x>
+      <y>91</y>
+      <w>130</w>
+      <h>26</h>
+    </coordinates>
+    <panel_attributes>Browse Site</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>
