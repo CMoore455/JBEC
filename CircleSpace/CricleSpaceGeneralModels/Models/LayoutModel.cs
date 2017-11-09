@@ -16,6 +16,15 @@ namespace CricleSpaceGeneralModels.Models
             set { id = value; }
         }
 
+        private string layoutTitle;
+
+        public string LayoutTitle
+        {
+            get { return layoutTitle; }
+            set { layoutTitle = value; }
+        }
+
+
         private string content;
 
         public string Content
