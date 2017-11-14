@@ -11,6 +11,8 @@ namespace CricleSpaceGeneralModels.Enums
         Header,
         Footer,
         Body,
-        Custom
+        CustomHeader,
+        CustomFooter,
+        CustomBody
     }
 }
