@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CircleSpaceServiceLib", "Ci
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CricleSpaceGeneralModels", "CricleSpaceGeneralModels\CricleSpaceGeneralModels.csproj", "{C5803521-C402-4FED-A40D-C5198E23507C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CircleSpaceDAL", "CircleSpaceDAL\CircleSpaceDAL.csproj", "{CE781602-2353-4707-A091-029FDC0F3C9D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{C5803521-C402-4FED-A40D-C5198E23507C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C5803521-C402-4FED-A40D-C5198E23507C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C5803521-C402-4FED-A40D-C5198E23507C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CE781602-2353-4707-A091-029FDC0F3C9D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CE781602-2353-4707-A091-029FDC0F3C9D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CE781602-2353-4707-A091-029FDC0F3C9D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CE781602-2353-4707-A091-029FDC0F3C9D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
