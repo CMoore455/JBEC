@@ -5,7 +5,8 @@ using System.Web;
 using System.Web.Mvc;
 
 namespace CircleSpace.Controllers
-{
+{ 
+    [Authorize]
     public class CreatorController : Controller
     {
         // GET: Creator

@@ -6,6 +6,7 @@ using System.Web.Mvc;
 
 namespace CircleSpace.Controllers
 {
+    [AllowAnonymous]
     public class BrowseController : Controller
     {
         // GET: Browse
