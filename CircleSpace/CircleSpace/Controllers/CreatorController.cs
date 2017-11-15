@@ -14,5 +14,14 @@ namespace CircleSpace.Controllers
         {
             return View();
         }
+        public ActionResult CreateWebsite()
+        {
+
+            return View();
+        }
+        public ActionResult CreatePage()
+        {
+            return View();
+        }
     }
 }
