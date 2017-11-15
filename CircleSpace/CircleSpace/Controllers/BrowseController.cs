@@ -13,5 +13,9 @@ namespace CircleSpace.Controllers
         {
             return View();
         }
+        public ActionResult BrowseSite()
+        {
+            return View();
+        }
     }
 }
