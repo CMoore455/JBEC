@@ -1,0 +1,62 @@
+﻿@using CircleSpaceGeneralModels.Enums
+@model List<CircleSpaceGeneralModels.Models.LayoutModel>
+
+@{
+    ViewBag.Title = "Creator";
+}
+<div class="row row-creator">
+    <div class="col-sm-1 creator-controls-col">
+
+
+        <select class="selector-headers">
+            @foreach (var layoutModel in Model ?? new List<CircleSpaceGeneralModels.Models.LayoutModel>() { new CircleSpaceGeneralModels.Models.LayoutModel() { ID = 100 } })
+            {
+                if (layoutModel.Type == LayoutTypes.Header)
+                {
+                    int id = (layoutModel.ID);
+                    <option value="@id">
+                        @layoutModel.LayoutTitle
+                    </option>
+                }
+            }
+        </select>
+
+        <select title="Choose a body..." class="selector-bodies">
+            @foreach (var layoutModel in Model ?? new List<CircleSpaceGeneralModels.Models.LayoutModel>())
+            {
+                if (layoutModel.Type == LayoutTypes.Body)
+                {
+                    int id = (layoutModel.ID);
+                    <option value="@id">
+                        @layoutModel.LayoutTitle
+                    </option>
+                }
+            }
+        </select>
+
+        <select title="Choose a footer..." class="selector-footers">
+            @foreach (var layoutModel in Model ?? new List<CircleSpaceGeneralModels.Models.LayoutModel>())
+            {
+                if (layoutModel.Type == LayoutTypes.Footer)
+                {
+                    int id = (layoutModel.ID);
+
+                    <option value="@id">
+                        @layoutModel.LayoutTitle
+                    </option>
+                }
+            }
+        </select>
+
+    </div>
+    <div id="live-preview-area" class="col-lg-1">
+
+    </div>
+
+    <div class="col-sm-1 creator-section-options" hidden />
+
+</div>
+
+@section scripts {
+    @Scripts.Render("~/Scripts/creator-script.js")
+}

@@ -1,10 +1,11 @@
-﻿using System;
+﻿using CircleSpaceGeneralModels.Enums;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CricleSpaceGeneralModels.Models
+namespace CircleSpaceGeneralModels.Models
 {
     public class LayoutModel
     {
@@ -14,6 +15,14 @@ namespace CricleSpaceGeneralModels.Models
         {
             get { return id; }
             set { id = value; }
+        }
+
+        private LayoutTypes type;
+
+        public LayoutTypes Type
+        {
+            get { return type; }
+            set { type = value; }
         }
 
         private string layoutTitle;
