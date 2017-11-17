@@ -1,4 +1,46 @@
-﻿body {
+html {
+    --backgroundColorLight: #FFFFFF;
+    --backgroundColorDark: #000000;
+    --HoverColor: #ACCFCC;
+    --TextColor: #000000;
+    --BorderStyle: none;
+    --BorderColor: #000000;
+}
+
+.navbar {
+    background-color: var(--backgroundColorLight);
+    border-bottom-color: var(--backgroundColorLight);
+}
+
+.navbar-toggle {
+    background-color: var(--backgroundColorDark);
+}
+
+.navbar-collapse {
+    border: var(--BorderStyle);
+}
+
+.navbar-inverse .navbar-brand {
+    color: var(--TextColor);
+}
+
+.navbar-inverse .navbar-nav > li > a {
+    color: var(--TextColor);
+}
+
+.navbar-inverse .navbar-collapse, .navbar-inverse .navbar-form {
+    border-color: var(--BorderColor);
+}
+
+.navbar-inverse .navbar-brand:hover, .navbar-inverse .navbar-brand:focus {
+    color: var(--HoverColor);
+}
+
+.navbar-inverse .navbar-nav > li > a:hover, .navbar-inverse .navbar-nav > li > a:focus .navbar-inverse .navbar-brand {
+        color: var(--HoverColor);
+    }
+
+﻿ body {
     padding-top: 50px;
     padding-bottom: 20px;
 }
@@ -7,6 +49,7 @@
 .body-content {
     padding-left: 15px;
     padding-right: 15px;
+    background-color: var(--backgroundColorLight);
 }
 
 /* Override the default bootstrap behavior where horizontal description lists 
