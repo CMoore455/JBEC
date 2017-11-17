@@ -1,4 +1,44 @@
-﻿body {
+html {
+    --color1: #8A0917;
+    --color2: #FFFFFF;
+    --color3: #ACCFCC;
+    --color4: #000000;
+}
+
+.navbar {
+    background-color: var(--color2);
+    border-bottom-color: var(--color2);
+}
+
+.navbar-toggle {
+    background-color: var(--color4);
+}
+
+.navbar-inverse .navbar-collapse, .navbar-inverse .navbar-form {
+    border-color: var(--color4);
+}
+
+.navbar-collapse {
+    border: none;
+}
+
+.navbar-inverse .navbar-nav > li > a {
+    color: var(--color4);
+}
+
+    .navbar-inverse .navbar-nav > li > a:hover, .navbar-inverse .navbar-nav > li > a:focus .navbar-inverse .navbar-brand {
+        color: var(--color3);
+    }
+
+.navbar-inverse .navbar-brand:hover, .navbar-inverse .navbar-brand:focus {
+    color: var(--color3);
+}
+
+.navbar-inverse .navbar-brand {
+    color: var(--color4);
+}
+
+﻿ body {
     padding-top: 50px;
     padding-bottom: 20px;
 }
