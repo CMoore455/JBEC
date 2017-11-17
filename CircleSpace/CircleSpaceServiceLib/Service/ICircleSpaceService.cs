@@ -1,5 +1,5 @@
-﻿using CricleSpaceGeneralModels.Enums;
-using CricleSpaceGeneralModels.Models;
+﻿using CircleSpaceGeneralModels.Enums;
+using CircleSpaceGeneralModels.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,6 +23,8 @@ namespace CircleSpaceServiceLib.Service
         LayoutModel GetLayoutWithType(LayoutTypes type);
         void AddLayout(LayoutModel model);
         void UpdateLayout(LayoutModel model);
+
+        List<LayoutModel> GetLayouts();
 
     }
 }
