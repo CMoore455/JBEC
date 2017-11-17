@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CricleSpaceGeneralModels.Enums
+namespace CircleSpaceGeneralModels.Enums
 {
     public enum LayoutTypes
     {
