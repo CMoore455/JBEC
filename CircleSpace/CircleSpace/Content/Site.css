@@ -1,41 +1,43 @@
 html {
-    --color1: #8A0917;
-    --color2: #FFFFFF;
-    --color3: #ACCFCC;
-    --color4: #000000;
+    --backgroundColorLight: #FFFFFF;
+    --backgroundColorDark: #000000;
+    --HoverColor: #ACCFCC;
+    --TextColor: #000000;
+    --BorderNone: none;
+    --BorderColor: #000000;
 }
 
 .navbar {
-    background-color: var(--color2);
-    border-bottom-color: var(--color2);
+    background-color: var(--backgroundColorLight);
+    border-bottom-color: var(--backgroundColorLight);
 }
 
 .navbar-toggle {
-    background-color: var(--color4);
+    background-color: var(--backgroundColorDark);
 }
 
 .navbar-collapse {
-    border: none;
+    border: var(--BorderNone);
 }
 
 .navbar-inverse .navbar-brand {
-    color: var(--color4);
+    color: var(--TextColor);
 }
 
 .navbar-inverse .navbar-nav > li > a {
-    color: var(--color4);
+    color: var(--TextColor);
 }
 
 .navbar-inverse .navbar-collapse, .navbar-inverse .navbar-form {
-    border-color: var(--color4);
+    border-color: var(--BorderColor);
 }
 
 .navbar-inverse .navbar-brand:hover, .navbar-inverse .navbar-brand:focus {
-    color: var(--color3);
+    color: var(--HoverColor);
 }
 
 .navbar-inverse .navbar-nav > li > a:hover, .navbar-inverse .navbar-nav > li > a:focus .navbar-inverse .navbar-brand {
-        color: var(--color3);
+        color: var(--HoverColor);
     }
 
 ﻿ body {
@@ -47,7 +49,7 @@ html {
 .body-content {
     padding-left: 15px;
     padding-right: 15px;
-    background-color: var(--color2);
+    background-color: var(--backgroundColorLight);
 }
 
 /* Override the default bootstrap behavior where horizontal description lists 
