@@ -5,11 +5,21 @@ using System.Web;
 using System.Web.Mvc;
 
 namespace CircleSpace.Controllers
-{
+{ 
+    [Authorize]
     public class CreatorController : Controller
     {
         // GET: Creator
         public ActionResult Index()
+        {
+            return View();
+        }
+        public ActionResult CreateWebsite()
+        {
+
+            return View();
+        }
+        public ActionResult CreatePage()
         {
             return View();
         }

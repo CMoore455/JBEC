@@ -15,7 +15,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>CircleSpace</RootNamespace>
     <AssemblyName>CircleSpace</AssemblyName>
-    <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
     <IISExpressSSLPort />
@@ -25,6 +25,8 @@
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <TargetFrameworkProfile />
+    <Use64BitIISExpress />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -260,11 +262,13 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Creator\CreatePage.cshtml" />
+    <Content Include="Views\Creator\CreateWebsite.cshtml" />
+    <Content Include="Views\Home\ProfilePage.cshtml" />
+    <Content Include="Views\Browse\BrowseSite.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Browse\" />
-    <Folder Include="Views\Creator\" />
     <Folder Include="Views\Help\" />
   </ItemGroup>
   <ItemGroup>
@@ -281,6 +285,16 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CircleSpaceServiceLib\CircleSpaceServiceLib.csproj">
+      <Project>{66eba8e8-7c9c-450e-bef3-1688ceefd360}</Project>
+      <Name>CircleSpaceServiceLib</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CricleSpaceGeneralModels\CricleSpaceGeneralModels.csproj">
+      <Project>{c5803521-c402-4fed-a40d-c5198e23507c}</Project>
+      <Name>CricleSpaceGeneralModels</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
