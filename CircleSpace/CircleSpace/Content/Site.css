@@ -3,7 +3,7 @@ html {
     --backgroundColorDark: #000000;
     --HoverColor: #ACCFCC;
     --TextColor: #000000;
-    --BorderNone: none;
+    --BorderStyle: none;
     --BorderColor: #000000;
 }
 
@@ -17,7 +17,7 @@ html {
 }
 
 .navbar-collapse {
-    border: var(--BorderNone);
+    border: var(--BorderStyle);
 }
 
 .navbar-inverse .navbar-brand {
