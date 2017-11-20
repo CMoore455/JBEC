@@ -1,9 +1,10 @@
 ﻿
 document.addEventListener("load", DocumentLoaded());
-//var fileInput = document.createElement("input");  For later
-//fileInput.setAttribute("type", "file"); For Later
+
+//The ID's of the currently selected layouts in the selector.
 var headerId, bodyId, footerId;
 
+//Hooks up all the click events for the selectors for a different layout.
 function DocumentLoaded() {
     var headerClassLookup = $(".selector-headers");
     var headerSelector = headerClassLookup[0];
@@ -56,6 +57,8 @@ function DocumentLoaded() {
     }
 };
 
+
+//Performs ajax request for the new layouts. Updates to the live preview area occur on received response.
 function LayoutSelectorChanged(IdChanger) {
     IdChanger.ChangeID();
     //Perform ajax request for new layout
@@ -72,10 +75,11 @@ function LayoutSelectorChanged(IdChanger) {
         default:
             return;
     }
-    //Apply new layouts to live preview
+
     //Update the page creation options for a layout.
 }
 
+//Responds to json received from server when new layouts are requested.
 function ReceiveNewLayout(json) {
     switch (json.Type) {
         case "Header":
@@ -92,6 +96,8 @@ function ReceiveNewLayout(json) {
     }
 }
 
+
+//These Change/Header|Body|Footer/ methods update the live preview area when a click occurs on the selection control.
 function ChangeHeader(content, css) {
     var headerPreview = $("#headerPreview")[0];
     if ($('#headerPreviewStyle').length != 0) { $('#headerPreviewStyle').remove(); }
@@ -99,7 +105,7 @@ function ChangeHeader(content, css) {
     cssStyle.setAttribute('id', 'headerPreviewStyle');
     cssStyle.setAttribute('type', 'text/css');
     for (var i = 0; i < css.length; i++) {
-        cssStyle.innerHTML += ' #headerPreview ' + css[i];
+        cssStyle.innerText += ' #headerPreview ' + css[i];
     }
     $('head').append(cssStyle);
     var newHeader = document.createElement("div");
@@ -144,17 +150,64 @@ function ChangeFooter(content, css) {
     }
 }
 
+//Sends the page to the server to be saved to the database.
 function SavePage() {
-    //Navigate DOM to page contents
+
+    //Creates header, body, and footer tags to send to the server.
+    var header = document.createElement('header');
+    header.innerHTML = $("#headerPreview")[0].innerHTML;
+    var body = document.createElement('body');
+    body.innerHTML = $("#bodyPreview")[0].innerHTML;
+    var footer = document.createElement('footer');
+    footer.innerHTML = $("#footerPreview")[0].innerHTML;
+
+    //Finding the style tags of the live preview areas contents.
+    var headerCssRules = $("#headerPreviewStyle");
+    var bodyCssRules = $("#bodyPreviewStyle");
+    var footerCssRules = $("#footerPreviewStyle");
+
+    //An array of the style tags applying to the live preview areas contents
+    var cssRulesOfPreviewAreas = [];
+
+    //If these exist on the page they will be added to the array that is used to populate the css field of the page.
+    if (headerCssRules.length > 0) { cssRulesOfPreviewAreas.push(headerCssRules[0]); }
+    if (bodyCssRules.length > 0) { cssRulesOfPreviewAreas.push(bodyCssRules[0]); }
+    if (footerCssRules.length > 0) { cssRulesOfPreviewAreas.push(footerCssRules[0]); }
+
+
+    var cssRules = ConvertAllRulesToOneString(cssRulesOfPreviewAreas);
+
+    //This objects fields needs to match JSONForSavingWebPage object in the models folder of server.
     var page = {
-        Header: $("#headerPreview")[0].innerHTML,
-        Body: $("#bodyPreview")[0].innerHTML,
-        Footer: $("#footerPreview")[0].innerHTML,
-        //TODO Get CSS for the page
+        Header: header.outerHTML,
+        Body: body.outerHTML,
+        Footer: footer.outerHTML,
+        CSS: cssRules
+        //Need ImageURLS
+        //Need RouteOfPage
     }
 
-    $.post("SavePage", page);
-    //Send page up to server as json
+    //Sending page to server as JSON
+    $.post("SavePage", page);//Need to react to bad post (i.e. Route is already taken)
+}
+
+//Converts all the css in several style tags into one blob of css text.
+function ConvertAllRulesToOneString(arrayOfStyles) {
+    var cssRulesTogetherAsString = "";
+    while (arrayOfStyles.length > 0) {
+        var cssRulesAsArray = SeparateCSSRulesIntoArray(arrayOfStyles[0].innerText);
+        for (var i = 0; i < cssRulesAsArray.length; i++) {
+            cssRulesTogetherAsString += cssRulesAsArray[0].trim() + ' ';
+        }
+        arrayOfStyles.shift();
+    }
+    return cssRulesTogetherAsString;
+}
+
+//Separates out each css rule of a blob of css into an array.
+function SeparateCSSRulesIntoArray(cssText) {
+    var matchCssRulesRegex = /[\)\(\]\[:\w," =\-\*^#\.\@>\n\+]+\{\s*[^}{]+\s*\}/;
+    return cssText.match(matchCssRulesRegex);
 }
 
 

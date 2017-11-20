@@ -24,21 +24,34 @@ namespace CircleSpace.Controllers
         {
             //Needs a List<LayoutModel> that will become option to be selected and applied to the live preview Window
             //  return View(service.GetLayouts());
-            return View(/*new List<LayoutModel>() { new LayoutModel() { ID = 1, CSS = "h1 { color: blue; }", Content = "<h1>Blah</h1>", Type = CircleSpaceGeneralModels.Enums.LayoutTypes.Body, LayoutTitle = "Layout1" } });*/
+            return View(
+              // new List<LayoutModel>() { new LayoutModel() { ID = 1, CSS = "h1 { color: blue; }", Content = "<h1>Blah</h1>", Type = CircleSpaceGeneralModels.Enums.LayoutTypes.Body, LayoutTitle = "Layout1" } });
                 service.GetLayouts());
         }
 
         public JsonResult GetNewLayout(int id)
         {
-            LayoutModel layout = /*new LayoutModel() { ID = 1, CSS = "h1 { color: blue; } p {color: green; }", Content = "<h1>Blah</h1><p>ofofo</p>", Type = CircleSpaceGeneralModels.Enums.LayoutTypes.Body, LayoutTitle = "Layout1" };*/
+            LayoutModel layout = //new LayoutModel() { ID = 1, CSS = "h1 { color: blue; } p {color: green; }", Content = "<h1>Blah</h1><p>ofofo</p>", Type = CircleSpaceGeneralModels.Enums.LayoutTypes.Body, LayoutTitle = "Layout1" };
                 service.GetLayoutWithID(id);
             return Json(new LayoutModelJSON(layout).JSON, JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]
-        public ActionResult SavePage(object o)
+        public string SavePage(JSONForSavingWebPage o)
         {
-            return null; 
+            PageModel pageModel = new PageModel()
+            {
+                Header = o.Header,
+                Body = o.Body,
+                Footer = o.Footer,
+                CSS = o.CSS,
+                //Need Route
+                //Need ImageURLS
+            };
+
+            service.AddPage(pageModel);
+
+            return "Success"; 
         }
     }
 }
