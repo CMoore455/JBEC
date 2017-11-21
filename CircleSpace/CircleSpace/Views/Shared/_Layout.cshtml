@@ -30,7 +30,7 @@
                         <li>@Html.ActionLink("Create Website", "CreateWebPage", "Creator")</li>
                         <li>@Html.ActionLink("Profile", "ProfilePage", "Home")</li>
                     }
-                 
+
 
                 </ul>
                 @Html.Partial("_LoginPartial")
@@ -39,6 +39,8 @@
     </div>
     <div class="container body-content">
         @RenderBody()
+    </div>
+    <div class="ClassFooter">
         <hr />
         <footer>
             <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
