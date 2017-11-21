@@ -1,4 +1,4 @@
-﻿using CircleSpace.Models;
+using CircleSpace.Models;
 using CircleSpaceGeneralModels.Models;
 using CircleSpaceServiceLib.Service;
 using System;
@@ -22,11 +22,11 @@ namespace CircleSpace.Controllers
 
         public ActionResult CreateWebPage()
         {
-            //Needs a List<LayoutModel> that will become option to be selected and applied to the live preview Window
-            //  return View(service.GetLayouts());
-            return View(
-              // new List<LayoutModel>() { new LayoutModel() { ID = 1, CSS = "h1 { color: blue; }", Content = "<h1>Blah</h1>", Type = CircleSpaceGeneralModels.Enums.LayoutTypes.Body, LayoutTitle = "Layout1" } });
-                service.GetLayouts());
+                        //Needs a List<Layouts> that will become option to be selected and applied to the live preview Window
+            return View(service.GetLayouts());
+            //new List<LayoutModel>() { new LayoutModel() { ID = 2, LayoutTitle = "Header", Type = CircleSpaceGeneralModels.Enums.LayoutTypes.Header },
+              //  new LayoutModel() { ID = 3, LayoutTitle = "Body", Type = CircleSpaceGeneralModels.Enums.LayoutTypes.Body },
+              //  new LayoutModel() { ID = 1, LayoutTitle = "Footer", Type = CircleSpaceGeneralModels.Enums.LayoutTypes.Footer } });
         }
 
         public JsonResult GetNewLayout(int id)
