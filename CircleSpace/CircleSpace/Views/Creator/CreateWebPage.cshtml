@@ -1,4 +1,4 @@
-﻿@using CircleSpaceGeneralModels.Enums
+@using CircleSpaceGeneralModels.Enums
 @model List<CircleSpaceGeneralModels.Models.LayoutModel>
 
 @{
@@ -6,9 +6,8 @@
 }
 <div class="row row-creator">
     <div class="col-sm-1 creator-controls-col">
-
         <select class="selector-headers">
-            @foreach (var layoutModel in Model ?? new List<CircleSpaceGeneralModels.Models.LayoutModel>() { new CircleSpaceGeneralModels.Models.LayoutModel() { ID = 100 } })
+            @foreach (var layoutModel in Model ?? new List<CircleSpaceGeneralModels.Models.LayoutModel>())
             {
                 if (layoutModel.Type == LayoutTypes.Header)
                 {
@@ -50,7 +49,9 @@
     </div>
 
     <div id="live-preview-area" class="col-lg-1">
-
+        <div id="headerPreview"></div>
+        <div id="bodyPreview"></div>
+        <div id="footerPreview"></div>
     </div>
 
     <div class="col-sm-1 creator-section-options" />
