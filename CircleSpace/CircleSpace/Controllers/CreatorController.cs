@@ -9,7 +9,7 @@ using System.Web.Mvc;
 namespace CircleSpace.Controllers
 {
 
-    //[Authorize]
+    [Authorize]
     public class CreatorController : Controller
     {
         private ICircleSpaceService service;
