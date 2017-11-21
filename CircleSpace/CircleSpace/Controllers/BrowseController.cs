@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CircleSpaceGeneralModels.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -12,11 +13,12 @@ namespace CircleSpace.Controllers
         // GET: Browse
         public ActionResult Index()
         {
-            return View();
+            PageModel p = new PageModel();
+            return View(p);
         }
         public ActionResult BrowseSite()
         {
-            return View();
+            return View("Index");
         }
     }
 }
