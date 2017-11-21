@@ -7,7 +7,6 @@
 <div class="row row-creator">
     <div class="col-sm-1 creator-controls-col">
 
-
         <select class="selector-headers">
             @foreach (var layoutModel in Model ?? new List<CircleSpaceGeneralModels.Models.LayoutModel>() { new CircleSpaceGeneralModels.Models.LayoutModel() { ID = 100 } })
             {
@@ -49,11 +48,12 @@
         </select>
 
     </div>
+
     <div id="live-preview-area" class="col-lg-1">
 
     </div>
 
-    <div class="col-sm-1 creator-section-options" hidden />
+    <div class="col-sm-1 creator-section-options" />
 
 </div>
 
