@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>CircleSpaceServiceLib</RootNamespace>
     <AssemblyName>CircleSpaceServiceLib</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
   </PropertyGroup>
@@ -50,8 +50,13 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service\ICircleSpaceService.cs" />
+    <Compile Include="Service\SqlCricleSpaceService.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\CircleSpaceDAL\CircleSpaceDAL.csproj">
+      <Project>{ce781602-2353-4707-a091-029fdc0f3c9d}</Project>
+      <Name>CircleSpaceDAL</Name>
+    </ProjectReference>
     <ProjectReference Include="..\CricleSpaceGeneralModels\CricleSpaceGeneralModels.csproj">
       <Project>{c5803521-c402-4fed-a40d-c5198e23507c}</Project>
       <Name>CricleSpaceGeneralModels</Name>
