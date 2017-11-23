@@ -62,8 +62,9 @@ namespace CircleSpaceServiceLib.Service
                     PageRoute = model.Route,
                     ID = db.Pages.Max(p => p.ID) + 1,
                     OwnerID = model.OwnerID,
-                    Header = model.Header
-
+                    Header = model.Header,
+                    Body = model.Body,
+                    Footer = model.Footer
                 };
             }
         }
