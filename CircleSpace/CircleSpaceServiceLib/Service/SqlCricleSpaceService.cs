@@ -160,7 +160,7 @@ namespace CircleSpaceServiceLib.Service
             return l;
         }
 
-        public PageModel GetPageRoute(string route)
+        public PageModel GetPageWithRoute(string route)
         {
             PageModel p = new PageModel();
             using (var db = new CircleSpaceEntities())
