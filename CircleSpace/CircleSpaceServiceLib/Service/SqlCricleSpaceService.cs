@@ -149,12 +149,13 @@ namespace CircleSpaceServiceLib.Service
             //}
         }
 
-        public LayoutModel GetLayoutWithType(LayoutTypes type)
+        public List<LayoutModel> GetLayoutWithType(LayoutTypes type)
         {
-            LayoutModel l = new LayoutModel();
+             List<LayoutModel> l = new List<LayoutModel>;
             using (var db = new CircleSpaceEntities())
             {
-                l = LayoutToLayoutModel(db.Layouts.Where(x => x.LayoutType == type.ToString()).First());
+                var query = db.Layouts.Where(x => x.LayoutType == type.ToString());
+                l = LayoutsToListOfLayouts(query.ToList());
             }
             return l;
         }
