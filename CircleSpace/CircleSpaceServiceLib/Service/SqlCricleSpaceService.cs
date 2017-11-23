@@ -62,8 +62,9 @@ namespace CircleSpaceServiceLib.Service
                     PageRoute = model.Route,
                     ID = db.Pages.Max(p => p.ID) + 1,
                     OwnerID = model.OwnerID,
-                    Header = model.Header
-
+                    Header = model.Header,
+                    Body = model.Body,
+                    Footer = model.Footer
                 };
             }
         }
@@ -138,27 +139,37 @@ namespace CircleSpaceServiceLib.Service
             return l;
         }
 
-        public LayoutModel GetLayoutWithTag(params string[] tags)
+        public List<LayoutModel> GetLayoutsWithTag(params string[] tags)
         {
-            //LayoutModel l = new LayoutModel();
+            List<LayoutModel> layouts = new List<LayoutModel>();
             //using (var db = new CircleSpaceEntities())
             //{
-            throw new NotImplementedException();
+            //    var query = db.Layouts.Where(l => {
+            //        bool isValid = false;
+            //        l.Tags.ToList().ForEach(tag =>
+            //        {
+            //            if
+            //        }
+            //        )
+            //        return isValid;
+            //    });
 
             //}
+            return layouts;
         }
 
-        public LayoutModel GetLayoutWithType(LayoutTypes type)
+        public List<LayoutModel> GetLayoutsWithType(LayoutTypes type)
         {
-            LayoutModel l = new LayoutModel();
+            List<LayoutModel> l = new List<LayoutModel>();
             using (var db = new CircleSpaceEntities())
             {
-                l = LayoutToLayoutModel(db.Layouts.Where(x => x.LayoutType == type.ToString()).First());
+                var query = db.Layouts.Where(x => x.LayoutType == type.ToString());
+                l = LayoutsToListOfLayouts(query.ToList());
             }
             return l;
         }
 
-        public PageModel GetPageRoute(string route)
+        public PageModel GetPageWithRoute(string route)
         {
             PageModel p = new PageModel();
             using (var db = new CircleSpaceEntities())
@@ -187,6 +198,12 @@ namespace CircleSpaceServiceLib.Service
                 layout.LayoutType = model.Type.ToString();
                 layout.Content = model.Content;
                 layout.CSS = model.CSS;
+                var listOfTags = layout.Tags.ToList();
+                listOfTags.ForEach(tag =>
+                {
+                    layout.Tags.Remove(tag);
+
+                });
                 model.Tags.ForEach(tag =>
                 {
                     var newTag = new Tag()
@@ -314,7 +331,7 @@ namespace CircleSpaceServiceLib.Service
                     LayoutTitle = l.LayoutTitle,
                     Content = l.Content,
                     CSS = l.CSS,
-                    Type = (LayoutTypes)Enum.Parse(typeof(LayoutTypes),l.LayoutType)
+                    Type = (LayoutTypes)Enum.Parse(typeof(LayoutTypes), l.LayoutType)
                 };
                 var tags = l.Tags.ToList();
                 tags.ForEach(tag =>
@@ -336,7 +353,7 @@ namespace CircleSpaceServiceLib.Service
                 LayoutType = l.Type.ToString(),
                 Content = l.Content,
                 CSS = l.CSS,
-                
+
             };
             return newLayout;
         }
