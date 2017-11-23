@@ -189,6 +189,12 @@ namespace CircleSpaceServiceLib.Service
                 layout.LayoutType = model.Type.ToString();
                 layout.Content = model.Content;
                 layout.CSS = model.CSS;
+                var listOfTags = layout.Tags.ToList();
+                listOfTags.ForEach(tag =>
+                {
+                    layout.Tags.Remove(tag);
+
+                });
                 model.Tags.ForEach(tag =>
                 {
                     var newTag = new Tag()
