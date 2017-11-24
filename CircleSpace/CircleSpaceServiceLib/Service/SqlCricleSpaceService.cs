@@ -129,33 +129,37 @@ namespace CircleSpaceServiceLib.Service
             return l;
         }
 
-        public LayoutModel GetLayoutWithOwner(UserModel model)
+        public List<LayoutModel> GetLayoutWithOwner(UserModel model)
         {
-            LayoutModel l = new LayoutModel();
+            List<LayoutModel> l = new List<LayoutModel>();
             using (var db = new CircleSpaceEntities())
             {
-                l = LayoutToLayoutModel(db.Layouts.Where(x => x.OwnerID == model.ID).First());
+                l = LayoutsToListOfLayouts(db.Layouts.Where(x => x.OwnerID == model.ID));
             }
             return l;
         }
 
         public List<LayoutModel> GetLayoutsWithTag(params string[] tags)
         {
-            List<LayoutModel> layouts = new List<LayoutModel>();
-            //using (var db = new CircleSpaceEntities())
-            //{
-            //    var query = db.Layouts.Where(l => {
-            //        bool isValid = false;
-            //        l.Tags.ToList().ForEach(tag =>
-            //        {
-            //            if
-            //        }
-            //        )
-            //        return isValid;
-            //    });
 
-            //}
+            List<LayoutModel> layouts = null;
+
+            using (var db = new CircleSpaceEntities())
+            {
+                List<Tag> tagsAsTagList = new List<Tag>();
+                foreach (var tag in tags)
+                {
+                    tagsAsTagList.Add(new Tag() { Tag1 = tag });
+                }
+                tagsAsTagList = tagsAsTagList.OrderBy(tag => tag.Tag1).ToList();
+                var query = from layout in db.Layouts
+                            where layout.Tags.OrderBy(tag => tag.Tag1).SequenceEqual(tagsAsTagList, new TagNameComparer())
+                            select layout;
+
+                layouts = LayoutsToListOfLayouts(query.ToList());
+            }
             return layouts;
+
         }
 
         public List<LayoutModel> GetLayoutsWithType(LayoutTypes type)
@@ -356,6 +360,20 @@ namespace CircleSpaceServiceLib.Service
 
             };
             return newLayout;
+        }
+
+
+        private class TagNameComparer : IEqualityComparer<Tag>
+        {
+            public bool Equals(Tag x, Tag y)
+            {
+                return x.Tag1 == y.Tag1;
+            }
+
+            public int GetHashCode(Tag obj)
+            {
+                throw new NotImplementedException();
+            }
         }
     }
 }

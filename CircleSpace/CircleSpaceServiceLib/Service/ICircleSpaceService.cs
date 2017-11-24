@@ -18,7 +18,7 @@ namespace CircleSpaceServiceLib.Service
         void UpdatePage(PageModel model);
         void AddContributorToPage(PageModel page, UserModel contributor);
         void DeleteContributorFromPage(PageModel page, UserModel contributor);
-        LayoutModel GetLayoutWithOwner(UserModel model);
+        List<LayoutModel> GetLayoutWithOwner(UserModel model);
         LayoutModel GetLayoutWithID(int id);
         List<LayoutModel> GetLayoutsWithTag(params string[] tags);
         List<LayoutModel> GetLayoutsWithType(LayoutTypes type);
