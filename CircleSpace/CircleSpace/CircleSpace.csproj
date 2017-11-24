@@ -204,6 +204,7 @@
     <Compile Include="Models\JSONForSavingWebPage.cs" />
     <Compile Include="Models\LayoutModelJSON.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\ProfileContentContainer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>

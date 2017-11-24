@@ -21,11 +21,13 @@ namespace CircleSpaceServiceLib.Service
         LayoutModel GetLayoutWithOwner(UserModel model);
         LayoutModel GetLayoutWithID(int id);
         LayoutModel GetLayoutWithTag(params string[] tags);
+        List<PageModel> GetPagesWithOwnerID(string v);
         LayoutModel GetLayoutWithType(LayoutTypes type);
         void AddLayout(LayoutModel model);
+        List<PageModel> GetContributorPagesWithOwnerID(string v);
         void UpdateLayout(LayoutModel model);
-
+        List<LayoutModel> GetLayoutWithOwnerID(string v);
         List<LayoutModel> GetLayouts();
-
+        
     }
 }
