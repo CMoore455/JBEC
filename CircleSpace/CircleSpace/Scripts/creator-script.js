@@ -11,7 +11,7 @@ function DocumentLoaded() {
     var option = headerSelector.options[headerSelector.selectedIndex];
     if (option) {
         headerId = option.value;
-        headerSelector.addEventListener("click", function (event) {
+        headerClassLookup.click(function (event) {
             LayoutSelectorChanged({
                 Type: "Header",
                 ChangeID: function () {
@@ -28,7 +28,7 @@ function DocumentLoaded() {
     var option = bodySelector.options[bodySelector.selectedIndex];
     if (option) {
         bodyId = option.value;
-        bodySelector.addEventListener("click", function (event) {
+        bodyClassLookup.click(function (event) {
             LayoutSelectorChanged({
                 Type: "Body",
                 ChangeID: function (id) {
@@ -45,7 +45,7 @@ function DocumentLoaded() {
     var option = footerSelector.options[footerSelector.selectedIndex];
     if (option) {
         footerId = option.value;
-        footerSelector.addEventListener("change", function (event) {
+        footerClassLookup.click(function (event) {
             LayoutSelectorChanged({
                 Type: "Footer",
                 ChangeID: function () {
@@ -55,6 +55,8 @@ function DocumentLoaded() {
         });
         footerClassLookup.trigger('click');
     }
+
+
 };
 
 
@@ -83,13 +85,13 @@ function LayoutSelectorChanged(IdChanger) {
 function ReceiveNewLayout(json) {
     switch (json.Type) {
         case "Header":
-            ChangeHeader(json.Content, json.CSS);
+            ChangeHeader(json.Content, json.CSS, '#headerPreview');
             break;
         case "Body":
-            ChangeBody(json.Content, json.CSS);
+            ChangeBody(json.Content, json.CSS, '#bodyPreview');
             break;
         case "Footer":
-            ChangeFooter(json.Content, json.CSS);
+            ChangeFooter(json.Content, json.CSS, '#footerPreview');
             break;
         default:
             break;
@@ -98,58 +100,30 @@ function ReceiveNewLayout(json) {
 
 
 //These Change/Header|Body|Footer/ methods update the live preview area when a click occurs on the selection control.
-function ChangeHeader(content, css) {
-    var headerPreview = $("#headerPreview")[0];
-    if ($('#headerPreviewStyle').length != 0) { $('#headerPreviewStyle').remove(); }
+function ChangeContent(content, css, idSelectorForContentPlacement) {
+    var previewArea = $(idSelectorForContentPlacement)[0];
+
+    if ($(idSelectorForContentPlacement + 'Style').length != 0) { $(idSelectorForContentPlacement + 'Style').remove(); }
+
     var cssStyle = document.createElement('style');
-    cssStyle.setAttribute('id', 'headerPreviewStyle');
+    cssStyle.setAttribute('id', idSelectorForContentPlacement + 'Style');
     cssStyle.setAttribute('type', 'text/css');
+
     for (var i = 0; i < css.length; i++) {
-        cssStyle.innerText += ' #headerPreview ' + css[i];
+        cssStyle.innerText += ' '+ idSelectorForContentPlacement +' ' + css[i];
     }
+
     $('head').append(cssStyle);
+
     var newHeader = document.createElement("div");
     newHeader.innerHTML = content;
-    headerPreview.innerHTML = '';
+    previewArea.innerHTML = '';
     while (newHeader.hasChildNodes()) {
-        headerPreview.appendChild(newHeader.childNodes[0]);
+        previewArea.appendChild(newHeader.childNodes[0]);
     }
-}
-function ChangeBody(content, css) {
-    var bodyPreview = $("#bodyPreview")[0];
-    if ($('#bodyPreviewStyle').length != 0) { $('#bodyPreviewStyle').remove(); }
-    var cssStyle = document.createElement('style');
-    cssStyle.setAttribute('id', 'bodyPreviewStyle');
-    cssStyle.setAttribute('type', 'text/css');
-    for (var i = 0; i < css.length; i++) {
-        cssStyle.innerHTML += ' #bodyPreview ' + css[i];
-    }
-    $('head').append(cssStyle);
-    var newBody = document.createElement("div");
-    newBody.innerHTML = content;
-    bodyPreview.innerHTML = '';
-    while (newBody.hasChildNodes()) {
-        bodyPreview.appendChild(newBody.childNodes[0]);
-    }
-}
-function ChangeFooter(content, css) {
-    var footerPreview = $("#footerPreview")[0];
-    if ($('#footerPreviewStyle').length != 0) { $('#footerPreviewStyle').remove(); }
-    var cssStyle = document.createElement('style');
-    cssStyle.setAttribute('id', 'footerPreviewStyle');
-    cssStyle.setAttribute('type', 'text/css');
-    for (var i = 0; i < css.length; i++) {
-        cssStyle.innerHTML += ' #footerPreview ' + css[i];
-    }
-    $('head').append(cssStyle);
-    var newFooter = document.createElement("div");
-    newFooter.innerHTML = content;
-    footerPreview.innerHTML = '';
-    while (newFooter.hasChildNodes()) {
-        footerPreview.appendChild(newFooter.childNodes[0]);
-    }
-}
 
+    WireContentForEditableText(previewArea);
+}
 //Sends the page to the server to be saved to the database.
 function SavePage() {
 
@@ -208,6 +182,32 @@ function ConvertAllRulesToOneString(arrayOfStyles) {
 function SeparateCSSRulesIntoArray(cssText) {
     var matchCssRulesRegex = /[\)\(\]\[:\w," =\-\*^#\.\@>\n\+]+\{\s*[^}{]+\s*\}/;
     return cssText.match(matchCssRulesRegex);
+}
+
+
+//Finds nodes with 0 children and makes their text editable
+function WireContentForEditableText(content) {
+    if (content.children.length != 0) {
+        for (var i = 0; i < content.children.length; i++) {
+            WireContentForEditableText(content.children[i]);
+        }
+    } else {
+        $(content).click(function (event) {
+            if (content.children.length == 0) {
+                var inputTag = document.createElement('input');
+                inputTag.type = 'text';
+                inputTag.value = content.innerText;
+                content.innerText = '';
+                $(inputTag).blur(function (event) {
+                    var inputTagChild = content.childNodes[0];
+                    content.removeChild(inputTagChild);
+                    content.innerText = inputTagChild.value;
+                    $(content).off();
+                });
+                content.appendChild(inputTag);
+            }
+        });
+    }
 }
 
 
