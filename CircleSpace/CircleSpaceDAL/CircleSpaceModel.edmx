@@ -1,0 +1,443 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="CircleSpaceModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Contributors">
+          <Key>
+            <PropertyRef Name="ContributorID" />
+            <PropertyRef Name="PageID" />
+          </Key>
+          <Property Name="ContributorID" Type="int" Nullable="false" />
+          <Property Name="PageID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Images">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ImageName" Type="varchar(max)" Nullable="false" />
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PageID" Type="int" Nullable="false" />
+          <Property Name="UserID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Layouts">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LayoutTitle" Type="varchar(max)" Nullable="false" />
+          <Property Name="Content" Type="varchar(max)" Nullable="false" />
+          <Property Name="OwnerID" Type="int" Nullable="false" />
+          <Property Name="LayoutType" Type="varchar(max)" Nullable="false" />
+          <Property Name="CSS" Type="varchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Pages">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PageRoute" Type="varchar(max)" />
+          <Property Name="Header" Type="varchar(max)" Nullable="false" />
+          <Property Name="Body" Type="varchar(max)" Nullable="false" />
+          <Property Name="Footer" Type="varchar(max)" Nullable="false" />
+          <Property Name="CSS" Type="varchar(max)" Nullable="false" />
+          <Property Name="OwnerID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tags">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="Tag" Type="varchar(max)" Nullable="false" />
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LayoutID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FirstName" Type="varchar(max)" Nullable="false" />
+          <Property Name="LastName" Type="varchar(max)" Nullable="false" />
+          <Property Name="Username" Type="varchar(max)" Nullable="false" />
+          <Property Name="Email" Type="varchar(max)" Nullable="false" />
+          <Property Name="Password" Type="varchar(max)" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__Contribut__Contr__286302EC">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Contributors" Type="Self.Contributors" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Contributors">
+              <PropertyRef Name="ContributorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Contribut__PageI__29572725">
+          <End Role="Pages" Type="Self.Pages" Multiplicity="1" />
+          <End Role="Contributors" Type="Self.Contributors" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pages">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Contributors">
+              <PropertyRef Name="PageID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Images__PageID__2C3393D0">
+          <End Role="Pages" Type="Self.Pages" Multiplicity="1" />
+          <End Role="Images" Type="Self.Images" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pages">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Images">
+              <PropertyRef Name="PageID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Images__UserID__2D27B809">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Images" Type="Self.Images" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Images">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Layouts__OwnerID__300424B4">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Layouts" Type="Self.Layouts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Layouts">
+              <PropertyRef Name="OwnerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Pages__OwnerID__25869641">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Pages" Type="Self.Pages" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Pages">
+              <PropertyRef Name="OwnerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Tags__LayoutID__32E0915F">
+          <End Role="Layouts" Type="Self.Layouts" Multiplicity="1" />
+          <End Role="Tags" Type="Self.Tags" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Layouts">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Tags">
+              <PropertyRef Name="LayoutID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="CircleSpaceModelStoreContainer">
+          <EntitySet Name="Contributors" EntityType="Self.Contributors" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Images" EntityType="Self.Images" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Layouts" EntityType="Self.Layouts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Pages" EntityType="Self.Pages" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tags" EntityType="Self.Tags" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Contribut__Contr__286302EC" Association="Self.FK__Contribut__Contr__286302EC">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Contributors" EntitySet="Contributors" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Contribut__PageI__29572725" Association="Self.FK__Contribut__PageI__29572725">
+            <End Role="Pages" EntitySet="Pages" />
+            <End Role="Contributors" EntitySet="Contributors" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Images__PageID__2C3393D0" Association="Self.FK__Images__PageID__2C3393D0">
+            <End Role="Pages" EntitySet="Pages" />
+            <End Role="Images" EntitySet="Images" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Images__UserID__2D27B809" Association="Self.FK__Images__UserID__2D27B809">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Images" EntitySet="Images" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Layouts__OwnerID__300424B4" Association="Self.FK__Layouts__OwnerID__300424B4">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Layouts" EntitySet="Layouts" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Pages__OwnerID__25869641" Association="Self.FK__Pages__OwnerID__25869641">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Pages" EntitySet="Pages" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Tags__LayoutID__32E0915F" Association="Self.FK__Tags__LayoutID__32E0915F">
+            <End Role="Layouts" EntitySet="Layouts" />
+            <End Role="Tags" EntitySet="Tags" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="CircleSpaceModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Image">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ImageName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PageID" Type="Int32" Nullable="false" />
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Page" Relationship="Self.FK__Images__PageID__2C3393D0" FromRole="Images" ToRole="Pages" />
+          <NavigationProperty Name="User" Relationship="Self.FK__Images__UserID__2D27B809" FromRole="Images" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="Layout">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LayoutTitle" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Content" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="OwnerID" Type="Int32" Nullable="false" />
+          <Property Name="LayoutType" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CSS" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="User" Relationship="Self.FK__Layouts__OwnerID__300424B4" FromRole="Layouts" ToRole="Users" />
+          <NavigationProperty Name="Tags" Relationship="Self.FK__Tags__LayoutID__32E0915F" FromRole="Layouts" ToRole="Tags" />
+        </EntityType>
+        <EntityType Name="Page">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PageRoute" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Header" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Body" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Footer" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CSS" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="OwnerID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Images" Relationship="Self.FK__Images__PageID__2C3393D0" FromRole="Pages" ToRole="Images" />
+          <NavigationProperty Name="User" Relationship="Self.FK__Pages__OwnerID__25869641" FromRole="Pages" ToRole="Users" />
+          <NavigationProperty Name="Users" Relationship="Self.Contributors" FromRole="Pages" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="Tag">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="Tag1" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LayoutID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Layout" Relationship="Self.FK__Tags__LayoutID__32E0915F" FromRole="Tags" ToRole="Layouts" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="LastName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Username" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Images" Relationship="Self.FK__Images__UserID__2D27B809" FromRole="Users" ToRole="Images" />
+          <NavigationProperty Name="Layouts" Relationship="Self.FK__Layouts__OwnerID__300424B4" FromRole="Users" ToRole="Layouts" />
+          <NavigationProperty Name="Pages" Relationship="Self.FK__Pages__OwnerID__25869641" FromRole="Users" ToRole="Pages" />
+          <NavigationProperty Name="Pages1" Relationship="Self.Contributors" FromRole="Users" ToRole="Pages" />
+        </EntityType>
+        <Association Name="FK__Images__PageID__2C3393D0">
+          <End Role="Pages" Type="Self.Page" Multiplicity="1" />
+          <End Role="Images" Type="Self.Image" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pages">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Images">
+              <PropertyRef Name="PageID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Images__UserID__2D27B809">
+          <End Role="Users" Type="Self.User" Multiplicity="1" />
+          <End Role="Images" Type="Self.Image" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Images">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Layouts__OwnerID__300424B4">
+          <End Role="Users" Type="Self.User" Multiplicity="1" />
+          <End Role="Layouts" Type="Self.Layout" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Layouts">
+              <PropertyRef Name="OwnerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Tags__LayoutID__32E0915F">
+          <End Role="Layouts" Type="Self.Layout" Multiplicity="1" />
+          <End Role="Tags" Type="Self.Tag" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Layouts">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Tags">
+              <PropertyRef Name="LayoutID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Pages__OwnerID__25869641">
+          <End Role="Users" Type="Self.User" Multiplicity="1" />
+          <End Role="Pages" Type="Self.Page" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Pages">
+              <PropertyRef Name="OwnerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Contributors">
+          <End Role="Users" Type="Self.User" Multiplicity="*" />
+          <End Role="Pages" Type="Self.Page" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="CircleSpaceEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Images" EntityType="Self.Image" />
+          <EntitySet Name="Layouts" EntityType="Self.Layout" />
+          <EntitySet Name="Pages" EntityType="Self.Page" />
+          <EntitySet Name="Tags" EntityType="Self.Tag" />
+          <EntitySet Name="Users" EntityType="Self.User" />
+          <AssociationSet Name="FK__Images__PageID__2C3393D0" Association="Self.FK__Images__PageID__2C3393D0">
+            <End Role="Pages" EntitySet="Pages" />
+            <End Role="Images" EntitySet="Images" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Images__UserID__2D27B809" Association="Self.FK__Images__UserID__2D27B809">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Images" EntitySet="Images" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Layouts__OwnerID__300424B4" Association="Self.FK__Layouts__OwnerID__300424B4">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Layouts" EntitySet="Layouts" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Tags__LayoutID__32E0915F" Association="Self.FK__Tags__LayoutID__32E0915F">
+            <End Role="Layouts" EntitySet="Layouts" />
+            <End Role="Tags" EntitySet="Tags" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Pages__OwnerID__25869641" Association="Self.FK__Pages__OwnerID__25869641">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Pages" EntitySet="Pages" />
+          </AssociationSet>
+          <AssociationSet Name="Contributors" Association="Self.Contributors">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Pages" EntitySet="Pages" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="CircleSpaceModelStoreContainer" CdmEntityContainer="CircleSpaceEntities">
+          <EntitySetMapping Name="Images">
+            <EntityTypeMapping TypeName="CircleSpaceModel.Image">
+              <MappingFragment StoreEntitySet="Images">
+                <ScalarProperty Name="ImageName" ColumnName="ImageName" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="PageID" ColumnName="PageID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Layouts">
+            <EntityTypeMapping TypeName="CircleSpaceModel.Layout">
+              <MappingFragment StoreEntitySet="Layouts">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="LayoutTitle" ColumnName="LayoutTitle" />
+                <ScalarProperty Name="Content" ColumnName="Content" />
+                <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+                <ScalarProperty Name="LayoutType" ColumnName="LayoutType" />
+                <ScalarProperty Name="CSS" ColumnName="CSS" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Pages">
+            <EntityTypeMapping TypeName="CircleSpaceModel.Page">
+              <MappingFragment StoreEntitySet="Pages">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="PageRoute" ColumnName="PageRoute" />
+                <ScalarProperty Name="Header" ColumnName="Header" />
+                <ScalarProperty Name="Body" ColumnName="Body" />
+                <ScalarProperty Name="Footer" ColumnName="Footer" />
+                <ScalarProperty Name="CSS" ColumnName="CSS" />
+                <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tags">
+            <EntityTypeMapping TypeName="CircleSpaceModel.Tag">
+              <MappingFragment StoreEntitySet="Tags">
+                <ScalarProperty Name="Tag1" ColumnName="Tag" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="LayoutID" ColumnName="LayoutID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="CircleSpaceModel.User">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="Contributors" TypeName="CircleSpaceModel.Contributors" StoreEntitySet="Contributors">
+            <EndProperty Name="Users">
+              <ScalarProperty Name="ID" ColumnName="ContributorID" />
+            </EndProperty>
+            <EndProperty Name="Pages">
+              <ScalarProperty Name="ID" ColumnName="PageID" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
