@@ -17,9 +17,9 @@ namespace CircleSpaceDAL
         public string ImageName { get; set; }
         public int ID { get; set; }
         public int PageID { get; set; }
-        public int UserID { get; set; }
+        public string UserID { get; set; }
     
+        public virtual AspNetUser AspNetUser { get; set; }
         public virtual Page Page { get; set; }
-        public virtual User User { get; set; }
     }
 }

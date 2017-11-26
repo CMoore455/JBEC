@@ -56,9 +56,9 @@ namespace CircleSpaceGeneralModels.Models
             set { id = value; }
         }
 
-        private int ownerID;
+        private string ownerID;
 
-        public int OwnerID
+        public string OwnerID
         {
             get { return ownerID; }
             set { ownerID = value; }
