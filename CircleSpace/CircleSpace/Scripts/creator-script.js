@@ -222,22 +222,12 @@ function WireContentForEditableText(content) {
 
 //Need function that makes the page creation option for color and sizing etc. appear with appropriate options(TBD)
 function UpdateCreatorOptions() {
-    //Works
-    //'#bodyPreviewStyle h1'
-    //var elementStylesheet = $('#bodyPreviewStyle')[0].sheet;
-    //for (var i = 0; i < elementStylesheet.cssRules.length; i++) {
-    //    if (elementStylesheet.cssRules[i].selectorText == currentElementSelected) {
-    //        //elementStylesheet.cssRules[i].style.color = 'red';
-    //        //}
-
-    //        //$(elementStylesheet.cssRules[i]).addEventListener
-    //        //    ('click', function (event) {
-    //        //    console.log(event);
-    //        //})
-    //    }
-    //}
-
-
+    document.getElementById('marginLeft').value = currentElementSelected.style.marginLeft != null ? currentElementSelected.style.marginLeft : 0;
+    document.getElementById('marginRight').value = currentElementSelected.style.marginRight != null ? currentElementSelected.style.marginRight : 0;
+    document.getElementById('marginTop').value = currentElementSelected.style.marginTop != null ? currentElementSelected.style.marginTop : 0;
+    document.getElementById('marginBottom').value = currentElementSelected.style.marginBottom != null ? currentElementSelected.style.marginBottom : 0;
+    document.getElementById('backgroundColor').value = currentElementSelected.style.backgroundColor != null ? currentElementSelected.style.backgroundColor : 'black';
+    document.getElementById('fontColor').value = currentElementSelected.style.color != null ? currentElementSelected.style.color : 'black';
 }
 
 function ChangeLeftMargin(margin) {
