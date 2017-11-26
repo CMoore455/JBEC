@@ -4,17 +4,23 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="8b7cbc33c14143288cfa1d4ecae3b81b" Name="Diagram1">
-        <EntityTypeShape EntityType="CircleSpaceModel.Image" Width="1.5" PointX="5.25" PointY="9.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="CircleSpaceModel.Layout" Width="1.5" PointX="3" PointY="5.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="CircleSpaceModel.Page" Width="1.5" PointX="3" PointY="9" IsExpanded="true" />
-        <EntityTypeShape EntityType="CircleSpaceModel.Tag" Width="1.5" PointX="5.25" PointY="6" IsExpanded="true" />
-        <EntityTypeShape EntityType="CircleSpaceModel.User" Width="1.5" PointX="0.75" PointY="4.375" IsExpanded="true" />
-        <AssociationConnector Association="CircleSpaceModel.FK__Images__PageID__2C3393D0" ManuallyRouted="false" />
-        <AssociationConnector Association="CircleSpaceModel.FK__Images__UserID__2D27B809" ManuallyRouted="false" />
-        <AssociationConnector Association="CircleSpaceModel.FK__Layouts__OwnerID__300424B4" ManuallyRouted="false" />
-        <AssociationConnector Association="CircleSpaceModel.FK__Tags__LayoutID__32E0915F" ManuallyRouted="false" />
-        <AssociationConnector Association="CircleSpaceModel.FK__Pages__OwnerID__25869641" ManuallyRouted="false" />
+      <Diagram DiagramId="4c2b4c6927224753b2f0932657b7f3a5" Name="Diagram1">
+        <EntityTypeShape EntityType="CircleSpaceModel.AspNetRole" Width="1.5" PointX="0.75" PointY="8" IsExpanded="true" />
+        <EntityTypeShape EntityType="CircleSpaceModel.AspNetUserClaim" Width="1.5" PointX="5.25" PointY="3" IsExpanded="true" />
+        <EntityTypeShape EntityType="CircleSpaceModel.AspNetUserLogin" Width="1.5" PointX="5.25" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CircleSpaceModel.AspNetUser" Width="1.5" PointX="3" PointY="6.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="CircleSpaceModel.Image" Width="1.5" PointX="7.5" PointY="7.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="CircleSpaceModel.Layout" Width="1.5" PointX="5.25" PointY="11.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="CircleSpaceModel.Page" Width="1.5" PointX="5.25" PointY="14.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="CircleSpaceModel.Tag" Width="1.5" PointX="7.5" PointY="11.625" IsExpanded="true" />
+        <AssociationConnector Association="CircleSpaceModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="CircleSpaceModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="CircleSpaceModel.FK__Images__UserID__60A75C0F" ManuallyRouted="false" />
+        <AssociationConnector Association="CircleSpaceModel.FK__Layouts__OwnerID__6383C8BA" ManuallyRouted="false" />
+        <AssociationConnector Association="CircleSpaceModel.FK__Pages__OwnerID__59063A47" ManuallyRouted="false" />
+        <AssociationConnector Association="CircleSpaceModel.FK__Images__PageID__5FB337D6" ManuallyRouted="false" />
+        <AssociationConnector Association="CircleSpaceModel.FK__Tags__LayoutID__66603565" ManuallyRouted="false" />
+        <AssociationConnector Association="CircleSpaceModel.AspNetUserRoles" ManuallyRouted="false" />
         <AssociationConnector Association="CircleSpaceModel.Contributors" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>

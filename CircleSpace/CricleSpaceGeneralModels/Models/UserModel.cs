@@ -8,9 +8,9 @@ namespace CircleSpaceGeneralModels.Models
 {
     public class UserModel
     {
-        private int id;
+        private string id;
 
-        public int ID
+        public string ID
         {
             get { return id; }
             set { id = value; }

@@ -23,11 +23,11 @@ namespace CircleSpaceDAL
         public int ID { get; set; }
         public string LayoutTitle { get; set; }
         public string Content { get; set; }
-        public int OwnerID { get; set; }
+        public string OwnerID { get; set; }
         public string LayoutType { get; set; }
         public string CSS { get; set; }
     
-        public virtual User User { get; set; }
+        public virtual AspNetUser AspNetUser { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Tag> Tags { get; set; }
     }

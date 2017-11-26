@@ -18,7 +18,7 @@ namespace CircleSpaceDAL
         public Page()
         {
             this.Images = new HashSet<Image>();
-            this.Users = new HashSet<User>();
+            this.AspNetUsers = new HashSet<AspNetUser>();
         }
     
         public int ID { get; set; }
@@ -27,12 +27,12 @@ namespace CircleSpaceDAL
         public string Body { get; set; }
         public string Footer { get; set; }
         public string CSS { get; set; }
-        public int OwnerID { get; set; }
+        public string OwnerID { get; set; }
     
+        public virtual AspNetUser AspNetUser { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Image> Images { get; set; }
-        public virtual User User { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<User> Users { get; set; }
+        public virtual ICollection<AspNetUser> AspNetUsers { get; set; }
     }
 }

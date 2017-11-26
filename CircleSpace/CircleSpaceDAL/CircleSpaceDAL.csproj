@@ -49,6 +49,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AspNetRole.cs">
+      <DependentUpon>CircleSpaceModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AspNetUser.cs">
+      <DependentUpon>CircleSpaceModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AspNetUserClaim.cs">
+      <DependentUpon>CircleSpaceModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AspNetUserLogin.cs">
+      <DependentUpon>CircleSpaceModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="CircleSpaceModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -77,39 +89,34 @@
     <Compile Include="Tag.cs">
       <DependentUpon>CircleSpaceModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="User.cs">
-      <DependentUpon>CircleSpaceModel.tt</DependentUpon>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <EntityDeploy Include="CircleSpaceModel.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>CircleSpaceModel.Designer.cs</LastGenOutput>
-    </EntityDeploy>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.Config">
       <SubType>Designer</SubType>
     </None>
+    <EntityDeploy Include="CircleSpaceModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>CircleSpaceModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
     <None Include="CircleSpaceModel.edmx.diagram">
       <DependentUpon>CircleSpaceModel.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
     <Content Include="CircleSpaceModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>CircleSpaceModel.Context.cs</LastGenOutput>
       <DependentUpon>CircleSpaceModel.edmx</DependentUpon>
+      <LastGenOutput>CircleSpaceModel.Context.cs</LastGenOutput>
     </Content>
     <Content Include="CircleSpaceModel.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>CircleSpaceModel.edmx</DependentUpon>
       <LastGenOutput>CircleSpaceModel.cs</LastGenOutput>
     </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
