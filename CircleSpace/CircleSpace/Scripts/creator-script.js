@@ -85,13 +85,13 @@ function LayoutSelectorChanged(IdChanger) {
 function ReceiveNewLayout(json) {
     switch (json.Type) {
         case "Header":
-            ChangeHeader(json.Content, json.CSS, '#headerPreview');
+            ChangeContent(json.Content, json.CSS, '#headerPreview');
             break;
         case "Body":
-            ChangeBody(json.Content, json.CSS, '#bodyPreview');
+            ChangeContent(json.Content, json.CSS, '#bodyPreview');
             break;
         case "Footer":
-            ChangeFooter(json.Content, json.CSS, '#footerPreview');
+            ChangeContent(json.Content, json.CSS, '#footerPreview');
             break;
         default:
             break;
@@ -192,7 +192,8 @@ function WireContentForEditableText(content) {
             WireContentForEditableText(content.children[i]);
         }
     } else {
-        $(content).click(function (event) {
+        var changeTextClickSubscriber;
+        $(content).click((changeTextClickSubscriber = function (event) {
             if (content.children.length == 0) {
                 var inputTag = document.createElement('input');
                 inputTag.type = 'text';
@@ -202,11 +203,11 @@ function WireContentForEditableText(content) {
                     var inputTagChild = content.childNodes[0];
                     content.removeChild(inputTagChild);
                     content.innerText = inputTagChild.value;
-                    $(content).off();
+                    $(content).off().click(changeTextClickSubscriber);                    
                 });
                 content.appendChild(inputTag);
             }
-        });
+        }));
     }
 }
 
