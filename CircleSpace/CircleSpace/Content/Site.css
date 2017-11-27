@@ -73,6 +73,11 @@ selector-bodies {
     max-height: 80vh;
 }
 
+div > label {
+    display: inline-grid;
+    margin-top: 10px;
+}
+
 /* Set padding to keep content from hitting the edges */
 .body-content {
     padding-left: 15px;
