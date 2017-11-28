@@ -106,3 +106,14 @@ textarea {
     margin-right: auto;
     max-width: 70vw;
 }
+.jumbotron {
+    box-shadow: 2px 2px 2px #888888;
+    background-color:white;
+    text-align:center;
+}
+.Name{
+    font-family:'Agency FB';
+}
+.lead{
+    font-family:'Agency FB';
+}
