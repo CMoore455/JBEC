@@ -3,6 +3,8 @@ document.addEventListener("load", DocumentLoaded());
 
 //The ID's of the currently selected layouts in the selector.
 var headerId, bodyId, footerId;
+var currentElementSelected;
+
 
 //Hooks up all the click events for the selectors for a different layout.
 function DocumentLoaded() {
@@ -56,7 +58,13 @@ function DocumentLoaded() {
         footerClassLookup.trigger('click');
     }
 
-
+    $('#fontColor').on('click', ChangeFontColor);
+    $('#backgroundColor').on('click', ChangeBackgroundColor);
+    $('#marginLeft').on('click', ChangeLeftMargin);
+    $('#marginRight').on('click', ChangeRightMargin);
+    $('#marginTop').on('click', ChangeTopMargin);
+    $('#marginBottom').on('click', ChangeBottomMargin);
+    $('#fontSize').on('click', ChangeFontSize);
 };
 
 
@@ -110,7 +118,7 @@ function ChangeContent(content, css, idSelectorForContentPlacement) {
     cssStyle.setAttribute('type', 'text/css');
 
     for (var i = 0; i < css.length; i++) {
-        cssStyle.innerText += ' '+ idSelectorForContentPlacement +' ' + css[i];
+        cssStyle.innerText += ' ' + idSelectorForContentPlacement + ' ' + css[i];
     }
 
     $('head').append(cssStyle);
@@ -206,6 +214,7 @@ function WireContentForEditableText(content) {
                     $(content).off().click(changeTextClickSubscriber);                    
                 });
                 content.appendChild(inputTag);
+                currentElementSelected = content;
             }
         }));
     }
@@ -213,3 +222,47 @@ function WireContentForEditableText(content) {
 
 
 //Need function that makes the page creation option for color and sizing etc. appear with appropriate options(TBD)
+function UpdateCreatorOptions() {
+    document.getElementById('marginLeft').value = currentElementSelected.style.marginLeft != null ? currentElementSelected.style.marginLeft : 0;
+    document.getElementById('marginRight').value = currentElementSelected.style.marginRight != null ? currentElementSelected.style.marginRight : 0;
+    document.getElementById('marginTop').value = currentElementSelected.style.marginTop != null ? currentElementSelected.style.marginTop : 0;
+    document.getElementById('marginBottom').value = currentElementSelected.style.marginBottom != null ? currentElementSelected.style.marginBottom : 0;
+    document.getElementById('backgroundColor').value = currentElementSelected.style.backgroundColor != null ? currentElementSelected.style.backgroundColor : 'black';
+    document.getElementById('fontColor').value = currentElementSelected.style.color != null ? currentElementSelected.style.color : 'black';
+}
+
+function ChangeLeftMargin(margin) {
+    currentElementSelected.style.marginLeft = document.getElementById('marginLeft').value;
+}
+
+function ChangeRightMargin(margin) {
+    currentElementSelected.style.marginRight = document.getElementById('marginRight').value;
+}
+
+function ChangeTopMargin(margin) {
+    currentElementSelected.style.marginTop = document.getElementById('marginTop').value;
+}
+
+function ChangeBottomMargin(margin) {
+    currentElementSelected.style.marginBottom = document.getElementById('marginBottom').value;
+}
+
+function ChangeFontSize(fontSize) {
+
+}
+
+function ChangeHeight() {
+    currentElementSelected.style.height = document.getElementById('height').value;
+}
+
+function ChangeWidth() {
+    currentElementSelected.style.width = document.getElementById('width').value;
+}
+
+function ChangeBackgroundColor() {
+    currentElementSelected.style.backgroundColor = document.getElementById('backgroundColor').value;
+}
+
+function ChangeFontColor() {
+    currentElementSelected.style.color = document.getElementById('fontColor').value;
+}

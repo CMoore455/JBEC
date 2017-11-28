@@ -25,10 +25,13 @@ namespace CircleSpaceDAL
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<AspNetRole> AspNetRoles { get; set; }
+        public virtual DbSet<AspNetUserClaim> AspNetUserClaims { get; set; }
+        public virtual DbSet<AspNetUserLogin> AspNetUserLogins { get; set; }
+        public virtual DbSet<AspNetUser> AspNetUsers { get; set; }
         public virtual DbSet<Image> Images { get; set; }
         public virtual DbSet<Layout> Layouts { get; set; }
         public virtual DbSet<Page> Pages { get; set; }
         public virtual DbSet<Tag> Tags { get; set; }
-        public virtual DbSet<User> Users { get; set; }
     }
 }
