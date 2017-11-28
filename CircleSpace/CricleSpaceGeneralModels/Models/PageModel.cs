@@ -56,6 +56,22 @@ namespace CircleSpaceGeneralModels.Models
             set { id = value; }
         }
 
+        private string ownerID;
+
+        public string OwnerID
+        {
+            get { return ownerID; }
+            set { ownerID = value; }
+        }
+
+        private List<UserModel> contributors;
+
+        public List<UserModel> Contributors
+        {
+            get { return contributors; }
+            set { contributors = value; }
+        }
+
         private List<string> imageUrls;
 
         public List<string> ImageUrls

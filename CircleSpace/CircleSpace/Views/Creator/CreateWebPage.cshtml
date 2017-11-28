@@ -1,4 +1,4 @@
-﻿@using CircleSpaceGeneralModels.Enums
+@using CircleSpaceGeneralModels.Enums
 @model List<CircleSpaceGeneralModels.Models.LayoutModel>
 
 @{
@@ -6,10 +6,8 @@
 }
 <div class="row row-creator">
     <div class="col-sm-1 creator-controls-col">
-
-
         <select class="selector-headers">
-            @foreach (var layoutModel in Model ?? new List<CircleSpaceGeneralModels.Models.LayoutModel>() { new CircleSpaceGeneralModels.Models.LayoutModel() { ID = 100 } })
+            @foreach (var layoutModel in Model ?? new List<CircleSpaceGeneralModels.Models.LayoutModel>())
             {
                 if (layoutModel.Type == LayoutTypes.Header)
                 {
@@ -49,11 +47,45 @@
         </select>
 
     </div>
-    <div id="live-preview-area" class="col-lg-1">
 
+    <div id="live-preview-area" class="col-lg-1">
+        <div id="headerPreview"></div>
+        <div id="bodyPreview"></div>
+        <div id="footerPreview"></div>
     </div>
 
-    <div class="col-sm-1 creator-section-options" hidden />
+    <div class="col-sm-1 creator-section-options">
+        <div>
+            <label>
+                Font Color:
+                <input id="fontColor" type="color" />
+            </label>
+            <label>
+                Background Color:
+                <input id="backgroundColor" type="color" />
+            </label>
+            <label>
+                Margin Left:
+                <input id="marginLeft" type="number" />
+            </label>
+            <label>
+                Margin Right:
+                <input id="marginRight" type="number" />
+            </label>
+            <label>
+                Margin Top:
+                <input id="marginTop" type="number" />
+            </label>
+            <label>
+                Margin Bottom:
+                <input id="marginBottom" type="number" />
+            </label>
+            <label>
+                Font Size:
+                <input id="fontSize" type="number" />
+            </label>
+        </div>
+    </div>
 
 </div>
 

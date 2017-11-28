@@ -8,9 +8,9 @@ namespace CircleSpaceGeneralModels.Models
 {
     public class UserModel
     {
-        private int id;
+        private string id;
 
-        public int ID
+        public string ID
         {
             get { return id; }
             set { id = value; }
@@ -48,21 +48,21 @@ namespace CircleSpaceGeneralModels.Models
             set { email = value; }
         }
 
-        private List<PageModel> ownedPages;
+        //private List<PageModel> ownedPages;
 
-        public List<PageModel> OwnedPages
-        {
-            get { return ownedPages; }
-            set { ownedPages = value; }
-        }
+        //public List<PageModel> OwnedPages
+        //{
+        //    get { return ownedPages; }
+        //    set { ownedPages = value; }
+        //}
 
-        private List<LayoutModel> ownedLayouts;
+        //private List<LayoutModel> ownedLayouts;
 
-        public List<LayoutModel> OwnedLayouts
-        {
-            get { return ownedLayouts; }
-            set { ownedLayouts = value; }
-        }
+        //public List<LayoutModel> OwnedLayouts
+        //{
+        //    get { return ownedLayouts; }
+        //    set { ownedLayouts = value; }
+        //}
 
     }
 }

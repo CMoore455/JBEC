@@ -66,8 +66,7 @@ namespace CircleSpaceGeneralModels.Models
             set { tags = value; }
         }
 
-
-
+ 
     }
 
 }

@@ -13,18 +13,21 @@ namespace CircleSpaceServiceLib.Service
         void AddPage(PageModel model);
         void DeletePage(PageModel model);
         PageModel GetPageWithID(int id);
-        PageModel GetPageRoute(string route);
+        PageModel GetPageWithRoute(string route);
         List<PageModel> GetContributorPages(UserModel model);
         void UpdatePage(PageModel model);
         void AddContributorToPage(PageModel page, UserModel contributor);
         void DeleteContributorFromPage(PageModel page, UserModel contributor);
-        LayoutModel GetLayoutWithOwner(UserModel model);
-        LayoutModel GetLayoutWithTag(params string[] tags);
-        LayoutModel GetLayoutWithType(LayoutTypes type);
+        List<LayoutModel> GetLayoutWithOwner(UserModel model);
+        LayoutModel GetLayoutWithID(int id);
+        List<LayoutModel> GetLayoutsWithTag(params string[] tags);
+        List<LayoutModel> GetLayoutsWithType(LayoutTypes type);
+        List<PageModel> GetPagesWithOwnerID(string v);
         void AddLayout(LayoutModel model);
+        List<PageModel> GetContributorPagesWithOwnerID(string v);
         void UpdateLayout(LayoutModel model);
-
+        List<LayoutModel> GetLayoutWithOwnerID(string v);
         List<LayoutModel> GetLayouts();
-
+        
     }
 }
