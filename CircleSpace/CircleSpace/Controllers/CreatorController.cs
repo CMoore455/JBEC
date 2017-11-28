@@ -13,7 +13,7 @@ namespace CircleSpace.Controllers
     [Authorize]
     public class CreatorController : Controller
     {
-        private ICircleSpaceService service;
+        private ICircleSpaceService service = new SqlCricleSpaceService();
         // GET: Creator
         public ActionResult Index()
         {

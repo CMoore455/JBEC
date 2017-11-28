@@ -7,21 +7,21 @@
 
 <h2>@User.Identity.Name</h2>
 
-<wbr />
+<hr />
 <h3>Pages Created</h3>
-@foreach (var route in Model.PAGE_ROUTES_OF_OWNED_PAGES)
+@foreach (var route in Model?.PAGE_ROUTES_OF_OWNED_PAGES ?? new List<string>().AsReadOnly())
 {
     <a href="@route">www.circlespace.com/@route</a>
 }
-<wbr />
+<hr />
 <h3>Pages Contributing To</h3>
-@foreach (var route in Model.PAGE_ROUTES_OF_CONTRIUBTED_PAGES)
+@foreach (var route in Model?.PAGE_ROUTES_OF_CONTRIUBTED_PAGES ?? new List<string>().AsReadOnly())
 {
     <a href="@route">www.circlespace.com/@route</a>
 }
-<wbr />
+<hr />
 <h3>Layouts Owned</h3>
-@foreach (var id in Model.OWNED_LAYOUT_IDS)
+@foreach (var id in Model?.OWNED_LAYOUT_IDS ?? new List<int>().AsReadOnly())
 {
     <a href="EditLayout/@id">Layout #@id</a>
 }

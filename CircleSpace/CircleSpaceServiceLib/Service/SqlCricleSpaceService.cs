@@ -116,7 +116,7 @@ namespace CircleSpaceServiceLib.Service
                 list = LayoutsToListOfLayouts(query.ToList());
             }
 
-            return list;
+            return list ?? new List<LayoutModel>();
         }
 
         public LayoutModel GetLayoutWithID(int id)
@@ -403,9 +403,7 @@ namespace CircleSpaceServiceLib.Service
 
             };
             return newLayout;
-        }
-
-       
+        }       
 
         private class TagNameComparer : IEqualityComparer<Tag>
         {
