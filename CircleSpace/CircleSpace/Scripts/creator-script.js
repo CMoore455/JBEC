@@ -64,6 +64,8 @@ function DocumentLoaded() {
     $('#marginRight').on('click', ChangeRightMargin);
     $('#marginTop').on('click', ChangeTopMargin);
     $('#marginBottom').on('click', ChangeBottomMargin);
+    $('#width').on('click', ChangeWidth);
+    $('#height').on('click', ChangeHeight);
     $('#fontSize').on('click', ChangeFontSize);
 };
 
@@ -231,37 +233,55 @@ function UpdateCreatorOptions() {
 }
 
 function ChangeLeftMargin(margin) {
-    currentElementSelected.style.marginLeft = document.getElementById('marginLeft').value;
+    jQuery('#marginLeft').on('input', function () {
+        jQuery(currentElementSelected).css('marginLeft', (jQuery(this).val()+'px'));
+    });
 }
 
-function ChangeRightMargin(margin) {
-    currentElementSelected.style.marginRight = document.getElementById('marginRight').value;
+function ChangeRightMargin() {
+    jQuery('#marginRight').on('input', function () {
+        jQuery(currentElementSelected).css('marginRight', (jQuery(this).val() + 'px'));
+    });
 }
 
-function ChangeTopMargin(margin) {
-    currentElementSelected.style.marginTop = document.getElementById('marginTop').value;
+function ChangeTopMargin() {
+    jQuery('#marginTop').on('input', function () {
+        jQuery(currentElementSelected).css('marginTop', (jQuery(this).val() + 'px'));
+    });
 }
 
-function ChangeBottomMargin(margin) {
-    currentElementSelected.style.marginBottom = document.getElementById('marginBottom').value;
+function ChangeBottomMargin() {
+    jQuery('#marginBottom').on('input', function () {
+        jQuery(currentElementSelected).css('marginBottom', (jQuery(this).val() + 'px'));
+    });
 }
 
-function ChangeFontSize(fontSize) {
-
+function ChangeFontSize() {
+    jQuery('#fontSize').on('input', function () {
+        jQuery(currentElementSelected).css('fontSize', jQuery(this).val());
+    });
 }
 
 function ChangeHeight() {
-    currentElementSelected.style.height = document.getElementById('height').value;
+    jQuery('#height').on('input', function () {
+        jQuery(currentElementSelected).css('height', jQuery(this).val());
+    });
 }
 
 function ChangeWidth() {
-    currentElementSelected.style.width = document.getElementById('width').value;
+    jQuery('#width').on('input', function () {
+        jQuery(currentElementSelected).css('width', jQuery(this).val());
+    });
 }
 
 function ChangeBackgroundColor() {
-    currentElementSelected.style.backgroundColor = document.getElementById('backgroundColor').value;
+    jQuery('#backgroundColor').on('input', function () {
+        jQuery(currentElementSelected).css('backgroundColor', jQuery(this).val());
+    });
 }
 
 function ChangeFontColor() {
-    currentElementSelected.style.color = document.getElementById('fontColor').value;
+    jQuery('#fontColor').on('input', function () {
+        jQuery(currentElementSelected).css('color', jQuery(this).val());
+    });
 }

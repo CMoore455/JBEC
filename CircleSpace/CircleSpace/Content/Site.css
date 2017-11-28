@@ -52,6 +52,10 @@ html {
     width: 15vw;
 }
 
+#radioChecks{
+    width: 15vw;
+}
+
 .selector-headers {
 }
 
@@ -71,6 +75,8 @@ selector-bodies {
     background-color: grey;
     height: 80vh;
     max-height: 80vh;
+    overflow-y: auto;
+    overflow-x: hidden;
 }
 
 div > label {
