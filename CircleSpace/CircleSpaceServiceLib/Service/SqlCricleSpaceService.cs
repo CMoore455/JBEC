@@ -17,7 +17,7 @@ namespace CircleSpaceServiceLib.Service
             {
 
                 var query = db.Pages.Where(p => p.ID == page.ID).First();
-                query.Users.Add(db.Users.Where(u => u.ID == contributor.ID).First());
+                query.AspNetUsers.Add(db.AspNetUsers.Where(u => u.Id == contributor.ID).First());
                 db.SaveChanges();
 
             }
@@ -74,7 +74,7 @@ namespace CircleSpaceServiceLib.Service
             {
 
                 var query = db.Pages.Where(p => p.ID == page.ID).First();
-                query.Users.Remove(db.Users.Where(u => u.ID == contributor.ID).First());
+                query.AspNetUsers.Remove(db.AspNetUsers.Where(u => u.Id == contributor.ID).First());
                 db.SaveChanges();
 
             }
@@ -95,7 +95,7 @@ namespace CircleSpaceServiceLib.Service
             List<PageModel> list = new List<PageModel>();
             using (var db = new CircleSpaceEntities())
             {
-                var user = db.Users.Where(u => u.ID == model.ID).First();
+                var user = db.AspNetUsers.Where(u => u.Id == model.ID).First();
                 var pages = user.Pages1.ToList();
                 pages.ForEach(page =>
                 {
@@ -237,6 +237,18 @@ namespace CircleSpaceServiceLib.Service
             }
         }
 
+        private List<PageModel> PagesToPageModelList(List<Page> p)
+        {
+            List<PageModel> list = new List<PageModel>();
+            p.ForEach(page =>
+            {
+                var newPage = PageToPageModel(page);
+                list.Add(newPage);
+            });
+            return list;
+
+        }
+
 
         /// <summary>
         /// This method will convert Page objects into PageModel objects
@@ -256,11 +268,12 @@ namespace CircleSpaceServiceLib.Service
                 Footer = p.Footer,
                 ImageUrls = ImagesToImageUrls(p),
                 CSS = p.CSS,
-                Contributors = UsersToContributors(p)
+                Contributors = AspNetUsersToContributors(p)
 
             };
             return newPageModel;
         }
+
         /// <summary>
         /// This method converts Image objects in to a list of strings called ImageUrls
         /// </summary>
@@ -287,25 +300,55 @@ namespace CircleSpaceServiceLib.Service
         //    return list;
         //}
 
-        private UserModel UserToUserModels(User u)
+        private UserModel UserToUserModels(AspNetUser u)
         {
             UserModel newUser = new UserModel()
             {
-                ID = u.ID,
-                Username = u.Username,
-                FirstName = u.FirstName,
-                LastName = u.LastName,
+                ID = u.Id,
+                Username = u.UserName,
                 Email = u.Email
 
             };
             return newUser;
         }
 
-        private List<UserModel> UsersToContributors(Page p)
+
+        public List<PageModel> GetPagesWithOwnerID(string v)
+        {
+            List<PageModel> list = new List<PageModel>();
+            using (var db = new CircleSpaceEntities())
+            {
+                 list = PagesToPageModelList(db.Pages.Where(p=> p.OwnerID == v).ToList());
+            }
+            return list;
+        }
+
+        public List<PageModel> GetContributorPagesWithOwnerID(string v)
+        {
+            List<PageModel> list = new List<PageModel>();
+            using (var db = new CircleSpaceEntities())
+            {
+
+                list = PagesToPageModelList(db.Pages.Where(p => p.AspNetUsers.Select(u=> u.Id).Contains(v)).ToList());
+            }
+            return list;
+        }
+
+        public List<LayoutModel> GetLayoutWithOwnerID(string v)
+        {
+            List<LayoutModel> list = new List<LayoutModel>();
+            using (var db = new CircleSpaceEntities())
+            {
+                list = LayoutsToListOfLayouts(db.Layouts.Where(l => l.OwnerID == v).ToList());
+            }
+            return list;
+        }
+
+        private List<UserModel> AspNetUsersToContributors(Page p)
         {
             List<UserModel> contributors = new List<UserModel>();
-            var users = p.Users.ToList();
-            users.ForEach(user =>
+            var AspNetUsers = p.AspNetUsers.ToList();
+            AspNetUsers.ForEach(user =>
             {
                 contributors.Add(UserToUserModels(user));
             });
@@ -331,7 +374,7 @@ namespace CircleSpaceServiceLib.Service
                 newLayout = new LayoutModel()
                 {
                     ID = l.ID,
-                    Owner = UserToUserModels(db.Users.Where(u => u.ID == l.OwnerID).First()),
+                    Owner = UserToUserModels(db.AspNetUsers.Where(u => u.Id == l.OwnerID).First()),
                     LayoutTitle = l.LayoutTitle,
                     Content = l.Content,
                     CSS = l.CSS,
@@ -362,6 +405,7 @@ namespace CircleSpaceServiceLib.Service
             return newLayout;
         }
 
+       
 
         private class TagNameComparer : IEqualityComparer<Tag>
         {

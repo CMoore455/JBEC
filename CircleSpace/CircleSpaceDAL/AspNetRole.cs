@@ -12,26 +12,17 @@ namespace CircleSpaceDAL
     using System;
     using System.Collections.Generic;
     
-    public partial class Page
+    public partial class AspNetRole
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Page()
+        public AspNetRole()
         {
-            this.Images = new HashSet<Image>();
             this.AspNetUsers = new HashSet<AspNetUser>();
         }
     
-        public int ID { get; set; }
-        public string PageRoute { get; set; }
-        public string Header { get; set; }
-        public string Body { get; set; }
-        public string Footer { get; set; }
-        public string CSS { get; set; }
-        public string OwnerID { get; set; }
+        public string Id { get; set; }
+        public string Name { get; set; }
     
-        public virtual AspNetUser AspNetUser { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Image> Images { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AspNetUser> AspNetUsers { get; set; }
     }

@@ -12,14 +12,13 @@ namespace CircleSpaceDAL
     using System;
     using System.Collections.Generic;
     
-    public partial class Image
+    public partial class AspNetUserClaim
     {
-        public string ImageName { get; set; }
-        public int ID { get; set; }
-        public int PageID { get; set; }
-        public string UserID { get; set; }
+        public int Id { get; set; }
+        public string UserId { get; set; }
+        public string ClaimType { get; set; }
+        public string ClaimValue { get; set; }
     
         public virtual AspNetUser AspNetUser { get; set; }
-        public virtual Page Page { get; set; }
     }
 }
