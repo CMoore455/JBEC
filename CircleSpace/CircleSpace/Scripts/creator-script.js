@@ -66,7 +66,10 @@ function DocumentLoaded() {
     $('#marginBottom').on('click', ChangeBottomMargin);
     $('#width').on('click', ChangeWidth);
     $('#height').on('click', ChangeHeight);
-    $('#fontSize').on('click', ChangeFontSize);
+    $('.fontSize').on('click', ChangeFontSize);
+    $('.fontStyle').on('click', ChangeFontStyle);
+    $('.fontWeight').on('click', ChangeFontWeight);
+    $('.textAlign').on('click', ChangeAlignment);
 };
 
 
@@ -257,12 +260,6 @@ function ChangeBottomMargin() {
     });
 }
 
-function ChangeFontSize() {
-    jQuery('#fontSize').on('input', function () {
-        jQuery(currentElementSelected).css('fontSize', jQuery(this).val());
-    });
-}
-
 function ChangeHeight() {
     jQuery('#height').on('input', function () {
         jQuery(currentElementSelected).css('height', jQuery(this).val());
@@ -284,5 +281,27 @@ function ChangeBackgroundColor() {
 function ChangeFontColor() {
     jQuery('#fontColor').on('input', function () {
         jQuery(currentElementSelected).css('color', jQuery(this).val());
+    });
+}
+
+function ChangeFontSize() {
+    jQuery('.fontSize').on('input', function () {
+        jQuery(currentElementSelected).css('fontSize', jQuery(this).val());
+    });
+}
+
+function ChangeFontStyle() {
+    jQuery('.fontStyle').on('input', function () {
+        jQuery(currentElementSelected).css('fontStyle', jQuery(this).val());
+    });
+}
+function ChangeFontWeight() {
+    jQuery('.fontSize').on('input', function () {
+        jQuery(currentElementSelected).css('fontWeight', jQuery(this).val());
+    });
+}
+function ChangeAlignment() {
+    jQuery('.textAlign').on('input', function () {
+        jQuery(currentElementSelected).css('textAlign', jQuery(this).val());
     });
 }
