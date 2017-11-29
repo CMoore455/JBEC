@@ -296,7 +296,7 @@ function ChangeFontStyle() {
     });
 }
 function ChangeFontWeight() {
-    jQuery('.fontSize').on('input', function () {
+    jQuery('.fontWeight').on('input', function () {
         jQuery(currentElementSelected).css('fontWeight', jQuery(this).val());
     });
 }
