@@ -204,27 +204,33 @@ function WireContentForEditableText(content) {
         for (var i = 0; i < content.children.length; i++) {
             WireContentForEditableText(content.children[i]);
         }
-    } else {
+    } else if(content != undefined) {
         var changeTextClickSubscriber;
-        $(content).click((changeTextClickSubscriber = function (event) {
-            if (content.children.length == 0) {
-                var inputTag = document.createElement('input');
-                inputTag.type = 'text';
-                inputTag.value = content.innerText;
-                content.innerText = '';
-                $(inputTag).blur(function (event) {
-                    var inputTagChild = content.childNodes[0];
-                    content.removeChild(inputTagChild);
-                    content.innerText = inputTagChild.value;
-                    $(content).off().click(changeTextClickSubscriber);                    
-                });
-                content.appendChild(inputTag);
-                currentElementSelected = content;
-            }
-        }));
+        $(content).click(function (event) {
+            ChangeTextClickSubscriber(content);
+        });
     }
 }
 
+function ChangeTextClickSubscriber(content) {
+
+    if (content.children.length == 0) {
+        var inputTag = document.createElement('input');
+        inputTag.type = 'text';
+        inputTag.value = content.innerText;
+        content.innerText = '';
+        $(inputTag).blur(function (event) {
+            var inputTagChild = content.childNodes[0];
+            content.removeChild(inputTagChild);
+            content.innerText = inputTagChild.value;
+            $(content).off();
+            $(content).click(function (event) { ChangeTextClickSubscriber(content) });
+        });
+        content.appendChild(inputTag);
+        currentElementSelected = content;
+    }
+
+}
 
 //Need function that makes the page creation option for color and sizing etc. appear with appropriate options(TBD)
 function UpdateCreatorOptions() {
