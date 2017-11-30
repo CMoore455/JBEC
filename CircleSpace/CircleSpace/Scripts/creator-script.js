@@ -285,6 +285,7 @@ function ChangeBackgroundColor() {
 }
 
 function ChangeFontColor() {
+    BlurCurrentlySelectedElement();
     jQuery('#fontColor').on('input', function () {
         jQuery(currentElementSelected).css('color', jQuery(this).val());
     });
@@ -310,4 +311,8 @@ function ChangeAlignment() {
     jQuery('.textAlign').on('input', function () {
         jQuery(currentElementSelected).css('textAlign', jQuery(this).val());
     });
+}
+
+function BlurCurrentlySelectedElement() {
+    $(currentElementSelected).children().trigger('blur');
 }
