@@ -405,7 +405,17 @@ namespace CircleSpaceServiceLib.Service
             return newLayout;
         }
 
-       
+        public List<PageModel> GetPages()
+        {
+            List<PageModel> list = new List<PageModel>();
+            using (var db = new CircleSpaceEntities())
+            {
+                var query = db.Pages.Select(x => x);
+                list = PagesToPageModelList(query.ToList());
+            }
+
+            return list;
+        }
 
         private class TagNameComparer : IEqualityComparer<Tag>
         {
