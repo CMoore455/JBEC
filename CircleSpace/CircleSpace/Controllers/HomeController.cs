@@ -51,7 +51,7 @@ namespace CircleSpace.Controllers
         public ActionResult SaveCreatedPage(int id)
         {
             var page = service.GetPageWithID(id);
-
+            if (string.IsNullOrWhiteSpace(page.Route)) { page.Route = "WebPage"; }
             string html = page.Header + page.Body + page.Footer;
             string css = page.CSS;
 
@@ -89,7 +89,41 @@ namespace CircleSpace.Controllers
         [Authorize]
         public ActionResult SaveCreatedLayout(int id)
         {
-            throw new NotImplementedException();
+            var layout = service.GetLayoutWithID(id);
+            if (string.IsNullOrWhiteSpace(layout.LayoutTitle)) { layout.LayoutTitle = "Layout"; }
+            string html = layout.Content;
+            string css = layout.CSS;
+
+            byte[] htmlFileContents = Encoding.Default.GetBytes(html);
+            byte[] cssFileContents = Encoding.Default.GetBytes(css);
+            byte[] zipFileContents = null;
+
+            using (var zipStream = new MemoryStream())
+            {
+
+                ZipArchive zip = new ZipArchive(zipStream, ZipArchiveMode.Create, true);
+                ZipArchiveEntry htmlArchiveEntry = zip.CreateEntry($"{layout.LayoutTitle.Replace('/', '_')}.html", CompressionLevel.Fastest);
+
+                using (var zipFileStream = htmlArchiveEntry.Open())
+                {
+                    zipFileStream.Flush();
+                    zipFileStream.Write(htmlFileContents, 0, htmlFileContents.Length);
+                }
+
+                ZipArchiveEntry cssArchiveEntry = zip.CreateEntry($"{layout.LayoutTitle.Replace('/', '_')}.css", CompressionLevel.Fastest);
+
+                using (var zipFileStream = cssArchiveEntry.Open())
+                {
+                    zipFileStream.Flush();
+                    zipFileStream.Write(cssFileContents, 0, cssFileContents.Length);
+                }
+
+                zipStream.Seek(0, SeekOrigin.Begin);
+                zipFileContents = new byte[zipStream.Length];
+                zipStream.Read(zipFileContents, 0, zipFileContents.Length);
+            }
+
+            return File(zipFileContents, "application/zip", $"{layout.LayoutTitle.Replace('/', '_')}.zip");
         }
     }
 }
