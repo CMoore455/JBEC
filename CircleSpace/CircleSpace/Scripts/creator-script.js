@@ -70,6 +70,7 @@ function DocumentLoaded() {
     $('.fontStyle').on('click', ChangeFontStyle);
     $('.fontWeight').on('click', ChangeFontWeight);
     $('.textAlign').on('click', ChangeAlignment);
+    $('#check').on('click', ChangeVerticalAlignment);
 };
 
 
@@ -204,7 +205,7 @@ function WireContentForEditableText(content) {
         for (var i = 0; i < content.children.length; i++) {
             WireContentForEditableText(content.children[i]);
         }
-    } else if(content != undefined) {
+    } else if (content != undefined) {
         var changeTextClickSubscriber;
         $(content).click(function (event) {
             ChangeTextClickSubscriber(content);
@@ -243,42 +244,49 @@ function UpdateCreatorOptions() {
 }
 
 function ChangeLeftMargin(margin) {
+    BlurCurrentlySelectedElement();
     jQuery('#marginLeft').on('input', function () {
-        jQuery(currentElementSelected).css('marginLeft', (jQuery(this).val()+'px'));
+        jQuery(currentElementSelected).css('marginLeft', (jQuery(this).val() + 'px'));
     });
 }
 
 function ChangeRightMargin() {
+    BlurCurrentlySelectedElement();
     jQuery('#marginRight').on('input', function () {
         jQuery(currentElementSelected).css('marginRight', (jQuery(this).val() + 'px'));
     });
 }
 
 function ChangeTopMargin() {
+    BlurCurrentlySelectedElement();
     jQuery('#marginTop').on('input', function () {
         jQuery(currentElementSelected).css('marginTop', (jQuery(this).val() + 'px'));
     });
 }
 
 function ChangeBottomMargin() {
+    BlurCurrentlySelectedElement();
     jQuery('#marginBottom').on('input', function () {
         jQuery(currentElementSelected).css('marginBottom', (jQuery(this).val() + 'px'));
     });
 }
 
 function ChangeHeight() {
+    BlurCurrentlySelectedElement();
     jQuery('#height').on('input', function () {
         jQuery(currentElementSelected).css('height', jQuery(this).val());
     });
 }
 
 function ChangeWidth() {
+    BlurCurrentlySelectedElement();
     jQuery('#width').on('input', function () {
         jQuery(currentElementSelected).css('width', jQuery(this).val());
     });
 }
 
 function ChangeBackgroundColor() {
+    BlurCurrentlySelectedElement();
     jQuery('#backgroundColor').on('input', function () {
         jQuery(currentElementSelected).css('backgroundColor', jQuery(this).val());
     });
@@ -292,25 +300,45 @@ function ChangeFontColor() {
 }
 
 function ChangeFontSize() {
+    BlurCurrentlySelectedElement();
     jQuery('.fontSize').on('input', function () {
         jQuery(currentElementSelected).css('fontSize', jQuery(this).val());
     });
 }
 
 function ChangeFontStyle() {
+    BlurCurrentlySelectedElement();
     jQuery('.fontStyle').on('input', function () {
         jQuery(currentElementSelected).css('fontStyle', jQuery(this).val());
     });
 }
+
 function ChangeFontWeight() {
+    BlurCurrentlySelectedElement();
     jQuery('.fontWeight').on('input', function () {
         jQuery(currentElementSelected).css('fontWeight', jQuery(this).val());
     });
 }
+
 function ChangeAlignment() {
+    BlurCurrentlySelectedElement();
     jQuery('.textAlign').on('input', function () {
         jQuery(currentElementSelected).css('textAlign', jQuery(this).val());
     });
+}
+
+function ChangeVerticalAlignment() {
+    BlurCurrentlySelectedElement();
+    if (document.getElementById("check").checked == true) {
+        jQuery('#check').on('input', function () {
+            jQuery(currentElementSelected).css('lineHeight', currentElementSelected.style.height);
+        });
+    }
+    else {
+        jQuery('#check').on('input', function () {
+            jQuery(currentElementSelected).css('lineHeight', (40 + 'px'));
+        });
+    }
 }
 
 function BlurCurrentlySelectedElement() {
