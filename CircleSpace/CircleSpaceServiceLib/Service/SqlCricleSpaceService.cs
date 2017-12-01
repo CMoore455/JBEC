@@ -15,11 +15,10 @@ namespace CircleSpaceServiceLib.Service
         {
             using (var db = new CircleSpaceEntities())
             {
-
                 var query = db.Pages.Where(p => p.ID == page.ID).First();
                 query.AspNetUsers.Add(db.AspNetUsers.Where(u => u.Id == contributor.ID).First());
-                db.SaveChanges();
 
+                db.SaveChanges();
             }
         }
 

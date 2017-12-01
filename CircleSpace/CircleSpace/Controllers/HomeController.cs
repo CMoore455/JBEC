@@ -38,16 +38,9 @@ namespace CircleSpace.Controllers
             ProfileContentContainer profileContent;
             List<PageModel> ownedPages = service.GetPagesWithOwnerID(User.Identity.GetUserId());
             List<PageModel> contributedPages = service.GetContributorPagesWithOwnerID(User.Identity.GetUserId());
-            List<LayoutModel> ownedLayout = service.GetLayoutWithOwnerID(User.Identity.GetUserId());
+            List<LayoutModel> ownedLayouts = service.GetLayoutWithOwnerID(User.Identity.GetUserId());
 
-            List<string> ownedPagesRoutes = (from page in ownedPages
-                                            select page.Route).ToList();
-            List<string> contriubtedPagesRoutes = (from page in contributedPages
-                                                   select page.Route).ToList();
-            List<int> ownedLayoutIDs = (from layout in ownedLayout
-                                        select layout.ID).ToList();
-
-            profileContent = new ProfileContentContainer(ownedPagesRoutes.AsReadOnly(), contriubtedPagesRoutes.AsReadOnly(), ownedLayoutIDs.AsReadOnly());
+            profileContent = new ProfileContentContainer(ownedPages.AsReadOnly(), contributedPages.AsReadOnly(), ownedLayouts.AsReadOnly());
 
             return View(profileContent);
         }

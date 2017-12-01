@@ -6,22 +6,24 @@
 }
 
 <h2>@User.Identity.Name</h2>
-
 <wbr />
 <h3>Pages Created</h3>
-@foreach (var route in Model.PAGE_ROUTES_OF_OWNED_PAGES)
+@foreach (var route in Model.OWNED_PAGES)
 {
-    <a href="@route">www.circlespace.com/@route</a>
+    <a href="@route">www.circlespace.com/@route.Route</a>
+    <br/>
 }
 <wbr />
 <h3>Pages Contributing To</h3>
-@foreach (var route in Model.PAGE_ROUTES_OF_CONTRIUBTED_PAGES)
+@foreach (var route in Model.CONTRIUBTED_PAGES)
 {
-    <a href="@route">www.circlespace.com/@route</a>
+    <a href="@route">www.circlespace.com/@route.Route</a>
+    <br/>
 }
 <wbr />
 <h3>Layouts Owned</h3>
-@foreach (var id in Model.OWNED_LAYOUT_IDS)
+@foreach (var id in Model.OWNED_LAYOUTS)
 {
-    <a href="EditLayout/@id">Layout #@id</a>
+    <a href="EditLayout/@id">Layout #@id.LayoutTitle</a>
+    <br/>
 }
