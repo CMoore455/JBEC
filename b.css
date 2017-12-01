@@ -1,0 +1,22 @@
+.navbar div{
+    display: inline-block;
+    margin: 30px;
+    margin-top: 15px;
+    font-size: 30px;
+}
+
+.navbar{
+    top: 0;
+    bottom: 0;
+    height: 10vh;
+    width: 100vw;
+    
+    background-color: aqua;
+}
+
+body{
+    margin-top: 0px;
+    margin-left: 0px;
+    margin-right: 0px;
+    
+}
