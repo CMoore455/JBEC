@@ -5,7 +5,7 @@
     font-size: 20px;
 }
 
-img{
+#imageSection{
     height: 10vh;
     margin: 0px;
 }
@@ -18,7 +18,6 @@ img{
     display: flex;
     justify-content: space-around;
     align-items: center;
-    background-color: aqua;
 }
 
 body{
