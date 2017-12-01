@@ -12,8 +12,6 @@ namespace CircleSpace.Models
         public readonly ReadOnlyCollection<PageModel> OWNED_PAGES;
         public readonly ReadOnlyCollection<PageModel> CONTRIUBTED_PAGES;
         public readonly ReadOnlyCollection<LayoutModel> OWNED_LAYOUTS;
-
-
         public ProfileContentContainer(ReadOnlyCollection<PageModel> ownedPages, ReadOnlyCollection<PageModel> contributedPages, ReadOnlyCollection<LayoutModel> ownedLayouts)
         { 
             this.OWNED_PAGES = ownedPages ?? new List<PageModel>().AsReadOnly();
