@@ -22,7 +22,7 @@ function drop(ev) {
 }
 
 function MakeElementsDraggable(context, shouldClone) {
-    var draggableElements = $("h1, h2, h3, h4, h5, h6, p, ul, ol, li, img", context);
+    var draggableElements = $("h1, h2, h3, h4, h5, h6, p, ul, ol, li, img, a", context);
     draggableElements.each(function (index, elem) {
 
         var htmlElement = elem;
