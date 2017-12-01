@@ -275,6 +275,7 @@
     <Content Include="Views\Home\ProfilePage.cshtml" />
     <Content Include="Views\Browse\BrowseSite.cshtml" />
     <Content Include="Views\Creator\CreateWebPage.cshtml" />
+    <Content Include="Views\Creator\CreateCustomLayout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

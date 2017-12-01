@@ -38,6 +38,11 @@ namespace CircleSpace.Controllers
             return Json(new LayoutModelJSON(layout).JSON, JsonRequestBehavior.AllowGet);
         }
 
+        public ActionResult CreateCustomLayout()
+        {
+            return View();
+        }
+
         [HttpPost]
         public string SavePage(JSONForSavingWebPage o)
         {
