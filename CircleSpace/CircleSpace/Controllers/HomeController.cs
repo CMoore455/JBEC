@@ -59,30 +59,32 @@ namespace CircleSpace.Controllers
             byte[] cssFileContents = Encoding.Default.GetBytes(css);
             byte[] zipFileContents = null;
 
-            using (var zipStream = new MemoryStream()) {
+            using (var zipStream = new MemoryStream())
+            {
 
-                ZipArchive zip = new ZipArchive(zipStream, ZipArchiveMode.Create, true);
-                ZipArchiveEntry htmlArchiveEntry = zip.CreateEntry($"{page.Route.Replace('/', '_')}.html", CompressionLevel.Fastest);
-
-                using(var zipFileStream = htmlArchiveEntry.Open())
+                using (ZipArchive zip = new ZipArchive(zipStream, ZipArchiveMode.Create, true))
                 {
-                    zipFileStream.Flush();
-                    zipFileStream.Write(htmlFileContents, 0, htmlFileContents.Length);
+                    ZipArchiveEntry htmlArchiveEntry = zip.CreateEntry($"{page.Route.Replace('/', '_')}.html", CompressionLevel.Fastest);
+
+                    using (var zipFileStream = htmlArchiveEntry.Open())
+                    {
+                        zipFileStream.Flush();
+                        zipFileStream.Write(htmlFileContents, 0, htmlFileContents.Length);
+                    }
+
+                    ZipArchiveEntry cssArchiveEntry = zip.CreateEntry($"{page.Route.Replace('/', '_')}.css", CompressionLevel.Fastest);
+
+                    using (var zipFileStream = cssArchiveEntry.Open())
+                    {
+                        zipFileStream.Flush();
+                        zipFileStream.Write(cssFileContents, 0, cssFileContents.Length);
+                    }
                 }
-
-                ZipArchiveEntry cssArchiveEntry = zip.CreateEntry($"{page.Route.Replace('/', '_')}.css", CompressionLevel.Fastest);
-
-                using(var zipFileStream = cssArchiveEntry.Open())
-                {
-                    zipFileStream.Flush();
-                    zipFileStream.Write(cssFileContents, 0, cssFileContents.Length);
-                }
-
                 zipStream.Seek(0, SeekOrigin.Begin);
                 zipFileContents = new byte[zipStream.Length];
                 zipStream.Read(zipFileContents, 0, zipFileContents.Length);
             }
-   
+
             return File(zipFileContents, "application/zip", $"{page.Route.Replace('/', '_')}.zip");
         }
 
@@ -101,21 +103,23 @@ namespace CircleSpace.Controllers
             using (var zipStream = new MemoryStream())
             {
 
-                ZipArchive zip = new ZipArchive(zipStream, ZipArchiveMode.Create, true);
-                ZipArchiveEntry htmlArchiveEntry = zip.CreateEntry($"{layout.LayoutTitle.Replace('/', '_')}.html", CompressionLevel.Fastest);
-
-                using (var zipFileStream = htmlArchiveEntry.Open())
+                using (ZipArchive zip = new ZipArchive(zipStream, ZipArchiveMode.Create, true))
                 {
-                    zipFileStream.Flush();
-                    zipFileStream.Write(htmlFileContents, 0, htmlFileContents.Length);
-                }
+                    ZipArchiveEntry htmlArchiveEntry = zip.CreateEntry($"{layout.LayoutTitle.Replace('/', '_')}.html", CompressionLevel.Fastest);
 
-                ZipArchiveEntry cssArchiveEntry = zip.CreateEntry($"{layout.LayoutTitle.Replace('/', '_')}.css", CompressionLevel.Fastest);
+                    using (var zipFileStream = htmlArchiveEntry.Open())
+                    {
+                        zipFileStream.Flush();
+                        zipFileStream.Write(htmlFileContents, 0, htmlFileContents.Length);
+                    }
 
-                using (var zipFileStream = cssArchiveEntry.Open())
-                {
-                    zipFileStream.Flush();
-                    zipFileStream.Write(cssFileContents, 0, cssFileContents.Length);
+                    ZipArchiveEntry cssArchiveEntry = zip.CreateEntry($"{layout.LayoutTitle.Replace('/', '_')}.css", CompressionLevel.Fastest);
+
+                    using (var zipFileStream = cssArchiveEntry.Open())
+                    {
+                        zipFileStream.Flush();
+                        zipFileStream.Write(cssFileContents, 0, cssFileContents.Length);
+                    }
                 }
 
                 zipStream.Seek(0, SeekOrigin.Begin);
