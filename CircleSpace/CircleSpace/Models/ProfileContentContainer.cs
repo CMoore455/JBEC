@@ -9,16 +9,15 @@ namespace CircleSpace.Models
 {
     public class ProfileContentContainer
     {
-        
+
         public readonly ReadOnlyCollection<PageModel> OWNED_PAGES;
         public readonly ReadOnlyCollection<PageModel> CONTRIUBTED_PAGES;
-        public ReadOnlyCollection<LayoutModel> OWNED_LAYOUTS;
-
-        public ProfileContentContainer(ReadOnlyCollection<PageModel> pageRoutesOfOwnedPages, ReadOnlyCollection<PageModel> pageRoutesOfContributedPages, ReadOnlyCollection<LayoutModel> ownedLayoutIDs)
+        public readonly ReadOnlyCollection<LayoutModel> OWNED_LAYOUTS;
+        public ProfileContentContainer(ReadOnlyCollection<PageModel> ownedPages, ReadOnlyCollection<PageModel> contributedPages, ReadOnlyCollection<LayoutModel> ownedLayouts)
         { 
-            this.OWNED_PAGES = pageRoutesOfOwnedPages ?? new List<PageModel>().AsReadOnly();
-            this.OWNED_PAGES = pageRoutesOfContributedPages ?? new List<PageModel>().AsReadOnly();
-            this.OWNED_LAYOUTS = ownedLayoutIDs ?? new List<LayoutModel>().AsReadOnly();
+            this.OWNED_PAGES = ownedPages ?? new List<PageModel>().AsReadOnly();
+            this.CONTRIUBTED_PAGES = contributedPages ?? new List<PageModel>().AsReadOnly();
+            this.OWNED_LAYOUTS = ownedLayouts ?? new List<LayoutModel>().AsReadOnly();
         }
     }
 }
