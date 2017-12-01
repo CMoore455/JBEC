@@ -5,7 +5,10 @@
 
 <h2>Create Custom Layout</h2>
 
-<select class="selector">
+<label>
+    Title: <input type="text" />
+</label>
+<select id="type-selector">
     <option value="Header">
         Header
     </option>
@@ -15,12 +18,19 @@
     <option value="Footer">
         Footer
     </option>
+    <option value="Custom">
+        Custom
+    </option>
 </select>
 
+<div id="draggableItems">
+    <h1>Page Header</h1>
+    <h2>Section Header</h2>
+    <h3>Paragraph Header</h3>
+    <p>Paragraph</p>    
+</div>
+
 <div id="live-preview-area">
-    <div id="headerPreview"></div>
-    <div id="bodyPreview"></div>
-    <div id="footerPreview"></div>
 </div>
 
 <div class="col-sm-1 creator-section-options">
@@ -55,3 +65,8 @@
         </label>
     </div>
 </div>
+
+@section scripts{
+      <script src="~/Scripts/DragAndDrop.js"></script>
+      <script src="~/Scripts/layout-creator-script.js"></script>  
+}
