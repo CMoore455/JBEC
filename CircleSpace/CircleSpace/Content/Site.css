@@ -1,10 +1,13 @@
 html {
     --backgroundColorLight: #FFFFFF;
-    --backgroundColorDark: #000000;
+    --backgroundColorDark: #0000;
     --HoverColor: #ACCFCC;
     --TextColor: #000000;
     --BorderStyle: none;
     --BorderColor: #000000;
+    --CreatorStyleBorder: double;
+    --BorderRadius: 5px;
+    --SideBackgroundColor: silver;
 }
 
 .navbar {
@@ -42,7 +45,6 @@ html {
 }
 
 .row{
-    background-color: black;
     display: flex;
 }
 
@@ -50,6 +52,9 @@ html {
     display: grid;
     align-content: center;
     width: 15vw;
+    border-style: var(--CreatorStyleBorder);
+    border-radius: var(--BorderRadius);
+    background-color: var(--SideBackgroundColor);
 }
 
 #radioChecks{
@@ -57,26 +62,62 @@ html {
 }
 
 .selector-headers {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    font-size: 20px;
 }
 
-selector-bodies {
+.selector-bodies {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    font-size: 20px;
 }
 
 .selector-footers {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    font-size: 20px;
+}
+
+input[type=button]{
+
+}
+
+input[type=color]{
+
+}
+
+input[type=checkbox]{
+
+}
+
+input[type=number]{
+
+}
+
+input[type=radio]{
+
 }
 
 #live-preview-area {
     width: 65vw;
-    background-color: aliceblue;
+    border-style: var(--CreatorStyleBorder);
+    border-radius: var(--BorderRadius);
+    max-height: 80vh;
+    max-width: 65vw;
+    overflow-y: auto;
+    overflow-x: auto;
 }
 
 .creator-section-options {
     width: 25vw;
-    background-color: grey;
     height: 80vh;
     max-height: 80vh;
     overflow-y: auto;
     overflow-x: hidden;
+    border-style: var(--CreatorStyleBorder);
+    border-radius: var(--BorderRadius);
+    background-color: var(--SideBackgroundColor);
 }
 
 div > label {
@@ -89,6 +130,7 @@ div > label {
     padding-left: 15px;
     padding-right: 15px;
     background-color: var(--backgroundColorLight);
+    box-shadow: 2px 2px 2px 2px #888888;
 }
 
 /* Override the default bootstrap behavior where horizontal description lists 
@@ -113,8 +155,7 @@ textarea {
     max-width: 70vw;
 }
 .jumbotron {
-    box-shadow: 2px 2px 2px #888888;
-    background-color:white;
+    background-color: var(--backgroundColorLight);
     text-align:center;
 }
 .Name{
