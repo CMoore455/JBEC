@@ -222,6 +222,7 @@ function ChangeTextClickSubscriber(content) {
             $(content).click(function (event) { ChangeTextClickSubscriber(content) });
         });
         content.appendChild(inputTag);
+        $(inputTag).trigger('focus');
         currentElementSelected = content;
     }
 
