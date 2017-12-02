@@ -12,6 +12,7 @@ function EditTextOfElement(element) {
 
     textAreaJQ.blur(function () {
         element.textContent = textArea.value;
+        $(element).mouseup(EditTextOnClick);
         textAreaJQ.replaceWith(element);
     });
 
@@ -22,30 +23,29 @@ function RemoveElement(element) {
     $(element).remove();
 }
 
+function EditTextOnClick(event) {
+    switch (event.which) {
+        case 1:
+            if (event.shiftKey) {
+                RemoveElement(event.target);
+            } else {
+                EditTextOfElement(event.target);
+            }
+            break;
+    }
+}
+
 window.addEventListener('load', function (event) {
 
     $('#draggableItems').each(function (index, element) {
-        MakeElementsDraggable(element);
-        $(element).children().mouseup(function (event) {
-            switch (event.which) {
-                case 1:
-                    if (event.shiftKey) {
-
-                        RemoveElement(event.target);
-                    } else {
-
-                        EditTextOfElement(event.target);
-                    }
-                    //'Left Mouse button pressed.
-                    break;
-                case 3:
-                    //'Right Mouse button pressed.'
-                    break;
-            }
-        });
+        MakeElementsDraggable(element, true);
     });
 
-    MakeElementDropTarget($('#live-preview-area')[0]);
+    livePreviewArea = $('#live-preview-area')[0]
+    MakeElementDropTarget(livePreviewArea);
+    onclone(function (element) {
+        $(element).mouseup(EditTextOnClick);
+    });
 
     var typeSelector = $('#type-selector')[0];
     $(typeSelector).click(
