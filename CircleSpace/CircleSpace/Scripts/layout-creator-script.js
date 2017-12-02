@@ -1,7 +1,5 @@
 ﻿var layoutTypeSelected;
 
-//Add cloning feature to the drag and drop script so the creation area isn't depleted as things are dragged.
-
 function EditTextOfElement(element) {
     var textArea = document.createElement('input');
     var textAreaJQ = $(textArea);
@@ -31,11 +29,16 @@ window.addEventListener('load', function (event) {
         $(element).children().mouseup(function (event) {
             switch (event.which) {
                 case 1:
-                    EditTextOfElement(event.target);
+                    if (event.shiftKey) {
+
+                        RemoveElement(event.target);
+                    } else {
+
+                        EditTextOfElement(event.target);
+                    }
                     //'Left Mouse button pressed.
                     break;
                 case 3:
-                    RemoveElement(event.target);
                     //'Right Mouse button pressed.'
                     break;
             }
@@ -56,7 +59,12 @@ window.addEventListener('load', function (event) {
     console.log(layoutTypeSelected);
 });
 
+//Need object on server side to receive json and save the layout
+//Don't forget validation of the title field.
 function SaveLayout() {
 
 }
+
+//Need to wire up the styling controls.
+//Don't forget that it needs to create a script tag and save that as the css and not apply the styles directly to the tags.
 
