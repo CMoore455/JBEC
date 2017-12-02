@@ -199,6 +199,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\EditPageContentContainer.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\JSONForSavingWebPage.cs" />
     <Compile Include="Models\LayoutModelJSON.cs" />
@@ -273,7 +274,7 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Home\ProfilePage.cshtml" />
     <Content Include="Views\Browse\BrowseSite.cshtml" />
-    <Content Include="Views\Creator\CreateWebPage.cshtml" />
+    <Content Include="Views\Creator\EditWebPage.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
