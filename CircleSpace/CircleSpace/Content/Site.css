@@ -44,7 +44,7 @@ html {
     color: var(--HoverColor);
 }
 
-.row{
+.row {
     display: flex;
 }
 
@@ -57,7 +57,7 @@ html {
     background-color: var(--SideBackgroundColor);
 }
 
-#radioChecks{
+#radioChecks {
     width: 15vw;
 }
 
@@ -100,18 +100,27 @@ input[type=color] {
     background-color: var(--backgroundColorLight);
 }
 
-input[type=checkbox] {
-    
-}
-
 input[type=number] {
     border-style: double;
     border-radius: 5px;
     background-color: var(--backgroundColorLight);
 }
 
-input[type=radio]{
+input[type=text] {
+    border-style: double;
+    border-radius: 5px;
+    background-color: var(--backgroundColorLight);
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+}
 
+#submitButton{
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+}
+
+#link{
+    text-align: left;
 }
 
 #live-preview-area {
@@ -162,20 +171,23 @@ textarea {
     max-width: 280px;
 }
 
-.ClassFooter{
+.ClassFooter {
     padding-left: 15px;
     padding-right: 15px;
     margin-left: auto;
     margin-right: auto;
     max-width: 70vw;
 }
+
 .jumbotron {
     background-color: var(--backgroundColorLight);
-    text-align:center;
+    text-align: center;
 }
-.Name{
-    font-family:'Agency FB';
+
+.Name {
+    font-family: 'Agency FB';
 }
-.lead{
-    font-family:'Agency FB';
+
+.lead {
+    font-family: 'Agency FB';
 }
