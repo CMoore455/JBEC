@@ -46,6 +46,7 @@
             }
         </select>
 
+        <input type="button" onclick="SavePage()" value="Save Page">
     </div>
 
     <div id="live-preview-area" class="col-lg-1">
@@ -53,7 +54,6 @@
         <div id="bodyPreview"></div>
         <div id="footerPreview"></div>
     </div>
-
     <div class="col-sm-1 creator-section-options">
         <div>
             <label>
@@ -81,8 +81,40 @@
                 <input id="marginBottom" type="number" />
             </label>
             <label>
+                Height:
+                <input id="height" type="number" min="0"/>
+            </label>
+            <label>
+                Width:
+                <input id="width" type="number" min="0"/>
+            </label>
+            <label>
                 Font Size:
-                <input id="fontSize" type="number" />
+                <input id="fontSize" type="number" min="5"/>
+            </label>
+            <label>
+                Font Weight:
+                <input id="fontWeight" type="number" min="100" max="900" step="100"/>
+            </label>
+            <label id="radioChecks">
+                Font Style:
+                <label><input type="radio" name="rad1" class="fontStyle" value="normal">Normal</label>
+                <label><input type="radio" name="rad1" class="fontStyle" value="italic">Italicized</label>
+            </label>
+            <label id="radioChecks">
+                Alignment:
+                <label><input type="radio" name="rad3" class="textAlign" value="left">Left</label>
+                <label><input type="radio" name="rad3" class="textAlign" value="center">Center</label>
+                <label><input type="radio" name="rad3" class="textAlign" value="right">Right</label>
+            </label>
+            <label>
+                Vertical Shift:
+                <label><input id="check" type="checkbox">Center</label>
+            </label>
+            <label id="link">
+                Link:
+                <input type="text" id="textArea" value=""/>
+                <input type="button" id="submitButton" value="Create Link"/>
             </label>
         </div>
     </div>
