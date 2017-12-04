@@ -241,11 +241,15 @@ function UpdateCreatorOptions() {
     document.getElementById('marginRight').value = currentElementSelected.style.marginRight.slice(0, currentElementSelected.style.marginRight.length - 2);
     document.getElementById('marginTop').value = currentElementSelected.style.marginTop.slice(0, currentElementSelected.style.marginTop.length - 2);
     document.getElementById('marginBottom').value = currentElementSelected.style.marginBottom.slice(0, currentElementSelected.style.marginBottom.length - 2);
+    document.getElementById('height').value = currentElementSelected.style.height.slice(0, currentElementSelected.style.height.length - 2);
+    document.getElementById('width').value = currentElementSelected.style.width.slice(0, currentElementSelected.style.width.length - 2);
     document.getElementById('fontSize').value = currentElementSelected.style.fontSize.slice(0, currentElementSelected.style.fontSize.length - 2);
     document.getElementById('fontWeight').value = currentElementSelected.style.fontWeight.slice(0, currentElementSelected.style.fontWeight.length);
     document.getElementById('backgroundColor').value = rgbToHex();
     document.getElementById('fontColor').value = rgbToHex();
     document.getElementById('textArea').value = "";
+    $('input[type=radio]').attr('checked', false);
+    $('input[type=checkbox]').attr('checked', false);
 }
 
 function ChangeLeftMargin(margin) {
