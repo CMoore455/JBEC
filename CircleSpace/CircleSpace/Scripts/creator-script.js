@@ -66,11 +66,12 @@ function DocumentLoaded() {
     $('#marginBottom').on('click', ChangeBottomMargin);
     $('#width').on('click', ChangeWidth);
     $('#height').on('click', ChangeHeight);
-    $('.fontSize').on('click', ChangeFontSize);
+    $('#fontSize').on('click', ChangeFontSize);
+    $('#fontWeight').on('click', ChangeFontWeight);
     $('.fontStyle').on('click', ChangeFontStyle);
-    $('.fontWeight').on('click', ChangeFontWeight);
     $('.textAlign').on('click', ChangeAlignment);
     $('#check').on('click', ChangeVerticalAlignment);
+    $('#submitButton').on('click', CreateLink);
 };
 
 
@@ -240,19 +241,11 @@ function UpdateCreatorOptions() {
     document.getElementById('marginRight').value = currentElementSelected.style.marginRight.slice(0, currentElementSelected.style.marginRight.length - 2);
     document.getElementById('marginTop').value = currentElementSelected.style.marginTop.slice(0, currentElementSelected.style.marginTop.length - 2);
     document.getElementById('marginBottom').value = currentElementSelected.style.marginBottom.slice(0, currentElementSelected.style.marginBottom.length - 2);
+    document.getElementById('fontSize').value = currentElementSelected.style.fontSize.slice(0, currentElementSelected.style.fontSize.length - 2);
+    document.getElementById('fontWeight').value = currentElementSelected.style.fontWeight.slice(0, currentElementSelected.style.fontWeight.length);
     document.getElementById('backgroundColor').value = rgbToHex();
     document.getElementById('fontColor').value = rgbToHex();
-}
-
-function rgbToHex() {
-    var a = currentElementSelected.style.backgroundColor.slice(4, currentElementSelected.style.backgroundColor.length-1);
-    a = a.split(",");
-    var b = a.map(function (x) {             //For each array element
-        x = parseInt(x).toString(16);      //Convert to a base16 string
-        return (x.length == 1) ? "0" + x : x;  //Add zero if we get only one character
-    })
-    b = "#" + b.join("");
-    return b;
+    document.getElementById('textArea').value = "";
 }
 
 function ChangeLeftMargin(margin) {
@@ -313,22 +306,22 @@ function ChangeFontColor() {
 
 function ChangeFontSize() {
     BlurCurrentlySelectedElement();
-    jQuery('.fontSize').on('input', function () {
-        jQuery(currentElementSelected).css('fontSize', jQuery(this).val());
+    jQuery('#fontSize').on('input', function () {
+        jQuery(currentElementSelected).css('fontSize', (jQuery(this).val() + 'px'));
+    });
+}
+
+function ChangeFontWeight() {
+    BlurCurrentlySelectedElement();
+    jQuery('#fontWeight').on('input', function () {
+        jQuery(currentElementSelected).css('fontWeight', jQuery(this).val());
     });
 }
 
 function ChangeFontStyle() {
     BlurCurrentlySelectedElement();
     jQuery('.fontStyle').on('input', function () {
-        jQuery(currentElementSelected).css('fontStyle', jQuery(this).val());
-    });
-}
-
-function ChangeFontWeight() {
-    BlurCurrentlySelectedElement();
-    jQuery('.fontWeight').on('input', function () {
-        jQuery(currentElementSelected).css('fontWeight', jQuery(this).val());
+        jQuery(currentElementSelected).css('font-style', jQuery(this).val());
     });
 }
 
@@ -353,6 +346,26 @@ function ChangeVerticalAlignment() {
     }
 }
 
+function CreateLink() {
+    if (document.getElementById('textArea').value != ""){
+        $(currentElementSelected).wrap("<a href=" + document.getElementById('textArea').value + "></a>");
+    }
+    else {
+        $(currentElementSelected).unwrap();
+    }
+}
+
 function BlurCurrentlySelectedElement() {
     $(currentElementSelected).children().trigger('blur');
+}
+
+function rgbToHex() {
+    var a = currentElementSelected.style.backgroundColor.slice(4, currentElementSelected.style.backgroundColor.length - 1);
+    a = a.split(",");
+    var b = a.map(function (x) {             //For each array element
+        x = parseInt(x).toString(16);      //Convert to a base16 string
+        return (x.length == 1) ? "0" + x : x;  //Add zero if we get only one character
+    })
+    b = "#" + b.join("");
+    return b;
 }

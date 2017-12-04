@@ -114,18 +114,13 @@ input[type=text] {
     border-bottom-right-radius: 0px;
 }
 
-input[type=submit] {
-    border-style: double;
-    border-radius: 5px;
-    background-color: var(--backgroundColorLight);
+#submitButton{
     border-top-left-radius: 0px;
     border-top-right-radius: 0px;
-    border-top-style: none;
 }
 
 #link{
     text-align: left;
-    width: inherit;
 }
 
 #live-preview-area {
