@@ -28,7 +28,6 @@ namespace CircleSpaceServiceLib.Service
             {
                 var newLayout = new Layout()
                 {
-                    ID = db.Layouts.Max(l => l.ID) + 1,
                     OwnerID = model.Owner.ID,
                     LayoutTitle = model.LayoutTitle,
                     Content = model.Content,
@@ -41,7 +40,6 @@ namespace CircleSpaceServiceLib.Service
                     var newTag = new Tag()
                     {
                         Tag1 = tag,
-                        ID = db.Tags.Max(t => t.ID) + 1,
                         LayoutID = newLayout.ID
                     };
                     db.Tags.Add(newTag);
@@ -59,7 +57,6 @@ namespace CircleSpaceServiceLib.Service
                 var newPage = new Page()
                 {
                     PageRoute = model.Route,
-                    ID = db.Pages.Max(p => p.ID) + 1,
                     OwnerID = model.OwnerID,
                     Header = model.Header,
                     Body = model.Body,
