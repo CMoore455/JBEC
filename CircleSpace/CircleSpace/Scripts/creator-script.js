@@ -64,7 +64,14 @@ function DocumentLoaded() {
     $('#marginRight').on('click', ChangeRightMargin);
     $('#marginTop').on('click', ChangeTopMargin);
     $('#marginBottom').on('click', ChangeBottomMargin);
+    $('#width').on('click', ChangeWidth);
+    $('#height').on('click', ChangeHeight);
     $('#fontSize').on('click', ChangeFontSize);
+    $('#fontWeight').on('click', ChangeFontWeight);
+    $('.fontStyle').on('click', ChangeFontStyle);
+    $('.textAlign').on('click', ChangeAlignment);
+    $('#check').on('click', ChangeVerticalAlignment);
+    $('#submitButton').on('click', CreateLink);
 };
 
 
@@ -199,69 +206,171 @@ function WireContentForEditableText(content) {
         for (var i = 0; i < content.children.length; i++) {
             WireContentForEditableText(content.children[i]);
         }
-    } else {
+    } else if (content != undefined) {
+        var changeTextClickSubscriber;
         $(content).click(function (event) {
-            if (content.children.length == 0) {
-                var inputTag = document.createElement('input');
-                inputTag.type = 'text';
-                inputTag.value = content.innerText;
-                content.innerText = '';
-                $(inputTag).blur(function (event) {
-                    var inputTagChild = content.childNodes[0];
-                    content.removeChild(inputTagChild);
-                    content.innerText = inputTagChild.value;
-                    $(content).off();
-                });
-                content.appendChild(inputTag);
-                currentElementSelected = content;
-            }
+            ChangeTextClickSubscriber(content);
         });
     }
 }
 
+function ChangeTextClickSubscriber(content) {
+
+    if (content.children.length == 0) {
+        var inputTag = document.createElement('input');
+        inputTag.type = 'text';
+        inputTag.value = content.innerText;
+        content.innerText = '';
+        $(inputTag).blur(function (event) {
+            var inputTagChild = content.childNodes[0];
+            content.removeChild(inputTagChild);
+            content.innerText = inputTagChild.value;
+            $(content).off();
+            $(content).click(function (event) { ChangeTextClickSubscriber(content) });
+        });
+        content.appendChild(inputTag);
+        $(inputTag).trigger('focus');
+        currentElementSelected = content;
+        UpdateCreatorOptions();
+    }
+
+}
 
 //Need function that makes the page creation option for color and sizing etc. appear with appropriate options(TBD)
 function UpdateCreatorOptions() {
-    document.getElementById('marginLeft').value = currentElementSelected.style.marginLeft != null ? currentElementSelected.style.marginLeft : 0;
-    document.getElementById('marginRight').value = currentElementSelected.style.marginRight != null ? currentElementSelected.style.marginRight : 0;
-    document.getElementById('marginTop').value = currentElementSelected.style.marginTop != null ? currentElementSelected.style.marginTop : 0;
-    document.getElementById('marginBottom').value = currentElementSelected.style.marginBottom != null ? currentElementSelected.style.marginBottom : 0;
-    document.getElementById('backgroundColor').value = currentElementSelected.style.backgroundColor != null ? currentElementSelected.style.backgroundColor : 'black';
-    document.getElementById('fontColor').value = currentElementSelected.style.color != null ? currentElementSelected.style.color : 'black';
+    document.getElementById('marginLeft').value = currentElementSelected.style.marginLeft.slice(0, currentElementSelected.style.marginTop.length - 2);
+    document.getElementById('marginRight').value = currentElementSelected.style.marginRight.slice(0, currentElementSelected.style.marginRight.length - 2);
+    document.getElementById('marginTop').value = currentElementSelected.style.marginTop.slice(0, currentElementSelected.style.marginTop.length - 2);
+    document.getElementById('marginBottom').value = currentElementSelected.style.marginBottom.slice(0, currentElementSelected.style.marginBottom.length - 2);
+    document.getElementById('height').value = currentElementSelected.style.height.slice(0, currentElementSelected.style.height.length - 2);
+    document.getElementById('width').value = currentElementSelected.style.width.slice(0, currentElementSelected.style.width.length - 2);
+    document.getElementById('fontSize').value = currentElementSelected.style.fontSize.slice(0, currentElementSelected.style.fontSize.length - 2);
+    document.getElementById('fontWeight').value = currentElementSelected.style.fontWeight.slice(0, currentElementSelected.style.fontWeight.length);
+    document.getElementById('backgroundColor').value = rgbToHex();
+    document.getElementById('fontColor').value = rgbToHex();
+    document.getElementById('textArea').value = "";
+    $('input[type=radio]').attr('checked', false);
+    $('input[type=checkbox]').attr('checked', false);
 }
 
 function ChangeLeftMargin(margin) {
-    currentElementSelected.style.marginLeft = document.getElementById('marginLeft').value;
+    BlurCurrentlySelectedElement();
+    jQuery('#marginLeft').on('input', function () {
+        jQuery(currentElementSelected).css('marginLeft', (jQuery(this).val() + 'px'));
+    });
 }
 
-function ChangeRightMargin(margin) {
-    currentElementSelected.style.marginRight = document.getElementById('marginRight').value;
+function ChangeRightMargin() {
+    BlurCurrentlySelectedElement();
+    jQuery('#marginRight').on('input', function () {
+        jQuery(currentElementSelected).css('marginRight', (jQuery(this).val() + 'px'));
+    });
 }
 
-function ChangeTopMargin(margin) {
-    currentElementSelected.style.marginTop = document.getElementById('marginTop').value;
+function ChangeTopMargin() {
+    BlurCurrentlySelectedElement();
+    jQuery('#marginTop').on('input', function () {
+        jQuery(currentElementSelected).css('marginTop', (jQuery(this).val() + 'px'));
+    });
 }
 
-function ChangeBottomMargin(margin) {
-    currentElementSelected.style.marginBottom = document.getElementById('marginBottom').value;
-}
-
-function ChangeFontSize(fontSize) {
-
+function ChangeBottomMargin() {
+    BlurCurrentlySelectedElement();
+    jQuery('#marginBottom').on('input', function () {
+        jQuery(currentElementSelected).css('marginBottom', (jQuery(this).val() + 'px'));
+    });
 }
 
 function ChangeHeight() {
-    currentElementSelected.style.height = document.getElementById('height').value;
+    BlurCurrentlySelectedElement();
+    jQuery('#height').on('input', function () {
+        jQuery(currentElementSelected).css('height', jQuery(this).val());
+    });
 }
 
 function ChangeWidth() {
-    currentElementSelected.style.width = document.getElementById('width').value;
+    BlurCurrentlySelectedElement();
+    jQuery('#width').on('input', function () {
+        jQuery(currentElementSelected).css('width', jQuery(this).val());
+    });
 }
 
 function ChangeBackgroundColor() {
-    currentElementSelected.style.backgroundColor = document.getElementById('backgroundColor').value;
+    BlurCurrentlySelectedElement();
+    jQuery('#backgroundColor').on('input', function () {
+        jQuery(currentElementSelected).css('backgroundColor', jQuery(this).val());
+    });
 }
 
 function ChangeFontColor() {
-    currentElementSelected.style.color = document.getElementById('fontColor').value;
+    BlurCurrentlySelectedElement();
+    jQuery('#fontColor').on('input', function () {
+        jQuery(currentElementSelected).css('color', jQuery(this).val());
+    });
+}
+
+function ChangeFontSize() {
+    BlurCurrentlySelectedElement();
+    jQuery('#fontSize').on('input', function () {
+        jQuery(currentElementSelected).css('fontSize', (jQuery(this).val() + 'px'));
+    });
+}
+
+function ChangeFontWeight() {
+    BlurCurrentlySelectedElement();
+    jQuery('#fontWeight').on('input', function () {
+        jQuery(currentElementSelected).css('fontWeight', jQuery(this).val());
+    });
+}
+
+function ChangeFontStyle() {
+    BlurCurrentlySelectedElement();
+    jQuery('.fontStyle').on('input', function () {
+        jQuery(currentElementSelected).css('font-style', jQuery(this).val());
+    });
+}
+
+function ChangeAlignment() {
+    BlurCurrentlySelectedElement();
+    jQuery('.textAlign').on('input', function () {
+        jQuery(currentElementSelected).css('textAlign', jQuery(this).val());
+    });
+}
+
+function ChangeVerticalAlignment() {
+    BlurCurrentlySelectedElement();
+    if (document.getElementById("check").checked == true) {
+        jQuery('#check').on('input', function () {
+            jQuery(currentElementSelected).css('lineHeight', currentElementSelected.style.height);
+        });
+    }
+    else {
+        jQuery('#check').on('input', function () {
+            jQuery(currentElementSelected).css('lineHeight', (40 + 'px'));
+        });
+    }
+}
+
+function CreateLink() {
+    if (document.getElementById('textArea').value != ""){
+        $(currentElementSelected).wrap("<a href=" + document.getElementById('textArea').value + "></a>");
+    }
+    else {
+        $(currentElementSelected).unwrap();
+    }
+}
+
+function BlurCurrentlySelectedElement() {
+    $(currentElementSelected).children().trigger('blur');
+}
+
+function rgbToHex() {
+    var a = currentElementSelected.style.backgroundColor.slice(4, currentElementSelected.style.backgroundColor.length - 1);
+    a = a.split(",");
+    var b = a.map(function (x) {             //For each array element
+        x = parseInt(x).toString(16);      //Convert to a base16 string
+        return (x.length == 1) ? "0" + x : x;  //Add zero if we get only one character
+    })
+    b = "#" + b.join("");
+    return b;
 }

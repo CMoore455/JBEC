@@ -1,10 +1,13 @@
 html {
     --backgroundColorLight: #FFFFFF;
-    --backgroundColorDark: #000000;
+    --backgroundColorDark: #0000;
     --HoverColor: #ACCFCC;
     --TextColor: #000000;
     --BorderStyle: none;
     --BorderColor: #000000;
+    --CreatorStyleBorder: double;
+    --BorderRadius: 5px;
+    --SideBackgroundColor: silver;
 }
 
 .navbar {
@@ -41,8 +44,7 @@ html {
     color: var(--HoverColor);
 }
 
-.row{
-    background-color: black;
+.row {
     display: flex;
 }
 
@@ -50,27 +52,96 @@ html {
     display: grid;
     align-content: center;
     width: 15vw;
+    border-style: var(--CreatorStyleBorder);
+    border-radius: var(--BorderRadius);
+    background-color: var(--SideBackgroundColor);
+}
+
+#radioChecks {
+    width: 15vw;
 }
 
 .selector-headers {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    font-size: 20px;
+    border-style: double;
+    border-radius: 5px;
+    background-color: var(--backgroundColorLight);
 }
 
-selector-bodies {
+.selector-bodies {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    font-size: 20px;
+    border-style: double;
+    border-radius: 5px;
+    background-color: var(--backgroundColorLight);
 }
 
 .selector-footers {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    font-size: 20px;
+    border-style: double;
+    border-radius: 5px;
+    background-color: var(--backgroundColorLight);
+}
+
+input[type=button] {
+    border-style: double;
+    border-radius: 5px;
+    background-color: var(--backgroundColorLight);
+}
+
+input[type=color] {
+    border-style: double;
+    border-radius: 5px;
+    background-color: var(--backgroundColorLight);
+}
+
+input[type=number] {
+    border-style: double;
+    border-radius: 5px;
+    background-color: var(--backgroundColorLight);
+}
+
+input[type=text] {
+    border-style: double;
+    border-radius: 5px;
+    background-color: var(--backgroundColorLight);
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+}
+
+#submitButton{
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+}
+
+#link{
+    text-align: left;
 }
 
 #live-preview-area {
     width: 65vw;
-    background-color: aliceblue;
+    border-style: var(--CreatorStyleBorder);
+    border-radius: var(--BorderRadius);
+    max-height: 80vh;
+    max-width: 65vw;
+    overflow-y: auto;
+    overflow-x: auto;
 }
 
 .creator-section-options {
     width: 25vw;
-    background-color: grey;
     height: 80vh;
     max-height: 80vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+    border-style: var(--CreatorStyleBorder);
+    border-radius: var(--BorderRadius);
+    background-color: var(--SideBackgroundColor);
 }
 
 div > label {
@@ -83,6 +154,7 @@ div > label {
     padding-left: 15px;
     padding-right: 15px;
     background-color: var(--backgroundColorLight);
+    box-shadow: 2px 2px 2px 2px #888888;
 }
 
 /* Override the default bootstrap behavior where horizontal description lists 
@@ -99,10 +171,23 @@ textarea {
     max-width: 280px;
 }
 
-.ClassFooter{
+.ClassFooter {
     padding-left: 15px;
     padding-right: 15px;
     margin-left: auto;
     margin-right: auto;
     max-width: 70vw;
+}
+
+.jumbotron {
+    background-color: var(--backgroundColorLight);
+    text-align: center;
+}
+
+.Name {
+    font-family: 'Agency FB';
+}
+
+.lead {
+    font-family: 'Agency FB';
 }
