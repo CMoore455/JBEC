@@ -1,9 +1,16 @@
 ﻿var dragTarget;
 var ShouldCloneMap = new Map();
+var Callbacks = [];
+
+
+function onClonedElement(func) {
+
+    Callbacks.push(func);
+}
+
 function allowDrop(ev) {
     ev.preventDefault();
 }
-
 
 function drag(ev) {
     dragTarget = ev.target;
@@ -14,6 +21,9 @@ function drop(ev) {
     if (ShouldCloneMap.get(dragTarget)) {
         var clonedTarget = dragTarget.cloneNode(true);
         ev.target.appendChild(clonedTarget);
+        Callbacks.forEach(function (callback) {
+            callback(clonedTarget);
+        });
     }
     else {
         ev.target.appendChild(dragTarget);
@@ -26,11 +36,12 @@ function MakeElementsDraggable(context, shouldClone) {
     draggableElements.each(function (index, elem) {
 
         var htmlElement = elem;
-        htmlElement.setAttribute('draggable','true');
+        htmlElement.setAttribute('draggable', 'true');
         htmlElement.setAttribute('ondragstart', 'drag(event)');
         ShouldCloneMap.set(htmlElement, shouldClone);
-    });    
+    });
 };
+
 
 function MakeElementDropTarget(element) {
     $(element).addClass("dropTarget");

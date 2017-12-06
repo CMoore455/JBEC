@@ -206,7 +206,7 @@ function WireContentForEditableText(content) {
         for (var i = 0; i < content.children.length; i++) {
             WireContentForEditableText(content.children[i]);
         }
-    } else if (content != undefined) {
+    } else if(content != undefined) {
         var changeTextClickSubscriber;
         $(content).click(function (event) {
             ChangeTextClickSubscriber(content);

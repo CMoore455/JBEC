@@ -6,27 +6,33 @@
 }
 
 <h2>@User.Identity.Name</h2>
-<wbr />
+<hr />
 <h3>Pages Created</h3>
 
 @foreach (var page in Model.OWNED_PAGES)
 {
-    <a href="@page.Route">www.circlespace.com/@page.Route</a>
-    Html.ActionLink("Save", "SaveCreatedPage", new { id = page.ID });
+    <div>
+        <a href="@page.Route">www.circlespace.com/@page.Route</a>
+    </div>
+        Html.ActionLink("Save", "SaveCreatedPage", new { id = page.ID });
 }
-<wbr />
+<hr />
 <h3>Pages Contributing To</h3>
 @foreach (var page in Model.CONTRIUBTED_PAGES)
 {
-    <a href="@page.Route">www.circlespace.com/@page.Route</a>
-    Html.ActionLink("Save", "SaveCreatedPage", new { id = page.ID });
+    <div>
+        <a href="@page.Route">www.circlespace.com/@page.Route</a>
+    </div>
+        Html.ActionLink("Save", "SaveCreatedPage", new { id = page.ID });
 
 
 }
-<wbr />
+<hr />
 <h3>Layouts Owned</h3>
 @foreach (var _layout in Model.OWNED_LAYOUTS)
 {
-    <a href="EditLayout/@_layout.ID">@_layout.LayoutTitle</a>
-    Html.ActionLink("Save", "SaveCreatedLayout", new { id = _layout.ID });
+    <div>
+        <a href="EditLayout/@_layout.ID">@_layout.LayoutTitle</a>
+    </div>
+        Html.ActionLink("Save", "SaveCreatedLayout", new { id = _layout.ID });
 }
