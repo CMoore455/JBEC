@@ -143,7 +143,7 @@ function ChangeContent(content, css, idSelectorForContentPlacement) {
 function SavePage() {
 
     //Creates header, body, and footer tags to send to the server.
-    var header =  $("#headerPreview")[0].innerHTML;
+    var header = $("#headerPreview")[0].innerHTML;
     var body = $("#bodyPreview")[0].innerHTML;
     var footer = $("#footerPreview")[0].innerHTML;
 
@@ -168,13 +168,25 @@ function SavePage() {
         Header: header.outerHTML,
         Body: body.outerHTML,
         Footer: footer.outerHTML,
-        CSS: cssRules
+        CSS: cssRules,
+        ID: pageId
         //Need ImageURLS
         //Need RouteOfPage
     }
 
     //Sending page to server as JSON
-    $.post("/Creator/SavePage", page);//Need to react to bad post (i.e. Route is already taken)
+    $.post("/Creator/SavePage", page).fail(function () {
+        var saveStateContainer = $('#save-state-container');
+        saveStateContainer.children().remove();
+        saveStateContainer.append('<p>Could not save page.</p>');
+
+    }).done(function () {
+        var saveStateContainer = $('#save-state-container');
+        saveStateContainer.children().remove();
+        var date = new Date($.now());
+        var saveMessage = '<p>Saved at ' + date.toLocaleTimeString() + '</p>';
+        saveStateContainer.append(saveMessage);
+    });//Need to react to bad post (i.e. Route is already taken)
 }
 
 //Converts all the css in several style tags into one blob of css text.
@@ -203,7 +215,7 @@ function WireContentForEditableText(content) {
         for (var i = 0; i < content.children.length; i++) {
             WireContentForEditableText(content.children[i]);
         }
-    } else if(content != undefined) {
+    } else if (content != undefined) {
         var changeTextClickSubscriber;
         $(content).click(function (event) {
             ChangeTextClickSubscriber(content);
@@ -349,7 +361,7 @@ function ChangeVerticalAlignment() {
 }
 
 function CreateLink() {
-    if (document.getElementById('textArea').value != ""){
+    if (document.getElementById('textArea').value != "") {
         $(currentElementSelected).wrap("<a href=" + document.getElementById('textArea').value + "></a>");
     }
     else {

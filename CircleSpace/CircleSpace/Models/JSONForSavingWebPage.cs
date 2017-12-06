@@ -16,6 +16,7 @@ namespace CircleSpace.Models
         public string Footer { get; set; }
         public string CSS { get; set; }
 
+        public int ID { get; set; }
         //Need Route
         //Need ImageURLS
 

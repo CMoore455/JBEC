@@ -5,6 +5,7 @@ using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 
@@ -35,7 +36,7 @@ namespace CircleSpace.Controllers
         }
 
         [HttpPost]
-        public string SavePage(JSONForSavingWebPage o)
+        public ActionResult SavePage(JSONForSavingWebPage o)
         {
             PageModel pageModel = new PageModel()
             {
@@ -43,14 +44,15 @@ namespace CircleSpace.Controllers
                 Body = o.Body,
                 Footer = o.Footer,
                 CSS = o.CSS,
-                OwnerID = User.Identity.GetUserId()
+                OwnerID = User.Identity.GetUserId(),
+                ID = o.ID
                 //Need Route
                 //Need ImageURLS
             };
 
-            service.AddPage(pageModel);
+            service.UpdatePage(pageModel);
 
-            return "Success"; 
+            return new HttpStatusCodeResult(HttpStatusCode.NoContent); 
         }
 
         public ActionResult EditPage(int id)
