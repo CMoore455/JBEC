@@ -85,9 +85,29 @@ namespace CircleSpace.Controllers
             SavePage(o);
             return Redirect($"~/Controllers/Creator/EditPage/{service.GetPageWithRoute(route).ID}");
         }
+        
+        [HttpPost]
+         public string SavePage(JSONForSavingWebPage o)
+        {
+                PageModel pageModel = new PageModel()
+                {
+                    Header = o.Header,
+                    Body = o.Body,
+                    Footer = o.Footer,
+                    CSS = o.CSS,
+                    Route = o.Route
+
+                };
+
+            service.AddPage(pageModel);
+
+            return "Success"; 
+        }
+
+
 
         [HttpPost]
-        public string SavePage(JSONForSavingWebPage o)
+        public string Update(JSONForSavingWebPage o)
         {
             PageModel pageModel = new PageModel()
             {
