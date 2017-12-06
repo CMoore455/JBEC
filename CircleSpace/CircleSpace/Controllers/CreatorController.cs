@@ -85,9 +85,9 @@ namespace CircleSpace.Controllers
             SavePage(o);
             return Redirect("~/Controllers/Creator/CreateWebPage/");
         }
-
+        
         [HttpPost]
-        public string SavePage(JSONForSavingWebPage o)
+         public string SavePage(JSONForSavingWebPage o)
         {
                 PageModel pageModel = new PageModel()
                 {
@@ -99,7 +99,27 @@ namespace CircleSpace.Controllers
 
                 };
 
-            //service.AddPage(pageModel);
+            service.AddPage(pageModel);
+
+            return "Success"; 
+        }
+
+
+
+        [HttpPost]
+        public string Update(JSONForSavingWebPage o)
+        {
+                PageModel pageModel = new PageModel()
+                {
+                    Header = o.Header,
+                    Body = o.Body,
+                    Footer = o.Footer,
+                    CSS = o.CSS,
+                    Route = o.Route
+
+                };
+
+            service.AddPage(pageModel);
 
             return "Success"; 
         }
