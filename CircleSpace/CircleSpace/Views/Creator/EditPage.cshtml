@@ -51,9 +51,9 @@
 
     <div id="live-preview-area" class="col-lg-1">
         @{
-            var header = Model.PAGE_TO_EDIT?.Header;
-            var body = Model.PAGE_TO_EDIT?.Body;
-            var footer = Model.PAGE_TO_EDIT?.Footer;
+            var header = new HtmlString(Model.PAGE_TO_EDIT?.Header);
+            var body = new HtmlString(Model.PAGE_TO_EDIT?.Body);
+            var footer = new HtmlString(Model.PAGE_TO_EDIT?.Footer);
         }
         <div id="headerPreview">@header</div>
         <div id="bodyPreview">@body</div>

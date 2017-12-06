@@ -1,13 +1,13 @@
 ﻿
-document.addEventListener("load", DocumentLoaded());
+window.addEventListener("load", DocumentLoaded);
 
 //The ID's of the currently selected layouts in the selector.
-var headerId, bodyId, footerId;
-var currentElementSelected;
+var headerId, bodyId, footerId, currentElementSelected;
 
 
 //Hooks up all the click events for the selectors for a different layout.
-function DocumentLoaded() {
+function DocumentLoaded(event) {
+    
     var headerClassLookup = $(".selector-headers");
     var headerSelector = headerClassLookup[0];
     var option = headerSelector.options[headerSelector.selectedIndex];
@@ -81,13 +81,13 @@ function LayoutSelectorChanged(IdChanger) {
     //Perform ajax request for new layout
     switch (IdChanger.Type) {
         case "Header":
-            $.getJSON("GetNewLayout/" + headerId).done(ReceiveNewLayout);
+            $.getJSON("/Creator/GetNewLayout/" + headerId).done(ReceiveNewLayout);
             break;
         case "Body":
-            $.getJSON("GetNewLayout/" + bodyId).done(ReceiveNewLayout);
+            $.getJSON("/Creator/GetNewLayout/" + bodyId).done(ReceiveNewLayout);
             break;
         case "Footer":
-            $.getJSON("GetNewLayout/" + footerId).done(ReceiveNewLayout);
+            $.getJSON("/Creator/GetNewLayout/" + footerId).done(ReceiveNewLayout);
             break;
         default:
             return;
@@ -143,12 +143,9 @@ function ChangeContent(content, css, idSelectorForContentPlacement) {
 function SavePage() {
 
     //Creates header, body, and footer tags to send to the server.
-    var header = document.createElement('header');
-    header.innerHTML = $("#headerPreview")[0].innerHTML;
-    var body = document.createElement('body');
-    body.innerHTML = $("#bodyPreview")[0].innerHTML;
-    var footer = document.createElement('footer');
-    footer.innerHTML = $("#footerPreview")[0].innerHTML;
+    var header =  $("#headerPreview")[0].innerHTML;
+    var body = $("#bodyPreview")[0].innerHTML;
+    var footer = $("#footerPreview")[0].innerHTML;
 
     //Finding the style tags of the live preview areas contents.
     var headerCssRules = $("#headerPreviewStyle");
@@ -177,7 +174,7 @@ function SavePage() {
     }
 
     //Sending page to server as JSON
-    $.post("SavePage", page);//Need to react to bad post (i.e. Route is already taken)
+    $.post("/Creator/SavePage", page);//Need to react to bad post (i.e. Route is already taken)
 }
 
 //Converts all the css in several style tags into one blob of css text.
