@@ -13,7 +13,7 @@ function DocumentLoaded(event) {
     var option = headerSelector.options[headerSelector.selectedIndex];
     if (option) {
         headerId = option.value;
-        headerClassLookup.click(function (event) {
+        headerClassLookup.change(function (event) {
             LayoutSelectorChanged({
                 Type: "Header",
                 ChangeID: function () {
@@ -22,15 +22,14 @@ function DocumentLoaded(event) {
                 }
             });
         });
-        headerClassLookup.trigger('click');
     }
 
     var bodyClassLookup = $(".selector-bodies");
     var bodySelector = bodyClassLookup[0];
-    var option = bodySelector.options[bodySelector.selectedIndex];
+    option = bodySelector.options[bodySelector.selectedIndex];
     if (option) {
         bodyId = option.value;
-        bodyClassLookup.click(function (event) {
+        bodyClassLookup.change(function (event) {
             LayoutSelectorChanged({
                 Type: "Body",
                 ChangeID: function (id) {
@@ -39,15 +38,14 @@ function DocumentLoaded(event) {
                 }
             });
         });
-        bodyClassLookup.trigger('click');
     }
 
     var footerClassLookup = $(".selector-footers")
     var footerSelector = footerClassLookup[0];
-    var option = footerSelector.options[footerSelector.selectedIndex];
+    option = footerSelector.options[footerSelector.selectedIndex];
     if (option) {
         footerId = option.value;
-        footerClassLookup.click(function (event) {
+        footerClassLookup.change(function (event) {
             LayoutSelectorChanged({
                 Type: "Footer",
                 ChangeID: function () {
@@ -55,7 +53,6 @@ function DocumentLoaded(event) {
                 }
             });
         });
-        footerClassLookup.trigger('click');
     }
 
     $('#fontColor').on('click', ChangeFontColor);
@@ -118,7 +115,7 @@ function ReceiveNewLayout(json) {
 function ChangeContent(content, css, idSelectorForContentPlacement) {
     var previewArea = $(idSelectorForContentPlacement)[0];
 
-    if ($(idSelectorForContentPlacement + 'Style').length != 0) { $(idSelectorForContentPlacement + 'Style').remove(); }
+    if ($(idSelectorForContentPlacement + 'Style').length !== 0) { $(idSelectorForContentPlacement + 'Style').remove(); }
 
     var cssStyle = document.createElement('style');
     cssStyle.setAttribute('id', idSelectorForContentPlacement + 'Style');
@@ -165,9 +162,9 @@ function SavePage() {
 
     //This objects fields needs to match JSONForSavingWebPage object in the models folder of server.
     var page = {
-        Header: header.outerHTML,
-        Body: body.outerHTML,
-        Footer: footer.outerHTML,
+        Header: header,
+        Body: body,
+        Footer: footer,
         CSS: cssRules,
         ID: pageId
         //Need ImageURLS

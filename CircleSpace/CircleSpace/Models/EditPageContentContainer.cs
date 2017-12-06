@@ -20,11 +20,7 @@ namespace CircleSpace.Models
             HEADERS = hEADERS ?? new List<LayoutModel>().AsReadOnly();
             BODIES = bODIES?? new List<LayoutModel>().AsReadOnly();
             FOOTERS = fOOTERS ?? new List<LayoutModel>().AsReadOnly();
-            if(pageToEdit == null)
-            {
-                throw new ArgumentException("The page to edit cannot be null.");
-            }
-            this.PAGE_TO_EDIT = pageToEdit;
+            this.PAGE_TO_EDIT = pageToEdit ?? throw new ArgumentException("The page to edit cannot be null.");
         }
     }
 }
