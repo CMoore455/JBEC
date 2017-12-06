@@ -1,0 +1,14 @@
+.footerholder {
+    background: none repeat scroll 0 0 transparent;
+    bottom: 0;
+    position: fixed;
+    text-align: center;
+    width: 100%;
+}
+
+footer {
+    background: none repeat scroll 0 0 white;
+    height: 100px;
+    margin: auto;
+    width: 400px;
+}
