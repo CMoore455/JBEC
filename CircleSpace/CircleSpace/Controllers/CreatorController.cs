@@ -95,8 +95,8 @@ namespace CircleSpace.Controllers
                     Body = o.Body,
                     Footer = o.Footer,
                     CSS = o.CSS,
-                    Route = o.Route
-
+                    Route = o.Route,
+                    ImageUrls = o.ImageURLS                    
                 };
 
             service.AddPage(pageModel);
@@ -106,24 +106,6 @@ namespace CircleSpace.Controllers
 
 
 
-        [HttpPost]
-        public string Update(JSONForSavingWebPage o)
-        {
-            PageModel pageModel = new PageModel()
-            {
-                Header = o.Header,
-                Body = o.Body,
-                Footer = o.Footer,
-                CSS = o.CSS,
-                Route = o.Route,
-                ImageUrls = o.ImageURLS
-                    
-                };
-
-            service.AddPage(pageModel);
-
-            return "Success"; 
-        }
 
         [HttpPost]
         public string UpdatePage(JSONForSavingWebPage o)
@@ -134,8 +116,8 @@ namespace CircleSpace.Controllers
                 Body = o.Body,
                 Footer = o.Footer,
                 CSS = o.CSS,
-                Route = o.Route
-
+                Route = o.Route,
+                ImageUrls = o.ImageURLS
             };
 
             service.AddPage(pageModel);
