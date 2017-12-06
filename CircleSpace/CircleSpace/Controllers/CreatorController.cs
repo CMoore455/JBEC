@@ -83,27 +83,45 @@ namespace CircleSpace.Controllers
             };
         
             SavePage(o);
-            return Redirect("~/Controllers/Creator/CreateWebPage/");
+            return Redirect($"~/Controllers/Creator/EditPage/{service.GetPageWithRoute(route).ID}");
         }
 
         [HttpPost]
         public string SavePage(JSONForSavingWebPage o)
         {
-                PageModel pageModel = new PageModel()
-                {
-                    Header = o.Header,
-                    Body = o.Body,
-                    Footer = o.Footer,
-                    CSS = o.CSS,
-                    Route = o.Route
-
+            PageModel pageModel = new PageModel()
+            {
+                Header = o.Header,
+                Body = o.Body,
+                Footer = o.Footer,
+                CSS = o.CSS,
+                Route = o.Route,
+                ImageUrls = o.ImageURLS
+                    
                 };
 
-            //service.AddPage(pageModel);
+            service.AddPage(pageModel);
 
             return "Success"; 
         }
 
-        
+        [HttpPost]
+        public string UpdatePage(JSONForSavingWebPage o)
+        {
+            PageModel pageModel = new PageModel()
+            {
+                Header = o.Header,
+                Body = o.Body,
+                Footer = o.Footer,
+                CSS = o.CSS,
+                Route = o.Route
+
+            };
+
+            service.AddPage(pageModel);
+
+            return "Success";
+        }
+
     }
 }
