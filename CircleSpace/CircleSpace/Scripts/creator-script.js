@@ -1,13 +1,13 @@
 ﻿
-document.addEventListener("load", DocumentLoaded());
+window.addEventListener("load", DocumentLoaded);
 
 //The ID's of the currently selected layouts in the selector.
-var headerId, bodyId, footerId;
-var currentElementSelected;
+var headerId, bodyId, footerId, currentElementSelected, pageId;
 
 
 //Hooks up all the click events for the selectors for a different layout.
-function DocumentLoaded() {
+function DocumentLoaded(event) {
+    pageId = document.URL.charAt(document.URL.length - 1);
     var headerClassLookup = $(".selector-headers");
     var headerSelector = headerClassLookup[0];
     var option = headerSelector.options[headerSelector.selectedIndex];
@@ -81,13 +81,13 @@ function LayoutSelectorChanged(IdChanger) {
     //Perform ajax request for new layout
     switch (IdChanger.Type) {
         case "Header":
-            $.getJSON("GetNewLayout/" + headerId).done(ReceiveNewLayout);
+            $.getJSON("/Creator/GetNewLayout/" + headerId).done(ReceiveNewLayout);
             break;
         case "Body":
-            $.getJSON("GetNewLayout/" + bodyId).done(ReceiveNewLayout);
+            $.getJSON("/Creator/GetNewLayout/" + bodyId).done(ReceiveNewLayout);
             break;
         case "Footer":
-            $.getJSON("GetNewLayout/" + footerId).done(ReceiveNewLayout);
+            $.getJSON("/Creator/GetNewLayout/" + footerId).done(ReceiveNewLayout);
             break;
         default:
             return;
@@ -143,12 +143,9 @@ function ChangeContent(content, css, idSelectorForContentPlacement) {
 function SavePage() {
 
     //Creates header, body, and footer tags to send to the server.
-    var header = document.createElement('header');
-    header.innerHTML = $("#headerPreview")[0].innerHTML;
-    var body = document.createElement('body');
-    body.innerHTML = $("#bodyPreview")[0].innerHTML;
-    var footer = document.createElement('footer');
-    footer.innerHTML = $("#footerPreview")[0].innerHTML;
+    var header = $("#headerPreview")[0].innerHTML;
+    var body = $("#bodyPreview")[0].innerHTML;
+    var footer = $("#footerPreview")[0].innerHTML;
 
     //Finding the style tags of the live preview areas contents.
     var headerCssRules = $("#headerPreviewStyle");
@@ -171,13 +168,25 @@ function SavePage() {
         Header: header.outerHTML,
         Body: body.outerHTML,
         Footer: footer.outerHTML,
-        CSS: cssRules
+        CSS: cssRules,
+        ID: pageId
         //Need ImageURLS
         //Need RouteOfPage
     }
 
     //Sending page to server as JSON
-    $.post("SavePage", page);//Need to react to bad post (i.e. Route is already taken)
+    $.post("/Creator/SavePage", page).fail(function () {
+        var saveStateContainer = $('#save-state-container');
+        saveStateContainer.children().remove();
+        saveStateContainer.append('<p>Could not save page.</p>');
+
+    }).done(function () {
+        var saveStateContainer = $('#save-state-container');
+        saveStateContainer.children().remove();
+        var date = new Date($.now());
+        var saveMessage = '<p>Saved at ' + date.toLocaleTimeString() + '</p>';
+        saveStateContainer.append(saveMessage);
+    });//Need to react to bad post (i.e. Route is already taken)
 }
 
 //Converts all the css in several style tags into one blob of css text.
@@ -206,7 +215,7 @@ function WireContentForEditableText(content) {
         for (var i = 0; i < content.children.length; i++) {
             WireContentForEditableText(content.children[i]);
         }
-    } else if(content != undefined) {
+    } else if (content != undefined) {
         var changeTextClickSubscriber;
         $(content).click(function (event) {
             ChangeTextClickSubscriber(content);
@@ -229,7 +238,7 @@ function ChangeTextClickSubscriber(content) {
             $(content).click(function (event) { ChangeTextClickSubscriber(content) });
         });
         content.appendChild(inputTag);
-        $(inputTag).trigger('focus');
+        $(inputTag).focus();
         currentElementSelected = content;
         UpdateCreatorOptions();
     }
@@ -352,7 +361,7 @@ function ChangeVerticalAlignment() {
 }
 
 function CreateLink() {
-    if (document.getElementById('textArea').value != ""){
+    if (document.getElementById('textArea').value != "") {
         $(currentElementSelected).wrap("<a href=" + document.getElementById('textArea').value + "></a>");
     }
     else {

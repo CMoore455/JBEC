@@ -1,9 +1,11 @@
 using CircleSpace.Models;
 using CircleSpaceGeneralModels.Models;
 using CircleSpaceServiceLib.Service;
+using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 
@@ -13,21 +15,11 @@ namespace CircleSpace.Controllers
     [Authorize]
     public class CreatorController : Controller
     {
-        private ICircleSpaceService service;
+        private ICircleSpaceService service = new SqlCricleSpaceService();
         // GET: Creator
         public ActionResult Index()
         {
             return View();
-        }
-
-        public ActionResult CreateWebPage()
-        {
-                        //Needs a List<Layouts> that will become option to be selected and applied to the live preview Window
-            return
-            View(service.GetLayouts());
-            //View(new List<LayoutModel>() { new LayoutModel() { ID = 2, LayoutTitle = "Header", Type = CircleSpaceGeneralModels.Enums.LayoutTypes.Header },
-            //    new LayoutModel() { ID = 3, LayoutTitle = "Body", Type = CircleSpaceGeneralModels.Enums.LayoutTypes.Body },
-            //    new LayoutModel() { ID = 1, LayoutTitle = "Footer", Type = CircleSpaceGeneralModels.Enums.LayoutTypes.Footer } });
         }
 
         public JsonResult GetNewLayout(int id)
@@ -38,8 +30,13 @@ namespace CircleSpace.Controllers
             return Json(new LayoutModelJSON(layout).JSON, JsonRequestBehavior.AllowGet);
         }
 
+        public ActionResult CreateCustomLayout()
+        {
+            return View();
+        }
+
         [HttpPost]
-        public string SavePage(JSONForSavingWebPage o)
+        public ActionResult SavePage(JSONForSavingWebPage o)
         {
             PageModel pageModel = new PageModel()
             {
@@ -47,13 +44,39 @@ namespace CircleSpace.Controllers
                 Body = o.Body,
                 Footer = o.Footer,
                 CSS = o.CSS,
+                OwnerID = User.Identity.GetUserId(),
+                ID = o.ID
                 //Need Route
                 //Need ImageURLS
             };
 
-            service.AddPage(pageModel);
+            service.UpdatePage(pageModel);
 
-            return "Success"; 
+            return new HttpStatusCodeResult(HttpStatusCode.NoContent); 
+        }
+
+        public ActionResult EditPage(int id)
+        {
+            var page = service.GetPageWithID(id);
+            var layouts = service.GetLayouts();
+            var headers = (from header in layouts
+                          where header.Type == CircleSpaceGeneralModels.Enums.LayoutTypes.Header
+                          select header).ToList().AsReadOnly();
+            var bodies = (from body in layouts
+                         where body.Type == CircleSpaceGeneralModels.Enums.LayoutTypes.Body
+                         select body).ToList().AsReadOnly();
+            var footers = (from footer in layouts
+                          where footer.Type == CircleSpaceGeneralModels.Enums.LayoutTypes.Footer
+                          select footer).ToList().AsReadOnly();
+
+            return View(new EditPageContentContainer(headers, bodies, footers, page));
+
+            
+        }
+
+        public ActionResult EditLayout(int id)
+        {
+            return View(service.GetLayoutWithID(id));
         }
     }
 }
