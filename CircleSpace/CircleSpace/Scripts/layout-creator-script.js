@@ -1,4 +1,4 @@
-﻿var layoutTypeSelected;
+﻿var layoutTypeSelected, layoutId;
 
 function EditTextOfElement(element) {
     var textArea = document.createElement('input');
@@ -12,7 +12,7 @@ function EditTextOfElement(element) {
 
     textAreaJQ.blur(function () {
         element.textContent = textArea.value;
-        $(element).mouseup(EditTextOnClick);
+        $(element).mouseup(EditOrRemoveTextOnClick);
         textAreaJQ.replaceWith(element);
     });
 
@@ -23,7 +23,7 @@ function RemoveElement(element) {
     $(element).remove();
 }
 
-function EditTextOnClick(event) {
+function EditOrRemoveTextOnClick(event) {
     switch (event.which) {
         case 1:
             if (event.shiftKey) {
@@ -36,15 +36,15 @@ function EditTextOnClick(event) {
 }
 
 window.addEventListener('load', function (event) {
-
+    layoutId = document.URL.charAt(document.URL.length - 1);
     $('#draggableItems').each(function (index, element) {
         MakeElementsDraggable(element, true);
     });
 
     livePreviewArea = $('#live-preview-area')[0]
     MakeElementDropTarget(livePreviewArea);
-    onclone(function (element) {
-        $(element).mouseup(EditTextOnClick);
+    onClonedElement(function (element) {
+        $(element).mouseup(EditOrRemoveTextOnClick);
     });
 
     var typeSelector = $('#type-selector')[0];

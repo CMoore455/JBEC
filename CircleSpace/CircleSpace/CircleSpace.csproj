@@ -276,8 +276,8 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Home\ProfilePage.cshtml" />
     <Content Include="Views\Browse\BrowseSite.cshtml" />
-    <Content Include="Views\Creator\EditWebPage.cshtml" />
-    <Content Include="Views\Creator\CreateCustomLayout.cshtml" />
+    <Content Include="Views\Creator\EditLayout.cshtml" />
+    <Content Include="Views\Creator\EditPage.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

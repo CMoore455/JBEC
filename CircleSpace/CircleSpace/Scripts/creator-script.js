@@ -2,12 +2,12 @@
 window.addEventListener("load", DocumentLoaded);
 
 //The ID's of the currently selected layouts in the selector.
-var headerId, bodyId, footerId, currentElementSelected;
+var headerId, bodyId, footerId, currentElementSelected, pageId;
 
 
 //Hooks up all the click events for the selectors for a different layout.
 function DocumentLoaded(event) {
-    
+    pageId = document.URL.charAt(document.URL.length - 1);
     var headerClassLookup = $(".selector-headers");
     var headerSelector = headerClassLookup[0];
     var option = headerSelector.options[headerSelector.selectedIndex];
