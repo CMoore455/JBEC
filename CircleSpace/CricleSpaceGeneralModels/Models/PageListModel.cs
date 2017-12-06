@@ -10,9 +10,9 @@ namespace CricleSpaceGeneralModels.Models
     {
         public List<PageModel> Pages { get; set; }
 
-        public PageListModel()
+        public PageListModel(List<PageModel> list)
         {
-            Pages = new List<PageModel>();
+            Pages = list;
         }
     }
 }

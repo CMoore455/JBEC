@@ -1,7 +1,11 @@
-﻿@model CircleSpaceGeneralModels.Models.PageModel
+﻿@model CricleSpaceGeneralModels.Models.PageListModel
 
 @{
     ViewBag.Title = "BrowseSite";
     Layout = "~/Views/Shared/_Layout.cshtml";
+} 
+@foreach(var page in Model.Pages)
+{
+    @Html.Partial("_PageBox", page);
 }
- 
+

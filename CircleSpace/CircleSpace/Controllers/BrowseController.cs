@@ -18,13 +18,14 @@ namespace CircleSpace.Controllers
         public ActionResult Index()
         {
             PageModel p = new PageModel();
+            
             return View(p);
         }
         public ActionResult BrowseSite()
         {
-            List<PageModel> model = service.GetPages();
-
-            return View();
+            PageListModel model = new PageListModel(service.GetPages());
+     
+            return View(model);
         }
     }
 }

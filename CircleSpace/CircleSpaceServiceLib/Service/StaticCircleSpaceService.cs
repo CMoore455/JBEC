@@ -12,7 +12,6 @@ namespace CircleSpaceServiceLib.Service
 {
     public class StaticCircleSpaceService : ICircleSpaceService
     {
-
         public void AddContributorToPage(PageModel page, UserModel contributor)
         {
             using (var db = new CircleSpaceEntities())
@@ -111,21 +110,14 @@ namespace CircleSpaceServiceLib.Service
 
         public List<LayoutModel> GetLayouts()
         {
-            List<LayoutModel> model = new List<LayoutModel>();
-            UserModel user1 = new UserModel();
-            List<string> tags = new List<string>();
-            model.Add(new LayoutModel()
+            List<LayoutModel> list = new List<LayoutModel>();
+            using (var db = new CircleSpaceEntities())
             {
-                ID = 1,
-                Type = LayoutTypes.Header,
-                LayoutTitle = "LayoutTitle1",
-                Content = "Content1",
-                CSS = "CSS1",
-                Owner = user1,
-                Tags = tags
+                var query = db.Layouts.Select(x => x);
+                list = LayoutsToListOfLayouts(query.ToList());
+            }
 
-            });
-            return model;
+            return list;
         }
 
         public LayoutModel GetLayoutWithID(int id)
@@ -327,7 +319,7 @@ namespace CircleSpaceServiceLib.Service
             List<PageModel> list = new List<PageModel>();
             using (var db = new CircleSpaceEntities())
             {
-                list = PagesToPageModelList(db.Pages.Where(p => p.OwnerID == v).ToList());
+                 list = PagesToPageModelList(db.Pages.Where(p=> p.OwnerID == v).ToList());
             }
             return list;
         }
@@ -338,7 +330,7 @@ namespace CircleSpaceServiceLib.Service
             using (var db = new CircleSpaceEntities())
             {
 
-                list = PagesToPageModelList(db.Pages.Where(p => p.AspNetUsers.Select(u => u.Id).Contains(v)).ToList());
+                list = PagesToPageModelList(db.Pages.Where(p => p.AspNetUsers.Select(u=> u.Id).Contains(v)).ToList());
             }
             return list;
         }
@@ -416,24 +408,14 @@ namespace CircleSpaceServiceLib.Service
 
         public List<PageModel> GetPages()
         {
-            List<PageModel> model = new List<PageModel>; 
-            PageModel page1 = new PageModel();
-            List<UserModel> contributors = new List<UserModel>();
-            List<string> images = new List<string>();
-            model.Add(new PageModel()
+            List<PageModel> list = new List<PageModel>();
+            using (var db = new CircleSpaceEntities())
             {
-                Header = "Header1",
-                Footer = "Footer1",
-                Body = "Body1",
-                Route = "Route1",
-                CSS = "CSS1",
-                ID = 1,
-                OwnerID = "1",
-                Contributors = contributors,
-                ImageUrls = images
+                var query = db.Pages.Select(x => x);
+                list = PagesToPageModelList(query.ToList());
+            }
 
-            });
-            return model;
+            return list;
         }
 
         private class TagNameComparer : IEqualityComparer<Tag>
