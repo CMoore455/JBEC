@@ -74,14 +74,15 @@ namespace CircleSpace.Controllers
             };
         
             SavePage(o);
-            return Redirect($"~/Controllers/Creator/EditPage/{service.GetPageWithRoute(route).ID}");
+            return Redirect($"~/Creator/EditPage/{service.GetPageWithRoute(route).ID}");
         }
         
         [HttpPost]
          public string SavePage(JSONForSavingWebPage o)
         {
-                PageModel pageModel = new PageModel()
-                {
+            PageModel pageModel = new PageModel()
+            {
+                    OwnerID = User.Identity.GetUserId(),
                     Header = o.Header,
                     Body = o.Body,
                     Footer = o.Footer,
