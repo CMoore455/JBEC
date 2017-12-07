@@ -114,6 +114,10 @@ input[type=text] {
     border-bottom-right-radius: 0px;
 }
 
+input[type=checkbox] {
+    width: 17px;
+}
+
 #submitButton{
     border-top-left-radius: 0px;
     border-top-right-radius: 0px;
@@ -169,6 +173,7 @@ input,
 select,
 textarea {
     max-width: 280px;
+    width: 10vw;
 }
 
 .ClassFooter {
