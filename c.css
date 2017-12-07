@@ -1,0 +1,19 @@
+.navbar div{
+    display: inline-block;
+    margin: 30px;
+    margin-top: 15px;
+    font-size: 30px;
+}
+
+.navbar{
+    top: 0;
+    position: fixed;
+    width: 100vw;
+    height: 10vh;
+}
+
+body{
+    margin-top: 0px;
+    margin-left: 0px;
+    margin-right: 0px;    
+}

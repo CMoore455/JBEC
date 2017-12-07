@@ -3,6 +3,7 @@ using CircleSpaceGeneralModels.Models;
 using CircleSpaceServiceLib.Service;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -13,7 +14,7 @@ namespace CircleSpace.Controllers
     [Authorize]
     public class CreatorController : Controller
     {
-        private ICircleSpaceService service;
+        private ICircleSpaceService service = new SqlCricleSpaceService();
         // GET: Creator
         public ActionResult Index()
         {
@@ -38,8 +39,76 @@ namespace CircleSpace.Controllers
             return Json(new LayoutModelJSON(layout).JSON, JsonRequestBehavior.AllowGet);
         }
 
+        [HttpGet]
+        public ActionResult NameWebsitePage()
+        {
+            return View();
+        }
+
+
         [HttpPost]
-        public string SavePage(JSONForSavingWebPage o)
+        public ActionResult NameWebsitePagePost(string route)
+        {
+            List<string> imgurls = new List<string>();
+            HttpFileCollectionBase hfc = Request.Files;
+            foreach (string h in hfc)
+            {
+                HttpPostedFileBase f = hfc[h];
+                bool repeat = false;
+                string extenstion = Path.GetExtension(f.FileName);
+                string newFileName = "";
+                do
+                {
+                    newFileName = Path.GetRandomFileName() + extenstion;
+                    if (System.IO.File.Exists(Server.MapPath("~/Content/Images") + "/" + newFileName))
+                    {
+                        repeat = true;
+                    }
+                } while (repeat);
+                f.SaveAs(Path.Combine(Server.MapPath("~/Content/Images"), newFileName));
+                imgurls.Add(newFileName);
+            };
+            foreach(char c in route)
+            {
+                route.Replace(' ', '_');
+            }
+            JSONForSavingWebPage o = new JSONForSavingWebPage()
+            {
+                Header = "",
+                Body = "",
+                Footer = "",
+                CSS = "",
+                Route = route,
+                ImageURLS = imgurls
+            };
+        
+            SavePage(o);
+            return Redirect($"~/Controllers/Creator/EditPage/{service.GetPageWithRoute(route).ID}");
+        }
+        
+        [HttpPost]
+         public string SavePage(JSONForSavingWebPage o)
+        {
+                PageModel pageModel = new PageModel()
+                {
+                    Header = o.Header,
+                    Body = o.Body,
+                    Footer = o.Footer,
+                    CSS = o.CSS,
+                    Route = o.Route,
+                    ImageUrls = o.ImageURLS                    
+                };
+
+            service.AddPage(pageModel);
+
+            return "Success"; 
+        }
+
+
+
+
+        [HttpPost]
+        public string UpdatePage(JSONForSavingWebPage o)
         {
             PageModel pageModel = new PageModel()
             {
@@ -47,13 +116,14 @@ namespace CircleSpace.Controllers
                 Body = o.Body,
                 Footer = o.Footer,
                 CSS = o.CSS,
-                //Need Route
-                //Need ImageURLS
+                Route = o.Route,
+                ImageUrls = o.ImageURLS
             };
 
             service.AddPage(pageModel);
 
-            return "Success"; 
+            return "Success";
         }
+
     }
 }
