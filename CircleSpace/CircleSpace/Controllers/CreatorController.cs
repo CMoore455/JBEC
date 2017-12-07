@@ -96,8 +96,11 @@ namespace CircleSpace.Controllers
             return new HttpStatusCodeResult(HttpStatusCode.NoContent); 
         }
 
+
+
+
         [HttpPost]
-        public ActionResult UpdatePage(JSONForSavingWebPage o)
+        public string UpdatePage(JSONForSavingWebPage o)
         {
             PageModel pageModel = new PageModel()
             {
@@ -159,6 +162,5 @@ namespace CircleSpace.Controllers
         {
             return View(service.GetLayoutWithID(id));
         }
-
     }
 }
