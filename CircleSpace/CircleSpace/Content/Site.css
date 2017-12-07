@@ -92,6 +92,7 @@ input[type=button] {
     border-style: double;
     border-radius: 5px;
     background-color: var(--backgroundColorLight);
+    margin-bottom: 10px;
 }
 
 input[type=color] {

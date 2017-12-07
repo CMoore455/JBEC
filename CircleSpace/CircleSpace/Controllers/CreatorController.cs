@@ -12,7 +12,7 @@ using System.Web.Mvc;
 namespace CircleSpace.Controllers
 {
 
-    [Authorize]
+    //[Authorize]
     public class CreatorController : Controller
     {
         private ICircleSpaceService service = new SqlCricleSpaceService();
@@ -21,20 +21,7 @@ namespace CircleSpace.Controllers
         {
             return View();
         }
-
-        public JsonResult GetNewLayout(int id)
-        {
-            LayoutModel layout =
-                //new LayoutModel() { ID = 1, CSS = "h1 { color: blue; } p {color: green; }", Content = "<h1>Blah</h1><p>ofofo</p>", Type = CircleSpaceGeneralModels.Enums.LayoutTypes.Body, LayoutTitle = "Layout1" };
-                service.GetLayoutWithID(id);
-            return Json(new LayoutModelJSON(layout).JSON, JsonRequestBehavior.AllowGet);
-        }
-
-        public ActionResult CreateCustomLayout()
-        {
-            return View();
-        }
-
+       
         [HttpPost]
         public ActionResult SavePage(JSONForSavingWebPage o)
         {
@@ -58,6 +45,10 @@ namespace CircleSpace.Controllers
 
         public ActionResult EditPage(int id)
         {
+            //View(new List<LayoutModel>() { new LayoutModel() { ID = 2, LayoutTitle = "Header", Type = CircleSpaceGeneralModels.Enums.LayoutTypes.Header },
+            //    new LayoutModel() { ID = 3, LayoutTitle = "Body", Type = CircleSpaceGeneralModels.Enums.LayoutTypes.Body },
+            //    new LayoutModel() { ID = 1, LayoutTitle = "Footer", Type = CircleSpaceGeneralModels.Enums.LayoutTypes.Footer } });
+
             var page = service.GetPageWithID(id);
             var layouts = service.GetLayouts();
             var headers = (from header in layouts
@@ -77,6 +68,9 @@ namespace CircleSpace.Controllers
 
         public ActionResult EditLayout(int id)
         {
+            //LayoutModel layout =
+            //    new LayoutModel() { ID = 1, CSS = "h1 { color: blue; } p {color: green; }", Content = "<h1>Blah</h1><p>ofofo</p>", Type = CircleSpaceGeneralModels.Enums.LayoutTypes.Body, LayoutTitle = "Layout1" };
+            //return View(layout);
             return View(service.GetLayoutWithID(id));
         }
     }
