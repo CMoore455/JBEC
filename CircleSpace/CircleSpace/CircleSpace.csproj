@@ -276,6 +276,7 @@
     <Content Include="Views\Creator\CreateWebPage.cshtml" />
     <Content Include="Views\Browse\BrowseSite.cshtml" />
     <Content Include="Views\Shared\_PageBox.cshtml" />
+    <Content Include="Views\Shared\_LayoutBox.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

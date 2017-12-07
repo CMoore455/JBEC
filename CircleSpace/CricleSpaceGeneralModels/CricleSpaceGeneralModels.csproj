@@ -42,7 +42,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Enums\LayoutTypes.cs" />
+    <Compile Include="Models\LayoutListModel.cs" />
     <Compile Include="Models\LayoutModel.cs" />
+    <Compile Include="Models\PageLayoutListModel.cs" />
     <Compile Include="Models\PageListModel.cs" />
     <Compile Include="Models\PageModel.cs" />
     <Compile Include="Models\UserModel.cs" />

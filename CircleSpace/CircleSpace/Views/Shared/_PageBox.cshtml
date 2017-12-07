@@ -1,32 +1,33 @@
 ﻿@model CircleSpaceGeneralModels.Models.PageModel
 
-
 <div class="pageBox">
-
-
-
     <table style="width:100%">
         <tr>
             <th>Contributors</th>
             <th>Emails</th>
             <th>Route</th>
-        </tr>
+         </tr>
         <tr>
             <td>
-                @foreach(var contributors in Model.Contributors)
+                 @foreach (var contributors in Model.Contributors)
                 {
-                    @contributors.Username;
+                    @contributors.Username
                 }
 
             </td>
             <td>
-                @foreach(var emails in Model.Contributors)
+                @foreach (var contributors in Model.Contributors)
                 {
-                    @emails.Email;
+                    @contributors.Email
                 }
             </td>
             <td>@Model.Route</td>
-        </tr>
+         </tr>
     </table>
 
+</div>
+<div class="layoutBox">
+    <table style="width:100%">
+        <tr></tr>
+    </table>
 </div>

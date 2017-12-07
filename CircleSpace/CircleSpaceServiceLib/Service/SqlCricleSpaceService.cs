@@ -314,7 +314,7 @@ namespace CircleSpaceServiceLib.Service
             List<PageModel> list = new List<PageModel>();
             using (var db = new CircleSpaceEntities())
             {
-                 list = PagesToPageModelList(db.Pages.Where(p=> p.OwnerID == v).ToList());
+                list = PagesToPageModelList(db.Pages.Where(p => p.OwnerID == v).ToList());
             }
             return list;
         }
@@ -325,7 +325,7 @@ namespace CircleSpaceServiceLib.Service
             using (var db = new CircleSpaceEntities())
             {
 
-                list = PagesToPageModelList(db.Pages.Where(p => p.AspNetUsers.Select(u=> u.Id).Contains(v)).ToList());
+                list = PagesToPageModelList(db.Pages.Where(p => p.AspNetUsers.Select(u => u.Id).Contains(v)).ToList());
             }
             return list;
         }

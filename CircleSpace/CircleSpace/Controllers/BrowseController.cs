@@ -13,7 +13,7 @@ namespace CircleSpace.Controllers
     [AllowAnonymous]
     public class BrowseController : Controller
     {
-        ICircleSpaceService service = new StaticCircleSpaceService();
+        ICircleSpaceService service = new SqlCricleSpaceService();
         // GET: Browse
         public ActionResult Index()
         {
@@ -23,9 +23,9 @@ namespace CircleSpace.Controllers
         }
         public ActionResult BrowseSite()
         {
-            PageListModel model = new PageListModel(service.GetPages());
-     
+            PageLayoutListModel model = new PageLayoutListModel(service.GetPages(), service.GetLayouts());     
             return View(model);
         }
+        
     }
 }
