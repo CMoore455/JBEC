@@ -4,7 +4,15 @@
     ViewBag.Title = "Create Custom Layout";
 }
 
+<style id="css-for-layout">
+   @{ 
+       var css = new HtmlString(Model.CSS);
+   }
+    @css
+</style>
+
 <h2>Create Custom Layout</h2>
+<h3 id="layoutTitle">@Model.LayoutTitle</h3>
 
 <select id="type-selector">
     <option value="Header">
@@ -16,9 +24,6 @@
     <option value="Footer">
         Footer
     </option>
-    <option value="Custom">
-        Custom
-    </option>
 </select>
 
 <div id="draggableItems">
@@ -27,10 +32,10 @@
     <h3>Paragraph Header</h3>
     <p>Paragraph</p>
 </div>
-
+<p>Left-Click = Edit &emsp;Left-Click + ShiftKey = Remove</p>
 <div id="live-preview-area" style="height: 300px;">
+    @Model.Content
 </div>
-
 
 @section scripts{
     <script src="~/Scripts/DragAndDrop.js"></script>
