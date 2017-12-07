@@ -29,10 +29,13 @@ function EditOrRemoveTextOnClick(event) {
             if (event.shiftKey) {
                 RemoveElement(event.target);
             } else {
+
                 EditTextOfElement(event.target);
             }
             break;
     }
+
+    return false;
 }
 
 window.addEventListener('load', function (event) {
@@ -41,7 +44,7 @@ window.addEventListener('load', function (event) {
         MakeElementsDraggable(element, true);
     });
 
-    livePreviewArea = $('#live-preview-area')[0]
+    livePreviewArea = $('#live-preview-area')[0];
     MakeElementDropTarget(livePreviewArea);
     onClonedElement(function (element) {
         $(element).mouseup(EditOrRemoveTextOnClick);
@@ -54,15 +57,41 @@ window.addEventListener('load', function (event) {
         }
     );
 
-    $(typeSelector).trigger('click');
+    $('#live-preview-area').children('h1, h2, h3, h4, h5, h6, p, ul, ol, li, a').mouseup(EditOrRemoveTextOnClick);
 
-    console.log(layoutTypeSelected);
+    $('#live-preview-area > a').click(function () { return false; });
+
+    $(typeSelector).click();
+
 });
 
 //Need object on server side to receive json and save the layout
 //Don't forget validation of the title field.
 function SaveLayout() {
+    /*
+              LayoutTitle = o.Title,
+                Content = o.Content,
+                ID = o.ID,
+                OwnerID = User.Identity.GetUserId(),
+                CSS = o.CSS,
+                Tags = o.Tags,
+                Type = o.Type
+    */
 
+    layout = {
+        Title: $('#layoutTitle')[0].innerText,
+        Content: $('#live-preview-area')[0].innerHTML,
+        ID: layoutId,
+        CSS: $('css-for-layout')[0].innerText,
+        Tags: [],
+        Type: layoutTypeSelected
+    }
+
+    $.post('/Creator/SaveLayout', layout).fail(function () {
+
+    }).done(function () {
+
+    });
 }
 
 //Need to wire up the styling controls.

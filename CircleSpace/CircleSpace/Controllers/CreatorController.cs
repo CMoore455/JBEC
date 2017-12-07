@@ -38,7 +38,6 @@ namespace CircleSpace.Controllers
         [HttpPost]
         public ActionResult SavePage(JSONForSavingWebPage o)
         {
-
             PageModel pageModel = new PageModel()
             {
                 Header = o.Header,
@@ -54,6 +53,24 @@ namespace CircleSpace.Controllers
             service.UpdatePage(pageModel);
 
             return new HttpStatusCodeResult(HttpStatusCode.NoContent); 
+        }
+
+        [HttpPost]
+        public ActionResult SaveLayout(JSONForSavingLayout o)
+        {
+            LayoutModel layout = new LayoutModel()
+            {
+                LayoutTitle = o.Title,
+                Content = o.Content,
+                ID = o.ID,
+                CSS = o.CSS,
+                Tags = o.Tags,
+                Type = o.Type
+            };
+
+            service.UpdateLayout(layout);
+
+            return new HttpStatusCodeResult(HttpStatusCode.NoContent);
         }
 
         public ActionResult EditPage(int id)
