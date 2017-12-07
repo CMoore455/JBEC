@@ -22,5 +22,10 @@ namespace CircleSpace.Models
         public int ID { get; set; }
         //Need Route
         //Need ImageURLS
+        public string Route { get; set; }
+        public List<string> ImageURLS { get; set; }
+
+
+
     }
 }
