@@ -1,19 +1,19 @@
 ﻿
-document.addEventListener("load", DocumentLoaded());
+window.addEventListener("load", DocumentLoaded);
 
 //The ID's of the currently selected layouts in the selector.
-var headerId, bodyId, footerId;
-var currentElementSelected;
+var headerId, bodyId, footerId, currentElementSelected, pageId;
 
 
 //Hooks up all the click events for the selectors for a different layout.
-function DocumentLoaded() {
+function DocumentLoaded(event) {
+    pageId = document.URL.charAt(document.URL.length - 1);
     var headerClassLookup = $(".selector-headers");
     var headerSelector = headerClassLookup[0];
     var option = headerSelector.options[headerSelector.selectedIndex];
     if (option) {
         headerId = option.value;
-        headerClassLookup.click(function (event) {
+        headerClassLookup.change(function (event) {
             LayoutSelectorChanged({
                 Type: "Header",
                 ChangeID: function () {
@@ -22,15 +22,14 @@ function DocumentLoaded() {
                 }
             });
         });
-        headerClassLookup.trigger('click');
     }
 
     var bodyClassLookup = $(".selector-bodies");
     var bodySelector = bodyClassLookup[0];
-    var option = bodySelector.options[bodySelector.selectedIndex];
+    option = bodySelector.options[bodySelector.selectedIndex];
     if (option) {
         bodyId = option.value;
-        bodyClassLookup.click(function (event) {
+        bodyClassLookup.change(function (event) {
             LayoutSelectorChanged({
                 Type: "Body",
                 ChangeID: function (id) {
@@ -39,15 +38,14 @@ function DocumentLoaded() {
                 }
             });
         });
-        bodyClassLookup.trigger('click');
     }
 
     var footerClassLookup = $(".selector-footers")
     var footerSelector = footerClassLookup[0];
-    var option = footerSelector.options[footerSelector.selectedIndex];
+    option = footerSelector.options[footerSelector.selectedIndex];
     if (option) {
         footerId = option.value;
-        footerClassLookup.click(function (event) {
+        footerClassLookup.change(function (event) {
             LayoutSelectorChanged({
                 Type: "Footer",
                 ChangeID: function () {
@@ -55,7 +53,6 @@ function DocumentLoaded() {
                 }
             });
         });
-        footerClassLookup.trigger('click');
     }
 
     $('#fontColor').on('click', ChangeFontColor);
@@ -72,6 +69,16 @@ function DocumentLoaded() {
     $('.textAlign').on('click', ChangeAlignment);
     $('#check').on('click', ChangeVerticalAlignment);
     $('#submitButton').on('click', CreateLink);
+
+
+    WireContentForEditableText($('#headerPreview')[0]);
+    WireContentForEditableText($('#bodyPreview')[0]);
+    WireContentForEditableText($('#footerPreview')[0]);
+
+    $('#live-preview-area a').click(function (event) {
+        return event.shiftKey;
+    });
+
 };
 
 
@@ -81,13 +88,13 @@ function LayoutSelectorChanged(IdChanger) {
     //Perform ajax request for new layout
     switch (IdChanger.Type) {
         case "Header":
-            $.getJSON("GetNewLayout/" + headerId).done(ReceiveNewLayout);
+            $.getJSON("/Creator/GetNewLayout/" + headerId).done(ReceiveNewLayout);
             break;
         case "Body":
-            $.getJSON("GetNewLayout/" + bodyId).done(ReceiveNewLayout);
+            $.getJSON("/Creator/GetNewLayout/" + bodyId).done(ReceiveNewLayout);
             break;
         case "Footer":
-            $.getJSON("GetNewLayout/" + footerId).done(ReceiveNewLayout);
+            $.getJSON("/Creator/GetNewLayout/" + footerId).done(ReceiveNewLayout);
             break;
         default:
             return;
@@ -118,7 +125,7 @@ function ReceiveNewLayout(json) {
 function ChangeContent(content, css, idSelectorForContentPlacement) {
     var previewArea = $(idSelectorForContentPlacement)[0];
 
-    if ($(idSelectorForContentPlacement + 'Style').length != 0) { $(idSelectorForContentPlacement + 'Style').remove(); }
+    if ($(idSelectorForContentPlacement + 'Style').length !== 0) { $(idSelectorForContentPlacement + 'Style').remove(); }
 
     var cssStyle = document.createElement('style');
     cssStyle.setAttribute('id', idSelectorForContentPlacement + 'Style');
@@ -143,12 +150,9 @@ function ChangeContent(content, css, idSelectorForContentPlacement) {
 function SavePage() {
 
     //Creates header, body, and footer tags to send to the server.
-    var header = document.createElement('header');
-    header.innerHTML = $("#headerPreview")[0].innerHTML;
-    var body = document.createElement('body');
-    body.innerHTML = $("#bodyPreview")[0].innerHTML;
-    var footer = document.createElement('footer');
-    footer.innerHTML = $("#footerPreview")[0].innerHTML;
+    var header = $("#headerPreview")[0].innerHTML;
+    var body = $("#bodyPreview")[0].innerHTML;
+    var footer = $("#footerPreview")[0].innerHTML;
 
     //Finding the style tags of the live preview areas contents.
     var headerCssRules = $("#headerPreviewStyle");
@@ -168,16 +172,28 @@ function SavePage() {
 
     //This objects fields needs to match JSONForSavingWebPage object in the models folder of server.
     var page = {
-        Header: header.outerHTML,
-        Body: body.outerHTML,
-        Footer: footer.outerHTML,
-        CSS: cssRules
+        Header: header,
+        Body: body,
+        Footer: footer,
+        CSS: cssRules,
+        ID: pageId
         //Need ImageURLS
         //Need RouteOfPage
     }
 
     //Sending page to server as JSON
-    $.post("SavePage", page);//Need to react to bad post (i.e. Route is already taken)
+    $.post("/Creator/UpdatePage", page).fail(function () {
+        var saveStateContainer = $('#save-state-container');
+        saveStateContainer.children().remove();
+        saveStateContainer.append('<p>Could not save page.</p>');
+
+    }).done(function () {
+        var saveStateContainer = $('#save-state-container');
+        saveStateContainer.children().remove();
+        var date = new Date($.now());
+        var saveMessage = '<p>Saved at ' + date.toLocaleTimeString() + '</p>';
+        saveStateContainer.append(saveMessage);
+    });//Need to react to bad post (i.e. Route is already taken)
 }
 
 //Converts all the css in several style tags into one blob of css text.
@@ -206,9 +222,9 @@ function WireContentForEditableText(content) {
         for (var i = 0; i < content.children.length; i++) {
             WireContentForEditableText(content.children[i]);
         }
-    } else if(content != undefined) {
-        var changeTextClickSubscriber;
+    } else if (content != undefined) {
         $(content).click(function (event) {
+            
             ChangeTextClickSubscriber(content);
         });
     }
@@ -229,7 +245,7 @@ function ChangeTextClickSubscriber(content) {
             $(content).click(function (event) { ChangeTextClickSubscriber(content) });
         });
         content.appendChild(inputTag);
-        $(inputTag).trigger('focus');
+        $(inputTag).focus();
         currentElementSelected = content;
         UpdateCreatorOptions();
     }
@@ -352,8 +368,11 @@ function ChangeVerticalAlignment() {
 }
 
 function CreateLink() {
-    if (document.getElementById('textArea').value != ""){
+    if (document.getElementById('textArea').value != "") {
         $(currentElementSelected).wrap("<a href=" + document.getElementById('textArea').value + "></a>");
+        $('a[href="' + document.getElementById('textArea').value + '"]').click(function (event) {
+            return event.shiftKey;
+        });
     }
     else {
         $(currentElementSelected).unwrap();

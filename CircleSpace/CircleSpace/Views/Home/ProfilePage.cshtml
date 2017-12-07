@@ -13,7 +13,8 @@
 {
     <div>
         <a href="@page.Route">www.circlespace.com/@page.Route</a>
-        @Html.ActionLink("Save", "SaveCreatedPage", new { id = page.ID });
+        @Html.ActionLink("Save", "SaveCreatedPage", new { id = page.ID })
+        @Html.ActionLink("Edit", "EditPage", "Creator", new { id = page.ID }, null)
     </div>
 }
 <hr />
@@ -22,7 +23,8 @@
 {
     <div>
         <a href="@page.Route">www.circlespace.com/@page.Route</a>
-        @Html.ActionLink("Save", "SaveCreatedPage", new { id = page.ID });
+        @Html.ActionLink("Save", "SaveCreatedPage", new { id = page.ID })
+        @Html.ActionLink("Edit", "EditPage", "Creator", new { id = page.ID }, null)
     </div>
 
 
@@ -33,6 +35,8 @@
 {
     <div>
         <a href="EditLayout/@_layout.ID">@_layout.LayoutTitle</a>
-        @Html.ActionLink("Save", "SaveCreatedLayout", new { id = _layout.ID });
+        @Html.ActionLink("Save", "SaveCreatedLayout", new { id = _layout.ID })
+        @Html.ActionLink("Edit", "EditLayout", "Creator", new { id = _layout.ID }, null)
+  
     </div>
 }
