@@ -14,18 +14,17 @@ namespace CircleSpace.Models
         public string Header { get { return header; } set { header = value ?? ""; } }
         [AllowHtml]
         public string Body { get { return body; } set { body = value ?? ""; } }
-    
-
-        public string Route { get; set; }
-        public List<string> ImageURLS { get; set; }
-
-
-
         [AllowHtml]
         public string Footer { get => footer; set => footer = value ?? ""; }
 
         public string CSS { get => css; set => css = value ?? ""; }
 
         public int ID { get; set; }
+        //Need Route
+        //Need ImageURLS
+        public string Route { get; set; }
+        public List<string> ImageURLS { get; set; }
+
+
     }
 }

@@ -78,7 +78,7 @@ namespace CircleSpace.Controllers
         }
         
         [HttpPost]
-         public string SavePage(JSONForSavingWebPage o)
+         public ActionResult SavePage(JSONForSavingWebPage o)
         {
             PageModel pageModel = new PageModel()
             {
@@ -93,7 +93,7 @@ namespace CircleSpace.Controllers
 
             service.AddPage(pageModel);
 
-            return "Success"; 
+            return new HttpStatusCodeResult(HttpStatusCode.NoContent); 
         }
 
 
@@ -102,14 +102,16 @@ namespace CircleSpace.Controllers
         [HttpPost]
         public ActionResult UpdatePage(JSONForSavingWebPage o)
         {
+            string route = service.GetPageWithID(o.ID).Route;
+            List<string> images = service.GetPageWithID(o.ID).ImageUrls;
             PageModel pageModel = new PageModel()
             {
                 Header = o.Header,
                 Body = o.Body,
                 Footer = o.Footer,
                 CSS = o.CSS,
-                Route = o.Route,
-                ImageUrls = o.ImageURLS,
+                Route = route,
+                ImageUrls = images,
                 OwnerID = User.Identity.GetUserId(),
                 ID = o.ID
             };
@@ -150,7 +152,6 @@ namespace CircleSpace.Controllers
             var footers = (from footer in layouts
                           where footer.Type == CircleSpaceGeneralModels.Enums.LayoutTypes.Footer
                           select footer).ToList().AsReadOnly();
-
             return View(new EditPageContentContainer(headers, bodies, footers, page));    
         }
 
@@ -158,6 +159,5 @@ namespace CircleSpace.Controllers
         {
             return View(service.GetLayoutWithID(id));
         }
-
     }
 }
