@@ -15,7 +15,7 @@ namespace CircleSpace.Controllers
 {
     public class HomeController : Controller
     {
-        ICircleSpaceService service;
+        ICircleSpaceService service = new SqlCricleSpaceService();
         public ActionResult Index()
         {
             return View();

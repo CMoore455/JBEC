@@ -1,5 +1,5 @@
 @using CircleSpaceGeneralModels.Enums
-@model List<CircleSpaceGeneralModels.Models.LayoutModel>
+@model CircleSpace.Models.EditPageContentContainer
 
 @{
     ViewBag.Title = "Creator";
@@ -7,7 +7,7 @@
 <div class="row row-creator">
     <div class="col-sm-1 creator-controls-col">
         <select class="selector-headers">
-            @foreach (var layoutModel in Model ?? new List<CircleSpaceGeneralModels.Models.LayoutModel>())
+            @foreach (var layoutModel in Model.HEADERS)
             {
                 if (layoutModel.Type == LayoutTypes.Header)
                 {
@@ -20,7 +20,7 @@
         </select>
 
         <select title="Choose a body..." class="selector-bodies">
-            @foreach (var layoutModel in Model ?? new List<CircleSpaceGeneralModels.Models.LayoutModel>())
+            @foreach (var layoutModel in Model.BODIES)
             {
                 if (layoutModel.Type == LayoutTypes.Body)
                 {
@@ -33,7 +33,7 @@
         </select>
 
         <select title="Choose a footer..." class="selector-footers">
-            @foreach (var layoutModel in Model ?? new List<CircleSpaceGeneralModels.Models.LayoutModel>())
+            @foreach (var layoutModel in Model.FOOTERS)
             {
                 if (layoutModel.Type == LayoutTypes.Footer)
                 {
@@ -45,14 +45,19 @@
                 }
             }
         </select>
-
         <input type="button" onclick="SavePage()" value="Save Page">
+        <div id="save-state-container"></div>
     </div>
 
     <div id="live-preview-area" class="col-lg-1">
-        <div id="headerPreview"></div>
-        <div id="bodyPreview"></div>
-        <div id="footerPreview"></div>
+        @{
+            var header = new HtmlString(Model.PAGE_TO_EDIT?.Header);
+            var body = new HtmlString(Model.PAGE_TO_EDIT?.Body);
+            var footer = new HtmlString(Model.PAGE_TO_EDIT?.Footer);
+        }
+        <div id="headerPreview">@header</div>
+        <div id="bodyPreview">@body</div>
+        <div id="footerPreview">@footer</div>
     </div>
     <div class="col-sm-1 creator-section-options">
         <div>
