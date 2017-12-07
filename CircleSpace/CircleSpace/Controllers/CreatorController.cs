@@ -100,7 +100,7 @@ namespace CircleSpace.Controllers
 
 
         [HttpPost]
-        public string UpdatePage(JSONForSavingWebPage o)
+        public ActionResult UpdatePage(JSONForSavingWebPage o)
         {
             PageModel pageModel = new PageModel()
             {
