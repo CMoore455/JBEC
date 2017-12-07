@@ -69,6 +69,12 @@ function DocumentLoaded(event) {
     $('.textAlign').on('click', ChangeAlignment);
     $('#check').on('click', ChangeVerticalAlignment);
     $('#submitButton').on('click', CreateLink);
+
+
+    WireContentForEditableText($('#headerPreview')[0]);
+    WireContentForEditableText($('#bodyPreview')[0]);
+    WireContentForEditableText($('#footerPreview')[0]);
+
 };
 
 
