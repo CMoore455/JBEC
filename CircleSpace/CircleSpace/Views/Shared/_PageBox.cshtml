@@ -1,33 +1,27 @@
 ﻿@model CircleSpaceGeneralModels.Models.PageModel
 
+
 <div class="pageBox">
     <table style="width:100%">
         <tr>
-            <th>Contributors</th>
-            <th>Emails</th>
-            <th>Route</th>
-         </tr>
+            <th>Owner Username</th>
+            <th>Owner Email</th>
+            
+        </tr>
         <tr>
+
             <td>
-                 @foreach (var contributors in Model.Contributors)
-                {
-                    @contributors.Username
-                }
+                @Model.PageOwner.Username
+
 
             </td>
             <td>
-                @foreach (var contributors in Model.Contributors)
-                {
-                    @contributors.Email
-                }
+                @Model.PageOwner.Email
             </td>
-            <td>@Model.Route</td>
-         </tr>
+            <td>
+                <a href="@Model.Route">Click To See</a>
+            </td>
+        </tr>
     </table>
 
-</div>
-<div class="layoutBox">
-    <table style="width:100%">
-        <tr></tr>
-    </table>
 </div>

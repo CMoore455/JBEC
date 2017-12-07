@@ -51,7 +51,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service\ICircleSpaceService.cs" />
     <Compile Include="Service\SqlCricleSpaceService.cs" />
-    <Compile Include="Service\StaticCircleSpaceService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CircleSpaceDAL\CircleSpaceDAL.csproj">
