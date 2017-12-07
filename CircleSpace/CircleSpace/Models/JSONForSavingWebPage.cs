@@ -15,9 +15,10 @@ namespace CircleSpace.Models
         [AllowHtml]
         public string Footer { get; set; }
         public string CSS { get; set; }
+        public string Route { get; set; }
+        public List<string> ImageURLS { get; set; }
 
-        //Need Route
-        //Need ImageURLS
+
 
     }
 }
