@@ -233,6 +233,7 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\layout-creator-script.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
@@ -275,6 +276,7 @@
     <Content Include="Views\Home\ProfilePage.cshtml" />
     <Content Include="Views\Browse\BrowseSite.cshtml" />
     <Content Include="Views\Creator\CreateWebPage.cshtml" />
+    <Content Include="Views\Creator\CreateCustomLayout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

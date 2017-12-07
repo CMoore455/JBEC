@@ -230,6 +230,7 @@ function ChangeTextClickSubscriber(content) {
         });
         content.appendChild(inputTag);
         $(inputTag).trigger('focus');
+
         currentElementSelected = content;
         UpdateCreatorOptions();
     }
