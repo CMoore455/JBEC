@@ -1,0 +1,35 @@
+.footerText {
+    float: right
+}
+.footerholder {
+    background: none repeat scroll 0 0 transparent;
+    bottom: 0;
+    position: fixed;
+    text-align: center;
+    width: 100%;
+}
+
+footer {
+    background: none repeat scroll 0 0 white;
+    height: 100px;
+    margin: auto;
+    width: 400px;
+}
+.logoPic{
+    float:left
+}
+.linkList{
+    float:inherit
+}
+    .linkList > ul {
+        display: flex;
+        width: 50%;
+        justify-content: space-around;
+    }
+
+li {
+    float: left;
+    margin-left: 50px;
+    padding: 0px;
+    color: #fff;
+}
