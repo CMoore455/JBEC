@@ -23,14 +23,14 @@ namespace CircleSpace.Controllers
 
         public ActionResult About()
         {
-            ViewBag.Message = "Your application description page.";
+            ViewBag.Message = "CircleSpace is an easy to use, website creator with built in modifiable templates, that make building a website possible for even those who have no prior coding knowledge.​";
 
             return View();
         }
 
         public ActionResult Contact()
         {
-            ViewBag.Message = "Your contact page.";
+            ViewBag.Message = "CircleSpace Headquarters";
 
             return View();
         }
