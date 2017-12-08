@@ -79,6 +79,14 @@ namespace CircleSpaceGeneralModels.Models
             get { return imageUrls; }
             set { imageUrls = value; }
         }
+        private UserModel pageOwner;
+
+        public UserModel PageOwner
+        {
+            get { return pageOwner; }
+            set { pageOwner = value; }
+        }
+
 
     }
 }

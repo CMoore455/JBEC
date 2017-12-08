@@ -1,0 +1,27 @@
+﻿@model CircleSpaceGeneralModels.Models.PageModel
+
+
+<div class="pageBox">
+    <table style="width:100%">
+        <tr>
+            <th>Owner Username</th>
+            <th>Owner Email</th>
+            
+        </tr>
+        <tr>
+
+            <td>
+                @Model.PageOwner.Username
+
+
+            </td>
+            <td>
+                @Model.PageOwner.Email
+            </td>
+            <td>
+                <a href="@Model.Route">Click To See</a>
+            </td>
+        </tr>
+    </table>
+
+</div>

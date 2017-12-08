@@ -28,6 +28,7 @@ namespace CircleSpaceServiceLib.Service
         void UpdateLayout(LayoutModel model);
         List<LayoutModel> GetLayoutWithOwnerID(string v);
         List<LayoutModel> GetLayouts();
+        List<PageModel> GetPages();
         
     }
 }

@@ -1,9 +1,35 @@
-﻿@model CricleSpaceGeneralModels.Models.LayoutModel
+﻿@model CricleSpaceGeneralModels.Models.PageLayoutListModel
 
 @{
     ViewBag.Title = "BrowseSite";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<div class="PagesX">
+    <p>
+        <h1>
+            Pages
+        </h1>
+    </p>
+        <br />
+    @foreach (var page in Model.Pages)
+    {
+        @Html.Partial("_PageBox", page);
+    }
+</div>
+<br />
+<hr />
+<br />
+<div class="LayoutsX">
+    <p>
+        <h1>
+            Layouts
+        </h1>
+    </p>
 
-<h2>BrowseSite</h2>
-
+    <br />
+    @foreach (var layout in Model.Layouts)
+    {
+        @Html.Partial("_LayoutBox", layout);
+    }
+</div>
+<br />
