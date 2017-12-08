@@ -48,6 +48,18 @@ namespace CircleSpace.Controllers
             return View(profileContent);
         }
 
+
+        [Authorize]
+        public ActionResult DeleteOwnedPage(int id)
+        {
+            var page = service.GetPageWithID(id);
+            if(page.OwnerID == User.Identity.GetUserId())
+            {
+                service.DeletePage(page);
+            }
+            return View("ProfilePage");
+        }
+
         [Authorize]
         public ActionResult SaveCreatedPage(int id)
         {
