@@ -15,7 +15,7 @@ namespace CircleSpace.Controllers
 {
     public class HomeController : Controller
     {
-        ICircleSpaceService service;
+        ICircleSpaceService service = new SqlCricleSpaceService();
         public ActionResult Index()
         {
             return View();
@@ -46,6 +46,18 @@ namespace CircleSpace.Controllers
             profileContent = new ProfileContentContainer(ownedPages.AsReadOnly(), contributedPages.AsReadOnly(), ownedLayouts.AsReadOnly());
 
             return View(profileContent);
+        }
+
+
+        [Authorize]
+        public ActionResult DeleteOwnedPage(int id)
+        {
+            var page = service.GetPageWithID(id);
+            if(page.OwnerID == User.Identity.GetUserId())
+            {
+                service.DeletePage(page);
+            }
+            return View("ProfilePage");
         }
 
         [Authorize]

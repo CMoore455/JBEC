@@ -1,0 +1,111 @@
+﻿@model CircleSpaceGeneralModels.Models.LayoutModel
+
+@{
+    ViewBag.Title = "Create Custom Layout";
+}
+
+<h2>Create Custom Layout</h2>
+<hr />
+<div class="row row-creator">
+    <div class="col-sm-1 creator-controls-col">
+    <input type="button" value="Save Layout" onclick="SaveLayout()"/> 
+        <select id="type-selector">
+            <option value="Header">
+                Header
+            </option>
+            <option value="Body">
+                Body
+            </option>
+            <option value="Footer">
+                Footer
+            </option>
+            <option value="Custom">
+                Custom
+            </option>
+        </select>
+        <div id="draggableItems">
+            <h1>Page Header</h1>
+            <h2>Section Header</h2>
+            <h3>Paragraph Header</h3>
+            <p>Paragraph</p>
+        </div>
+    </div>
+
+    <div id="live-preview-area" style="min-height: 300px;">
+    </div>
+
+    <div class="col-sm-1 creator-section-options">
+        <div>
+            <label>
+                Font Color:
+                <input id="fontColor" type="color" />
+            </label>
+            <label>
+                Background Color:
+                <input id="backgroundColor" type="color" />
+            </label>
+            <label>
+                Margin Left:
+                <input id="marginLeft" type="number" />
+            </label>
+            <label>
+                Margin Right:
+                <input id="marginRight" type="number" />
+            </label>
+            <label>
+                Margin Top:
+                <input id="marginTop" type="number" />
+            </label>
+            <label>
+                Margin Bottom:
+                <input id="marginBottom" type="number" />
+            </label>
+            <label>
+                Height:
+                <input id="height" type="number" min="0" />
+            </label>
+            <label>
+                Width:
+                <input id="width" type="number" min="0" />
+            </label>
+            <label>
+                Font Size:
+                <input id="fontSize" type="number" min="5" />
+            </label>
+            <label>
+                Font Weight:
+                <input id="fontWeight" type="number" min="100" max="900" step="100" />
+            </label>
+            <label id="radioChecks">
+                Font Style:
+                <select id="fontStyle">
+                    <option value="normal">Normal</option>
+                    <option value="italic">Italicized</option>
+                </select>
+            </label>
+            <label id="radioChecks">
+                Alignment:
+                <select id="textAlign">
+                    <option value="left">Left</option>
+                    <option value="center">Center</option>
+                    <option value="right">Right</option>
+                </select>
+            </label>
+            <label>
+                Vertical Shift:
+                <label><input id="check" type="checkbox">Center</label>
+            </label>
+            <label id="link">
+                Link:
+                <input type="text" id="textArea" value="" />
+                <input type="button" id="submitButton" value="Create Link" />
+            </label>
+        </div>
+    </div>
+</div>
+
+
+@section scripts{
+    <script src="~/Scripts/DragAndDrop.js"></script>
+    <script src="~/Scripts/layout-creator-script.js"></script>
+}

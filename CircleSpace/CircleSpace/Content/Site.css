@@ -92,6 +92,7 @@ input[type=button] {
     border-style: double;
     border-radius: 5px;
     background-color: var(--backgroundColorLight);
+    margin-bottom: 10px;
 }
 
 input[type=color] {
@@ -112,6 +113,10 @@ input[type=text] {
     background-color: var(--backgroundColorLight);
     border-bottom-left-radius: 0px;
     border-bottom-right-radius: 0px;
+}
+
+input[type=checkbox] {
+    width: 17px;
 }
 
 #submitButton{
@@ -169,6 +174,7 @@ input,
 select,
 textarea {
     max-width: 280px;
+    width: 10vw;
 }
 
 .ClassFooter {

@@ -9,6 +9,7 @@ namespace CircleSpace.Models
 {
     public class ProfileContentContainer
     {
+
         public readonly ReadOnlyCollection<PageModel> OWNED_PAGES;
         public readonly ReadOnlyCollection<PageModel> CONTRIUBTED_PAGES;
         public readonly ReadOnlyCollection<LayoutModel> OWNED_LAYOUTS;

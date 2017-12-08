@@ -8,17 +8,20 @@ namespace CircleSpace.Models
 {
     public class JSONForSavingWebPage
     {
+        private string header = "", body = "", footer = "", css = "";
+
         [AllowHtml]
-        public string Header { get; set; }
+        public string Header { get { return header; } set { header = value ?? ""; } }
         [AllowHtml]
-        public string Body { get; set; }
+        public string Body { get { return body; } set { body = value ?? ""; } }
         [AllowHtml]
-        public string Footer { get; set; }
-        public string CSS { get; set; }
+        public string Footer { get => footer; set => footer = value ?? ""; }
+
         public string Route { get; set; }
         public List<string> ImageURLS { get; set; }
 
+        public string CSS { get => css; set => css = value ?? ""; }
 
-
+        public int ID { get; set; }
     }
 }
