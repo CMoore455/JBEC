@@ -12,9 +12,10 @@
 @foreach (var page in Model.OWNED_PAGES)
 {
     <div>
-    <a href="@page.Route">www.circlespace.com/@page.Route</a>
-    @Html.ActionLink("Save", "SaveCreatedPage", new { id = page.ID })
-    @Html.ActionLink("Edit", "EditPage", "Creator", new { id = page.ID }, null)
+        <a href="@page.Route">www.circlespace.com/@page.Route</a>
+        @Html.ActionLink("Save", "SaveCreatedPage", new { id = page.ID })
+        @Html.ActionLink("Edit", "EditPage", "Creator", new { id = page.ID }, null)
+        @Html.ActionLink("Delete", "DeleteOwnedPage", "Home", new { id = page.ID}, null)
     </div>
 
 }
@@ -30,6 +31,7 @@
 </div>
 
 
+
 }
 <hr />
 <h3>Layouts Owned</h3>
@@ -37,9 +39,9 @@
 {
 
     <div>
-    <a href="EditLayout/@_layout.ID">@_layout.LayoutTitle</a>
-    @Html.ActionLink("Save", "SaveCreatedLayout", new { id = _layout.ID })
-    @Html.ActionLink("Edit", "EditLayout", "Creator", new { id = _layout.ID }, null)
-    
-</div>
+        <a href="EditLayout/@_layout.ID">@_layout.LayoutTitle</a>
+        @Html.ActionLink("Save", "SaveCreatedLayout", new { id = _layout.ID })
+        @Html.ActionLink("Edit", "EditLayout", "Creator", new { id = _layout.ID }, null)
+    </div>
+
 }
