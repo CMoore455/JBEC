@@ -22,8 +22,7 @@ namespace CircleSpace.Controllers
         {
             return View();
         }
-
-
+        
         public JsonResult GetNewLayout(int id)
         {
             LayoutModel layout =
@@ -37,7 +36,6 @@ namespace CircleSpace.Controllers
         {
             return View();
         }
-
 
         [HttpPost]
         public ActionResult NameWebsitePagePost(string route)
@@ -76,14 +74,15 @@ namespace CircleSpace.Controllers
             };
         
             SavePage(o);
-            return Redirect($"~/Controllers/Creator/EditPage/{service.GetPageWithRoute(route).ID}");
+            return Redirect($"~/Creator/EditPage/{service.GetPageWithRoute(route).ID}");
         }
         
         [HttpPost]
-         public string SavePage(JSONForSavingWebPage o)
+         public ActionResult SavePage(JSONForSavingWebPage o)
         {
-                PageModel pageModel = new PageModel()
-                {
+            PageModel pageModel = new PageModel()
+            {
+                    OwnerID = User.Identity.GetUserId(),
                     Header = o.Header,
                     Body = o.Body,
                     Footer = o.Footer,
@@ -94,7 +93,7 @@ namespace CircleSpace.Controllers
 
             service.AddPage(pageModel);
 
-            return "Success"; 
+            return new HttpStatusCodeResult(HttpStatusCode.NoContent); 
         }
 
 
@@ -150,7 +149,27 @@ namespace CircleSpace.Controllers
             //    new LayoutModel() { ID = 1, CSS = "h1 { color: blue; } p {color: green; }", Content = "<h1>Blah</h1><p>ofofo</p>", Type = CircleSpaceGeneralModels.Enums.LayoutTypes.Body, LayoutTitle = "Layout1" };
             //return View(layout);
             return View(service.GetLayoutWithID(id));
+
         }
+
+        [HttpPost]
+        public ActionResult SaveLayout(JSONForSavingLayout o)
+        {
+            LayoutModel layout = new LayoutModel()
+            {
+                LayoutTitle = o.Title,
+                Content = o.Content,
+                ID = o.ID,
+                CSS = o.CSS,
+                Tags = o.Tags,
+                Type = o.Type
+            };
+
+            service.UpdateLayout(layout);
+
+            return new HttpStatusCodeResult(HttpStatusCode.NoContent);
+        }
+
 
     }
 }

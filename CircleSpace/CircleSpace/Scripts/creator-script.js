@@ -75,6 +75,10 @@ function DocumentLoaded(event) {
     WireContentForEditableText($('#bodyPreview')[0]);
     WireContentForEditableText($('#footerPreview')[0]);
 
+    $('#live-preview-area a').click(function (event) {
+        return event.shiftKey;
+    });
+
 };
 
 
@@ -178,7 +182,7 @@ function SavePage() {
     }
 
     //Sending page to server as JSON
-    $.post("/Creator/SavePage", page).fail(function () {
+    $.post("/Creator/UpdatePage", page).fail(function () {
         var saveStateContainer = $('#save-state-container');
         saveStateContainer.children().remove();
         saveStateContainer.append('<p>Could not save page.</p>');
@@ -219,8 +223,8 @@ function WireContentForEditableText(content) {
             WireContentForEditableText(content.children[i]);
         }
     } else if (content != undefined) {
-        var changeTextClickSubscriber;
         $(content).click(function (event) {
+            
             ChangeTextClickSubscriber(content);
         });
     }
@@ -367,6 +371,9 @@ function ChangeVerticalAlignment() {
 function CreateLink() {
     if (document.getElementById('textArea').value != "") {
         $(currentElementSelected).wrap("<a href=" + document.getElementById('textArea').value + "></a>");
+        $('a[href="' + document.getElementById('textArea').value + '"]').click(function (event) {
+            return event.shiftKey;
+        });
     }
     else {
         $(currentElementSelected).unwrap();

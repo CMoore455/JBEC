@@ -56,12 +56,19 @@ namespace CircleSpaceServiceLib.Service
             {
                 var newPage = new Page()
                 {
+
                     PageRoute = model.Route,
                     OwnerID = model.OwnerID,
                     Header = model.Header,
                     Body = model.Body,
-                    Footer = model.Footer
+                    CSS = model.CSS,
+                    Footer = model.Footer,
+                    Images = AddingNewPageToPagesTable_ImageUrlsToImages(model)
+
                 };
+
+                db.Pages.Add(newPage);
+                db.SaveChanges();
             }
         }
         public void DeleteContributorFromPage(PageModel page, UserModel contributor)
@@ -285,16 +292,23 @@ namespace CircleSpaceServiceLib.Service
             });
             return list;
         }
-        //private ICollection<Image> ImageUrlsToImages(PageModel p)
-        //{
-        //    ICollection<Image> list = new List<Image>();
-        //    var images = p.Images.ToList();
-        //    images.ForEach(image =>
-        //    {
-        //        list.Add(image.ImageName);
-        //    });
-        //    return list;
-        //}
+
+        private ICollection<Image> AddingNewPageToPagesTable_ImageUrlsToImages(PageModel p)
+        {
+            ICollection<Image> list = new List<Image>();
+            
+            p.ImageUrls.ForEach(image =>
+            {
+                var newImage = new Image()
+                {
+                    ImageName = image,
+                    UserID = p.OwnerID,
+                    PageID = p.ID
+                };
+                
+            });
+            return list;
+        }
 
         private UserModel UserToUserModels(AspNetUser u)
         {
