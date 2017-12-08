@@ -13,7 +13,7 @@ using System.Web.Mvc;
 namespace CircleSpace.Controllers
 {
 
-    //[Authorize]
+    [Authorize]
     public class CreatorController : Controller
     {
         private ICircleSpaceService service = new SqlCricleSpaceService();
@@ -103,15 +103,15 @@ namespace CircleSpace.Controllers
         [HttpPost]
         public ActionResult UpdatePage(JSONForSavingWebPage o)
         {
-
+            var page = service.GetPageWithID(o.ID);
             PageModel pageModel = new PageModel()
             {
                 Header = o.Header,
                 Body = o.Body,
                 Footer = o.Footer,
                 CSS = o.CSS,
-                Route = o.Route,
-                ImageUrls = o.ImageURLS,
+                Route = page.Route,
+                ImageUrls = page.ImageUrls,
                 OwnerID = User.Identity.GetUserId(),
                 ID = o.ID
             };
