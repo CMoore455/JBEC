@@ -32,16 +32,15 @@
 
     </div>
 
+
 }
 <hr />
 <h3>Layouts Owned</h3>
 @foreach (var _layout in Model.OWNED_LAYOUTS)
 {
-
     <div>
         <a href="EditLayout/@_layout.ID">@_layout.LayoutTitle</a>
         @Html.ActionLink("Save", "SaveCreatedLayout", new { id = _layout.ID })
         @Html.ActionLink("Edit", "EditLayout", "Creator", new { id = _layout.ID }, null)
     </div>
-
 }

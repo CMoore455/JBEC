@@ -13,7 +13,7 @@ using System.Web.Mvc;
 namespace CircleSpace.Controllers
 {
 
-    [Authorize]
+    //[Authorize]
     public class CreatorController : Controller
     {
         private ICircleSpaceService service = new SqlCricleSpaceService();
@@ -22,20 +22,7 @@ namespace CircleSpace.Controllers
         {
             return View();
         }
-        
-        public JsonResult GetNewLayout(int id)
-        {
-            LayoutModel layout =
-                //new LayoutModel() { ID = 1, CSS = "h1 { color: blue; } p {color: green; }", Content = "<h1>Blah</h1><p>ofofo</p>", Type = CircleSpaceGeneralModels.Enums.LayoutTypes.Body, LayoutTitle = "Layout1" };
-                service.GetLayoutWithID(id);
-            return Json(new LayoutModelJSON(layout).JSON, JsonRequestBehavior.AllowGet);
-        }
 
-        [HttpGet]
-        public ActionResult NameWebsitePage()
-        {
-            return View();
-        }
 
         [HttpPost]
         public ActionResult NameWebsitePagePost(string route)
