@@ -273,8 +273,10 @@
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Home\ProfilePage.cshtml" />
-    <Content Include="Views\Browse\BrowseSite.cshtml" />
     <Content Include="Views\Creator\CreateWebPage.cshtml" />
+    <Content Include="Views\Browse\BrowseSite.cshtml" />
+    <Content Include="Views\Shared\_PageBox.cshtml" />
+    <Content Include="Views\Shared\_LayoutBox.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

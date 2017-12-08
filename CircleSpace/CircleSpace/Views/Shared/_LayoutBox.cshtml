@@ -1,0 +1,25 @@
+﻿@model CircleSpaceGeneralModels.Models.LayoutModel
+
+<div class="layoutBox">
+
+
+
+    <table style="width:100%">
+        <tr>
+            <th>Layout Title</th>
+            <th>Layout Type</th>
+            <th>Owner</th>
+        </tr>
+        <tr>
+            <td>
+                @Model.LayoutTitle
+
+            </td>
+            <td>
+                @Model.Type
+            </td>
+            <td>@Model.Owner.Username</td>
+        </tr>
+    </table>
+
+</div>

@@ -95,7 +95,7 @@ namespace CircleSpaceServiceLib.Service
                 var pages = user.Pages1.ToList();
                 pages.ForEach(page =>
                 {
-                    PageModel p = PageToPageModel(page);
+                    PageModel p = PageToPageModel(page, user);
                     list.Add(p);
                 });
             }
@@ -174,7 +174,9 @@ namespace CircleSpaceServiceLib.Service
             PageModel p = new PageModel();
             using (var db = new CircleSpaceEntities())
             {
-                p = PageToPageModel(db.Pages.Where(x => x.PageRoute == route).First());
+                var page = db.Pages.Where(x => x.PageRoute == route).First();
+                var user = page.AspNetUser;
+                p = PageToPageModel(page, user);
             }
             return p;
         }
@@ -184,7 +186,9 @@ namespace CircleSpaceServiceLib.Service
             PageModel p = new PageModel();
             using (var db = new CircleSpaceEntities())
             {
-                p = PageToPageModel(db.Pages.Where(x => x.ID == id).First());
+                var page = db.Pages.Where(x => x.ID == id).First();
+                var user = page.AspNetUser;
+                p = PageToPageModel(page,user);
             }
             return p;
         }
@@ -238,7 +242,8 @@ namespace CircleSpaceServiceLib.Service
             List<PageModel> list = new List<PageModel>();
             p.ForEach(page =>
             {
-                var newPage = PageToPageModel(page);
+                var user = page.AspNetUser;
+                var newPage = PageToPageModel(page, user);
                 list.Add(newPage);
             });
             return list;
@@ -251,9 +256,8 @@ namespace CircleSpaceServiceLib.Service
         /// </summary>
         /// <param name="p">The page being converted</param>
         /// <returns>The converted Page object as a PageModel object</returns>
-        private PageModel PageToPageModel(Page p)
+        private PageModel PageToPageModel(Page p, AspNetUser user)
         {
-
             PageModel newPageModel = new PageModel()
             {
                 Route = p.PageRoute,
@@ -264,7 +268,8 @@ namespace CircleSpaceServiceLib.Service
                 Footer = p.Footer,
                 ImageUrls = ImagesToImageUrls(p),
                 CSS = p.CSS,
-                Contributors = AspNetUsersToContributors(p)
+                Contributors = AspNetUsersToContributors(p),
+                PageOwner = UserToUserModels(user)
 
             };
             return newPageModel;
@@ -314,7 +319,7 @@ namespace CircleSpaceServiceLib.Service
             List<PageModel> list = new List<PageModel>();
             using (var db = new CircleSpaceEntities())
             {
-                 list = PagesToPageModelList(db.Pages.Where(p=> p.OwnerID == v).ToList());
+                list = PagesToPageModelList(db.Pages.Where(p => p.OwnerID == v).ToList());
             }
             return list;
         }
@@ -325,7 +330,7 @@ namespace CircleSpaceServiceLib.Service
             using (var db = new CircleSpaceEntities())
             {
 
-                list = PagesToPageModelList(db.Pages.Where(p => p.AspNetUsers.Select(u=> u.Id).Contains(v)).ToList());
+                list = PagesToPageModelList(db.Pages.Where(p => p.AspNetUsers.Select(u => u.Id).Contains(v)).ToList());
             }
             return list;
         }
@@ -401,7 +406,17 @@ namespace CircleSpaceServiceLib.Service
             return newLayout;
         }
 
-       
+        public List<PageModel> GetPages()
+        {
+            List<PageModel> list = new List<PageModel>();
+            using (var db = new CircleSpaceEntities())
+            {
+                var query = db.Pages.Select(x => x);
+                list = PagesToPageModelList(query.ToList());
+            }
+
+            return list;
+        }
 
         private class TagNameComparer : IEqualityComparer<Tag>
         {
