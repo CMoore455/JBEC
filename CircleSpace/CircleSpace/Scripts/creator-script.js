@@ -68,8 +68,8 @@ function DocumentLoaded() {
     $('#height').on('click', ChangeHeight);
     $('#fontSize').on('click', ChangeFontSize);
     $('#fontWeight').on('click', ChangeFontWeight);
-    $('.fontStyle').on('click', ChangeFontStyle);
-    $('.textAlign').on('click', ChangeAlignment);
+    $('#fontStyle').on('click', ChangeFontStyle);
+    $('#textAlign').on('click', ChangeAlignment);
     $('#check').on('click', ChangeVerticalAlignment);
     $('#submitButton').on('click', CreateLink);
 };
@@ -248,9 +248,10 @@ function UpdateCreatorOptions() {
     document.getElementById('fontWeight').value = currentElementSelected.style.fontWeight.slice(0, currentElementSelected.style.fontWeight.length);
     document.getElementById('backgroundColor').value = rgbToHex();
     document.getElementById('fontColor').value = rgbToHex();
+    document.getElementById('textAlign').value = currentElementSelected.style.textAlign != "" ? currentElementSelected.style.textAlign : "left";
+    document.getElementById('fontStyle').value = currentElementSelected.style.fontStyle != "" ? currentElementSelected.style.fontStyle : "normal";
+    document.getElementById('check').checked = currentElementSelected.style.lineHeight == currentElementSelected.style.height
     document.getElementById('textArea').value = "";
-    $('input[type=radio]').attr('checked', false);
-    $('input[type=checkbox]').attr('checked', false);
 }
 
 function ChangeLeftMargin(margin) {
@@ -325,14 +326,14 @@ function ChangeFontWeight() {
 
 function ChangeFontStyle() {
     BlurCurrentlySelectedElement();
-    jQuery('.fontStyle').on('input', function () {
+    jQuery('#fontStyle').on('input', function () {
         jQuery(currentElementSelected).css('font-style', jQuery(this).val());
     });
 }
 
 function ChangeAlignment() {
     BlurCurrentlySelectedElement();
-    jQuery('.textAlign').on('input', function () {
+    jQuery('#textAlign').on('input', function () {
         jQuery(currentElementSelected).css('textAlign', jQuery(this).val());
     });
 }
