@@ -23,6 +23,16 @@ namespace CircleSpace.Controllers
             return View();
         }
 
+        public ActionResult GetNewLayout(int id)
+        {
+            return Json(new LayoutModelJSON(service.GetLayoutWithID(id)).JSON, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        public ActionResult NameWebsitePage()
+        {
+            return View();
+        }
 
         [HttpPost]
         public ActionResult NameWebsitePagePost(string route)
