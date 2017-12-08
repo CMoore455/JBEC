@@ -108,11 +108,11 @@ namespace CircleSpace.Controllers
                 Header = o.Header,
                 Body = o.Body,
                 Footer = o.Footer,
-                CSS = o.CSS,
+                CSS = o.CSS ?? "",
                 Route = page.Route,
                 ImageUrls = page.ImageUrls,
                 OwnerID = User.Identity.GetUserId(),
-                ID = o.ID
+                ID = page.ID
             };
 
             service.UpdatePage(pageModel);

@@ -7,7 +7,8 @@ var headerId, bodyId, footerId, currentElementSelected, pageId;
 
 //Hooks up all the click events for the selectors for a different layout.
 function DocumentLoaded(event) {
-    pageId = document.URL.charAt(document.URL.length - 1);
+    pageId = document.URL.split('/');
+    pageId = pageId[pageId.length - 1];
     var headerClassLookup = $(".selector-headers");
     var headerSelector = headerClassLookup[0];
     var option = headerSelector.options[headerSelector.selectedIndex];

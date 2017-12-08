@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CricleSpaceGeneralModels.Models
+namespace CircleSpaceGeneralModels.Models
 {
     public class PageLayoutListModel
     {

@@ -35,6 +35,9 @@ namespace CircleSpace.Controllers
             return View();
         }
 
+
+
+
         [Authorize]
         public ActionResult ProfilePage()
         {
@@ -45,7 +48,7 @@ namespace CircleSpace.Controllers
 
             profileContent = new ProfileContentContainer(ownedPages.AsReadOnly(), contributedPages.AsReadOnly(), ownedLayouts.AsReadOnly());
 
-            return View(profileContent);
+            return View("ProfilePage", profileContent);
         }
 
 
@@ -57,7 +60,7 @@ namespace CircleSpace.Controllers
             {
                 service.DeletePage(page);
             }
-            return View("ProfilePage");
+            return ProfilePage();
         }
 
         [Authorize]

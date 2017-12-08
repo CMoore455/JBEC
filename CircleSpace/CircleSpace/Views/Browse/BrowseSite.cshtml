@@ -1,4 +1,4 @@
-﻿@model CricleSpaceGeneralModels.Models.PageLayoutListModel
+﻿@model CircleSpaceGeneralModels.Models.PageLayoutListModel
 
 @{
     ViewBag.Title = "BrowseSite";
@@ -10,11 +10,13 @@
             Pages
         </h1>
     </p>
-        <br />
-    @foreach (var page in Model.Pages)
-    {
-        @Html.Partial("_PageBox", page);
-    }
+    <br />
+    <table style="width:100%">
+        @foreach (var page in Model.Pages)
+        {
+            @Html.Partial("_PageBox", page);
+        }
+    </table>
 </div>
 <br />
 <hr />

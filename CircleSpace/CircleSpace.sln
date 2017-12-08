@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CircleSpace", "CircleSpace\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CircleSpaceServiceLib", "CircleSpaceServiceLib\CircleSpaceServiceLib.csproj", "{66EBA8E8-7C9C-450E-BEF3-1688CEEFD360}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CricleSpaceGeneralModels", "CricleSpaceGeneralModels\CricleSpaceGeneralModels.csproj", "{C5803521-C402-4FED-A40D-C5198E23507C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CircleSpaceGeneralModels", "CricleSpaceGeneralModels\CircleSpaceGeneralModels.csproj", "{C5803521-C402-4FED-A40D-C5198E23507C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CircleSpaceDAL", "CircleSpaceDAL\CircleSpaceDAL.csproj", "{CE781602-2353-4707-A091-029FDC0F3C9D}"
 EndProject
